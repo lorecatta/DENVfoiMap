@@ -80,8 +80,8 @@ quick_raster_map <- function(pred_df,
 
   if(!is.null(z_range)){
 
-    lower <- z_range[1]
-    upper <- z_range[2]
+    lower <- min(z_range)
+    upper <- max(z_range)
 
   }
 
