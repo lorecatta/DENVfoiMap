@@ -25,6 +25,13 @@ create_parameter_list <- function(no_predictors = 16,
                                   foi_offset = 0.03,
                                   covariates_dir = "stepwise_v6",
                                   EM_iter = 10,
+                                  base_info = c("cell",
+                                                "latitude",
+                                                "longitude",
+                                                "population",
+                                                "ID_0",
+                                                "ID_1",
+                                                "ID_2"),
                                   extra_params = NULL) {
 
   pm_list <- list()
@@ -52,6 +59,7 @@ create_parameter_list <- function(no_predictors = 16,
   pm_list$foi_offset <- foi_offset
   pm_list$covariates_dir <- covariates_dir
   pm_list$EM_iter <- EM_iter
+  pm_list$base_info <- base_info
 
   if(sum(!is.na(match(names(extra_params), names(pm_list))))!=0){
 
