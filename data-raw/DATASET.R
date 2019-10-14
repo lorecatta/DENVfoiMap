@@ -49,10 +49,37 @@ endemic_ID_0_ID_1 <- endemic_ID_0_ID_1[!endemic_ID_0_ID_1$ID_0 %in% ID_0_to_remo
 
 usethis::use_data(endemic_ID_0_ID_1, overwrite = TRUE)
 
-all_sqr_covariates_original <- readRDS(file.path("data-raw",
+all_sqr_covariates <- readRDS(file.path("data-raw",
                                         "all_squares_env_var_0_1667_deg.rds"))
 
-# keep only pixels in endemic countries
-all_sqr_covariates <- inner_join(all_sqr_covariates_original, endemic_ID_0_ID_1)
-
 usethis::use_data(all_sqr_covariates, overwrite = TRUE)
+
+R0_to_prop_cases_averted_lookup_1 <- read.csv(file.path("data-raw",
+                                                        "R0_to_prop_cases_averted_lookup_1.csv"),
+                                              stringsAsFactors = FALSE)
+usethis::use_data(R0_to_prop_cases_averted_lookup_1, overwrite = TRUE)
+
+R0_to_prop_cases_averted_lookup_2 <- read.csv(file.path("data-raw",
+                                                        "R0_to_prop_cases_averted_lookup_2.csv"),
+                                              stringsAsFactors = FALSE)
+usethis::use_data(R0_to_prop_cases_averted_lookup_2, overwrite = TRUE)
+
+R0_to_prop_hosp_averted_lookup_1 <- read.csv(file.path("data-raw",
+                                                       "R0_to_prop_hosp_averted_lookup_1.csv"),
+                                             stringsAsFactors = FALSE)
+usethis::use_data(R0_to_prop_hosp_averted_lookup_1, overwrite = TRUE)
+
+R0_to_prop_hosp_averted_lookup_2 <- read.csv(file.path("data-raw",
+                                                       "R0_to_prop_hosp_averted_lookup_2.csv"),
+                                             stringsAsFactors = FALSE)
+usethis::use_data(R0_to_prop_hosp_averted_lookup_2, overwrite = TRUE)
+
+R0_to_prop_infections_averted_lookup_1 <- read.csv(file.path("data-raw",
+                                                             "R0_to_prop_infections_averted_lookup_1.csv"),
+                                                   stringsAsFactors = FALSE)
+usethis::use_data(R0_to_prop_infections_averted_lookup_1, overwrite = TRUE)
+
+R0_to_prop_infections_averted_lookup_2 <- read.csv(file.path("data-raw",
+                                                             "R0_to_prop_infections_averted_lookup_2.csv"),
+                                                   stringsAsFactors = FALSE)
+usethis::use_data(R0_to_prop_infections_averted_lookup_2, overwrite = TRUE)
