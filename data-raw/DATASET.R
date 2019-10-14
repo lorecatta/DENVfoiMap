@@ -6,11 +6,6 @@ foi_data <- read.csv(file.path("data-raw",
 
 usethis::use_data(foi_data, overwrite = TRUE)
 
-all_sqr_covariates <- readRDS(file.path("data-raw",
-                                        "all_squares_env_var_0_1667_deg.rds"))
-
-usethis::use_data(all_sqr_covariates, overwrite = TRUE)
-
 admin_covariates <- read.csv(file.path("data-raw",
                                        "admin_covariates.csv"),
                              stringsAsFactors = FALSE)
@@ -53,3 +48,11 @@ ID_0_to_remove <- c(1, 69, 171, 122, 200, 224, 226, 235, 236, 244, 246)
 endemic_ID_0_ID_1 <- endemic_ID_0_ID_1[!endemic_ID_0_ID_1$ID_0 %in% ID_0_to_remove,]
 
 usethis::use_data(endemic_ID_0_ID_1, overwrite = TRUE)
+
+all_sqr_covariates_original <- readRDS(file.path("data-raw",
+                                        "all_squares_env_var_0_1667_deg.rds"))
+
+# keep only pixels in endemic countries
+all_sqr_covariates <- inner_join(all_sqr_covariates_original, endemic_ID_0_ID_1)
+
+usethis::use_data(all_sqr_covariates, overwrite = TRUE)
