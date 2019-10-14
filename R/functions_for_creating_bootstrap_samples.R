@@ -1,16 +1,73 @@
-grid_and_boot <- function(i, a, b){
-  
-  xx <- grid_up(a, b, rnd_dist = FALSE)
-  
-  yy <- do_boostrap(xx)
-  
-  cbind(unique_id = seq_len(nrow(yy)), yy)
 
-}
+#------------------------------------------------------------------------------
 
-do_boostrap <- function(dataset){
-  #browser()
-  idx <- unname(split(seq_len(nrow(dataset)), dataset$cell))
-  pick <- sample(idx, size = length(idx), replace = TRUE)
-  dataset[unlist(pick), ]
+# grid_and_boot
+
+#' \code{grid_and_boot} take a block bootstrapped sample of the original foi dataset.
+#'
+#' @param a dataframe of foi predictions dataset at admin unit 1 resolution.
+#'
+#' @inheritParams full_routine_bootstrap
+#'
+#' @export
+
+
+grid_and_boot <- function(a, parms){
+
+  helper <- function(i, a, parms) {
+
+    xx <- grid_up(a, parms, rnd_dist = FALSE)
+
+    yy <- do_boostrap(xx)
+
+    cbind(unique_id = seq_len(nrow(yy)), yy)
+
+  }
+
+
+  do_boostrap <- function(dataset){
+    #browser()
+    idx <- unname(split(seq_len(nrow(dataset)), dataset$cell))
+    pick <- sample(idx, size = length(idx), replace = TRUE)
+    dataset[unlist(pick), ]
+  }
+
+
+  grid_up <- function(dataset, parms, rnd_dist){
+
+    grid_size <- parms$grid_size
+
+    rd <- 0
+    rd2 <- 0
+
+    if (rnd_dist) {
+
+      # draw random distance values
+      rd <- runif(n = 1, min = 0, max = grid_size)
+      rd2 <- runif(n = 1, min = 0, max = grid_size)
+
+    }
+
+    # add rd to lat.grid and long.grid variables
+    dataset$lat.grid <- floor((dataset$latitude - rd) / grid_size)
+    dataset$long.grid <- floor((dataset$longitude - rd2) / grid_size)
+    min.long <- min(dataset$long.grid)
+    width.long <- max(dataset$long.grid) - min.long + 1
+    min.lat <- min(dataset$lat.grid)
+
+    dataset$cell <- (dataset$lat.grid - min.lat) * width.long + dataset$long.grid - min.long
+
+    dataset
+
+  }
+
+
+  no_samples <- parms$no_samples
+
+  loop(seq_len(no_samples),
+       helper,
+       a = foi_data,
+       parms = parameters,
+       parallel = FALSE)
+
 }

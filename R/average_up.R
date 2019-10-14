@@ -1,8 +1,29 @@
-average_up <- function(pxl_df, grp_flds, var_names){
+
+#------------------------------------------------------------------------------
+
+# average_up
+
+#' \code{average_up} aggregates foi predictions at 1/6 degree resolutions to
+#'   adim unit 1 level by taking the population-weighted average of the
+#'   1/6 degree resolution predictions within each admin unit 1.
+#'
+#' @param pxl_df dataframe of foi predictions at 1/6 degree resolution.
+#'
+#' @param grp_flds character string of column names by which the 1/6 degree
+#'   resolution predictions are aggregated by.
+#'
+#' @inheritParams full_routine_bootstrap
+#'
+#' @importFrom dplyr %>% group_by summarise_at summarise left_join
+#'
+#' @export
+
+
+average_up <- function(pxl_df, grp_flds, covariates_names){
 
   by_grp <- pxl_df %>% group_by(.dots = grp_flds)
 
-  wtd_mean_pixel_data <- by_grp %>% summarise_at(var_names,
+  wtd_mean_pixel_data <- by_grp %>% summarise_at(covariates_names,
     funs(weighted.mean(., population, na.rm = TRUE)))
 
   mean_pixel_data <- by_grp %>% summarise(
@@ -11,23 +32,6 @@ average_up <- function(pxl_df, grp_flds, var_names){
   aggreg_pixel_data <- left_join(wtd_mean_pixel_data, mean_pixel_data)
 
   as.data.frame(aggreg_pixel_data)
-
-}
-
-multi_col_average_up <- function(i, x, grp_flds){
-
-  dat <- x[, c("population", grp_flds, i)]
-  average_up(dat, grp_flds, i)
-
-}
-
-remove_pop_col <- function(i){
-  i[, setdiff(names(i), c("ID_0", "population"))]
-}
-
-how_many_below_1 <- function(x){
-
-  sum(x < 1)
 
 }
 

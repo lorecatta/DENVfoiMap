@@ -1,7 +1,24 @@
+
+#------------------------------------------------------------------------------
+
+# create_parameter_list
+
+#' \code{create_parameter_list} creates a list of user-defined parameters.
+#'
+#' @param no_predictors number of selected covariates used for model fitting and making predictions.
+#' @param dependent_variable character string of the fitted response variable (FOI).
+#' @param grid_size size of the grid used for block bootstrapping.
+#' @param no_samples number of bootstrap samples.
+#' @param vec_phis_R0_1
+#'
+#' @inheritParams fit_ranger_RF
+#'
+#' @export
+
+
 create_parameter_list <- function(no_predictors = 16,
                                   dependent_variable = "FOI",
                                   grid_size = 5,
-                                  resample_grid_size = 20,
                                   no_samples = 1,
                                   vec_phis_R0_1 = c(1, 1, 0),
                                   vec_phis_R0_2 = c(1, 1, 1),
@@ -23,7 +40,6 @@ create_parameter_list <- function(no_predictors = 16,
                                                       R0_3 = 0.5,
                                                       Z = -0.02),
                                   foi_offset = 0.03,
-                                  covariates_dir = "stepwise_v6",
                                   EM_iter = 10,
                                   base_info = c("cell",
                                                 "latitude",
@@ -39,7 +55,6 @@ create_parameter_list <- function(no_predictors = 16,
   pm_list$no_predictors <- no_predictors
   pm_list$dependent_variable <- dependent_variable
   pm_list$grid_size <- grid_size
-  pm_list$resample_grid_size <- resample_grid_size
   pm_list$no_samples <- no_samples
   pm_list$vec_phis_R0_1 <- vec_phis_R0_1
   pm_list$vec_phis_R0_2 <- vec_phis_R0_2
