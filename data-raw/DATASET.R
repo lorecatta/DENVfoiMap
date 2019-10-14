@@ -22,6 +22,8 @@ age_structure <- read.csv(file.path("data-raw",
                                     "age_structure.csv"),
                           stringsAsFactors = FALSE)
 
+age_structure$age_id <- seq_len(nrow(age_structure))
+
 usethis::use_data(age_structure, overwrite = TRUE)
 
 FOI_to_I_lookup_tables <- readRDS(file.path("data-raw", "FOI_to_I_lookup_tables.rds"))
