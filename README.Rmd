@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The goal of DENVfoiMap is to provide a set of functions to run a basic analysis 
-similar to the one deescribed in 
+similar to the one described in 
 
-CITATION
+CITATION AND link
 
 As the analysis described in the aformentioned publication includes 
 bootstrapping and sensitivity analyses of model parameters, 
