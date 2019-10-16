@@ -19,7 +19,9 @@ Imports:
     ranger,
     weights,
     colorRamps,
-    fields
+    fields,
+    context,
+    drep
 RoxygenNote: 6.1.1
 Remotes:
     mrc-ide/context,
