@@ -5,18 +5,18 @@
 
 #' \code{grid_and_boot} take a block bootstrapped sample of the original foi dataset.
 #'
-#' @param a dataframe of foi predictions dataset at admin unit 1 resolution.
+#' @param data_df dataframe of foi predictions dataset at admin unit 1 resolution.
 #'
 #' @inheritParams full_routine_bootstrap
 #'
 #' @export
 
 
-grid_and_boot <- function(a, parms){
+grid_and_boot <- function(data_df, parms){
 
-  helper <- function(i, a, parms) {
+  helper <- function(i, data_df, parms) {
 
-    xx <- grid_up(a, parms, rnd_dist = FALSE)
+    xx <- grid_up(data_df, parms, rnd_dist = FALSE)
 
     yy <- do_boostrap(xx)
 
@@ -66,7 +66,7 @@ grid_and_boot <- function(a, parms){
 
   loop(seq_len(no_samples),
        helper,
-       a = foi_data,
+       data_df = foi_data,
        parms = parameters,
        parallel = FALSE)
 
