@@ -1,7 +1,7 @@
 Package: DENVfoiMap
 Type: Package
 Title: Runs the analysis of the paper on global dengue FOI mapping and 
-  prediction of intervention impact.
+  prediction of intervention impact
 Version: 0.1.0
 Author: person(given = "Lorenzo", 
                family = "Cattarino", 
@@ -10,7 +10,7 @@ Author: person(given = "Lorenzo",
 Description: The package fits a random forest model to a set of geolocated 
   dengue force of infection point data, makes global predictions using a set of 
   explanatory variables and calculates the impact of transmission-reduction 
-  interventions against dengue and the Sanofi Pasteur dengue vaccine.
+  interventions against dengue and the Sanofi Pasteur dengue vaccine
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
