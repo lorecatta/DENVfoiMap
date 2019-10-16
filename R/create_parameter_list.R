@@ -72,7 +72,6 @@ create_parameter_list <- function(no_predictors = 16,
   pm_list$all_wgt <- all_wgt
   pm_list$pseudoAbs_value <- pseudoAbs_value
   pm_list$foi_offset <- foi_offset
-  pm_list$covariates_dir <- covariates_dir
   pm_list$EM_iter <- EM_iter
   pm_list$base_info <- base_info
 
