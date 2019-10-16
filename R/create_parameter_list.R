@@ -7,6 +7,7 @@
 #'
 #' @param no_predictors number of selected covariates used for model fitting and making predictions.
 #' @param dependent_variable character string of the fitted response variable (FOI).
+#' @param resample_grid_size resolution of the foi predictions (in km). Default = 20 (1/6 degree).
 #' @param grid_size size of the grid used for block bootstrapping.
 #' @param no_samples number of bootstrap samples.
 #' @param vec_phis_R0_1
@@ -18,6 +19,7 @@
 
 create_parameter_list <- function(no_predictors = 16,
                                   dependent_variable = "FOI",
+                                  resample_grid_size = 20,
                                   grid_size = 5,
                                   no_samples = 1,
                                   vec_phis_R0_1 = c(1, 1, 0),
@@ -54,6 +56,7 @@ create_parameter_list <- function(no_predictors = 16,
 
   pm_list$no_predictors <- no_predictors
   pm_list$dependent_variable <- dependent_variable
+  pm_list$resample_grid_size <- resample_grid_size
   pm_list$grid_size <- grid_size
   pm_list$no_samples <- no_samples
   pm_list$vec_phis_R0_1 <- vec_phis_R0_1

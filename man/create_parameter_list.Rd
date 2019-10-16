@@ -5,20 +5,23 @@
 \title{\code{create_parameter_list} creates a list of user-defined parameters.}
 \usage{
 create_parameter_list(no_predictors = 16, dependent_variable = "FOI",
-  grid_size = 5, no_samples = 1, vec_phis_R0_1 = c(1, 1, 0),
-  vec_phis_R0_2 = c(1, 1, 1), prop_sympt = c(0.45, 0.85, 0.15),
-  Q_1 = 0.04, Q_3 = 0.04, Q_2 = 0.1, FOI_grid = seq(0, 0.2, 0.001),
-  sf_vals = seq(1, 0.1, -0.1), shape_1 = 0, shape_2 = 5,
-  shape_3 = 1600000, no_trees = 500, min_node_size = 20,
-  all_wgt = 1, pseudoAbs_value = c(FOI = -0.02, R0_1 = 0.5, R0_2 = 0.5,
-  R0_3 = 0.5, Z = -0.02), foi_offset = 0.03, EM_iter = 10,
-  base_info = c("cell", "latitude", "longitude", "population", "ID_0",
-  "ID_1", "ID_2"), extra_params = NULL)
+  resample_grid_size = 20, grid_size = 5, no_samples = 1,
+  vec_phis_R0_1 = c(1, 1, 0), vec_phis_R0_2 = c(1, 1, 1),
+  prop_sympt = c(0.45, 0.85, 0.15), Q_1 = 0.04, Q_3 = 0.04,
+  Q_2 = 0.1, FOI_grid = seq(0, 0.2, 0.001), sf_vals = seq(1, 0.1,
+  -0.1), shape_1 = 0, shape_2 = 5, shape_3 = 1600000,
+  no_trees = 500, min_node_size = 20, all_wgt = 1,
+  pseudoAbs_value = c(FOI = -0.02, R0_1 = 0.5, R0_2 = 0.5, R0_3 = 0.5, Z
+  = -0.02), foi_offset = 0.03, EM_iter = 10, base_info = c("cell",
+  "latitude", "longitude", "population", "ID_0", "ID_1", "ID_2"),
+  extra_params = NULL)
 }
 \arguments{
 \item{no_predictors}{number of selected covariates used for model fitting and making predictions.}
 
 \item{dependent_variable}{character string of the fitted response variable (FOI).}
+
+\item{resample_grid_size}{resolution of the foi predictions (in km). Default = 20 (1/6 degree).}
 
 \item{grid_size}{size of the grid used for block bootstrapping.}
 

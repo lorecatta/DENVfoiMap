@@ -34,7 +34,6 @@ full_routine_bootstrap <- function(parms,
                                    covariates_names,
                                    boot_sample){
 
-
   var_to_fit <- parms$dependent_variable
 
   number_of_predictors <- parms$no_predictors
