@@ -1,4 +1,5 @@
 create_lookup_tables <- function(i,
+                                 age_struct,
                                  age_band_tags,
                                  age_band_L_bounds,
                                  age_band_U_bounds,
@@ -29,13 +30,13 @@ create_lookup_tables <- function(i,
                                tags = age_band_tags,
                                FOI_values = FOI_values,
                                my_fun = my_fun,
-                               age_band_lower_bounds = age_band_L_bounds,
-                               age_band_upper_bounds = age_band_U_bounds,
+                               u_lim = age_band_U_bounds,
+                               l_lim = age_band_L_bounds,
                                parallel = parallel_2)
 
-      lookup_list_1 <- lapply(Infection_values, cbind_FOI_to_lookup, FOI_values)
+      lookup_list <- lapply(Infection_values, cbind_FOI_to_lookup, FOI_values)
 
-      # saveRDS(lookup_list_1, out_nm)
+      # saveRDS(lookup_list, out_nm)
 
     }
 
@@ -59,14 +60,14 @@ create_lookup_tables <- function(i,
                           tags = age_band_tags,
                           FOI_values = FOI_values,
                           my_fun = my_fun,
-                          age_band_lower_bounds = age_band_L_bounds,
-                          age_band_upper_bounds = age_band_U_bounds,
+                          u_lim = age_band_U_bounds,
+                          l_lim = age_band_L_bounds,
                           weights_vec = my_weights,
                           parallel = parallel_2)
 
-      lookup_list_2 <- lapply(case_values, cbind_FOI_to_lookup, FOI_values)
+      lookup_list <- lapply(case_values, cbind_FOI_to_lookup, FOI_values)
 
-      # saveRDS(lookup_list_2, out_nm_)
+      # saveRDS(lookup_list, out_nm_)
 
     }
 
@@ -90,15 +91,15 @@ create_lookup_tables <- function(i,
                            tags = age_band_tags,
                            FOI_values = FOI_values,
                            my_fun = my_fun,
-                           age_band_lower_bounds = age_band_L_bounds,
-                           age_band_upper_bounds = age_band_U_bounds,
-                           parms = parms,
+                           u_lim = age_band_U_bounds,
+                           l_lim = age_band_L_bounds,
+                           parms = parms$prop_hosp,
                            weights_vec = my_weights,
                            parallel = parallel_2)
 
-      lookup_list_3 <- lapply(HCase_values, cbind_FOI_to_lookup, FOI_values)
+      lookup_list <- lapply(HCase_values, cbind_FOI_to_lookup, FOI_values)
 
-      # saveRDS(lookup_list_3, out_nm)
+      # saveRDS(lookup_list, out_nm)
 
     }
 
@@ -122,16 +123,16 @@ create_lookup_tables <- function(i,
                         tags = age_band_tags,
                         FOI_values = FOI_values,
                         my_fun = my_fun,
-                        age_band_lower_bounds = age_band_L_bounds,
-                        age_band_upper_bounds = age_band_U_bounds,
+                        u_lim = age_band_U_bounds,
+                        l_lim = age_band_L_bounds,
                         weights_vec = my_weights,
                         parallel = parallel_2)
 
       lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
 
-      lookup_list_4 <- lapply(lookup_list, fix_R0_lookup_limits)
+      lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
 
-      # saveRDS(lookup_list_4, out_nm)
+      # saveRDS(lookup_list, out_nm)
 
     }
 
@@ -155,60 +156,20 @@ create_lookup_tables <- function(i,
                         tags = age_band_tags,
                         FOI_values = FOI_values,
                         my_fun = my_fun,
-                        age_band_lower_bounds = age_band_L_bounds,
-                        age_band_upper_bounds = age_band_U_bounds,
+                        u_lim = age_band_U_bounds,
+                        l_lim = age_band_L_bounds,
                         weights_vec = my_weights,
                         parallel = parallel_2)
 
       lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
 
-      lookup_list_5 <- lapply(lookup_list, fix_R0_lookup_limits)
+      lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
 
-      # saveRDS(lookup_list_5, out_nm)
-
-    }
-
-  }
-
-  if (i == "R0_3") {
-
-    my_fun <- drep::calculate_R0
-    my_weights <- parms$vec_phis_R0_3
-    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
-
-    if (!file.exists(file.path(out_path, out_nm))) {
-
-      message("1D lookup")
-
-      cat("weights vector =", my_weights, "\n")
-
-      R0_values <- loop(seq_len(nrow(age_struct)),
-                        wrapper_to_lookup,
-                        age_struct = age_struct,
-                        tags = age_band_tags,
-                        FOI_values = FOI_values,
-                        my_fun = my_fun,
-                        age_band_lower_bounds = age_band_L_bounds,
-                        age_band_upper_bounds = age_band_U_bounds,
-                        weights_vec = my_weights,
-                        parallel = parallel_2)
-
-      lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
-
-      lookup_list_6 <- lapply(lookup_list, fix_R0_lookup_limits)
-
-      # saveRDS(lookup_list_6, out_nm)
+      # saveRDS(lookup_list, out_nm)
 
     }
 
   }
-
-  list(lookup_list_1,
-       lookup_list_2,
-       lookup_list_3,
-       lookup_list_4,
-       lookup_list_5,
-       lookup_list_6)
 
 }
 
