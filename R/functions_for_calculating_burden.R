@@ -171,6 +171,8 @@ create_lookup_tables <- function(i,
 
   }
 
+  lookup_list
+
 }
 
 wrapper_to_lookup <- function(i,
