@@ -111,7 +111,7 @@ create_lookup_tables <- function(i,
     my_weights <- parms$vec_phis_R0_1
     out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
 
-    if (!file.exists(file.path(out_path, out_nm))) {
+    if (!file.exists(out_nm)) {
 
       message("1D lookup")
 
@@ -144,7 +144,7 @@ create_lookup_tables <- function(i,
     my_weights <- parms$vec_phis_R0_2
     out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
 
-    if (!file.exists(file.path(out_path, out_nm))) {
+    if (!file.exists(out_nm)) {
 
       message("1D lookup")
 
