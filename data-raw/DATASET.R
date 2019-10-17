@@ -26,21 +26,6 @@ age_structure$age_id <- seq_len(nrow(age_structure))
 
 usethis::use_data(age_structure, overwrite = TRUE)
 
-FOI_to_I_lookup_tables <- readRDS(file.path("data-raw", "FOI_to_I_lookup_tables.rds"))
-usethis::use_data(FOI_to_I_lookup_tables, overwrite = TRUE)
-
-FOI_to_C_lookup_tables <- readRDS(file.path("data-raw", "FOI_to_C_lookup_tables.rds"))
-usethis::use_data(FOI_to_C_lookup_tables, overwrite = TRUE)
-
-FOI_to_HC_lookup_tables <- readRDS(file.path("data-raw", "FOI_to_HC_lookup_tables.rds"))
-usethis::use_data(FOI_to_HC_lookup_tables, overwrite = TRUE)
-
-FOI_to_R0_1_lookup_tables <- readRDS(file.path("data-raw", "FOI_to_R0_1_lookup_tables.rds"))
-usethis::use_data(FOI_to_R0_1_lookup_tables, overwrite = TRUE)
-
-FOI_to_R0_2_lookup_tables <- readRDS(file.path("data-raw", "FOI_to_R0_2_lookup_tables.rds"))
-usethis::use_data(FOI_to_R0_2_lookup_tables, overwrite = TRUE)
-
 endemic_ID_0_ID_1 <- read.csv(file.path("data-raw",
                                         "endemic_ID_0_ID_1.csv"),
                               stringsAsFactors = FALSE)
