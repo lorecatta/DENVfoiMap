@@ -22,13 +22,11 @@ create_parameter_list <- function(no_predictors = 16,
                                   resample_grid_size = 20,
                                   grid_size = 5,
                                   no_samples = 1,
-                                  vec_phis_R0_1 = c(1, 1, 0),
-                                  vec_phis_R0_2 = c(1, 1, 1),
-                                  prop_sympt = c(0.45, 0.85, 0.15),
-                                  Q_1 = 0.04,
-                                  Q_3 = 0.04,
-                                  Q_2 = 0.1,
-                                  FOI_grid = seq(0, 0.2, 0.002), #seq(0, 0.2, 0.0002),
+                                  vec_phis_R0_1 = c(1, 1, 0, 0),
+                                  vec_phis_R0_2 = c(1, 1, 1, 1),
+                                  prop_sympt = c(0.45, 0.85, 0.15, 0.15),
+                                  prop_hosp = c(0.04, 0.1, 0.04, 0.04),
+                                  FOI_grid = seq(0.002, 0.2, 0.002), #seq(0, 0.2, 0.0002),
                                   sf_vals = seq(1, 0.1, -0.1),
                                   shape_1 = 0,
                                   shape_2 = 5,
@@ -62,9 +60,7 @@ create_parameter_list <- function(no_predictors = 16,
   pm_list$vec_phis_R0_1 <- vec_phis_R0_1
   pm_list$vec_phis_R0_2 <- vec_phis_R0_2
   pm_list$prop_sympt <- prop_sympt
-  pm_list$Q_1 <- Q_1
-  pm_list$Q_3 <- Q_3
-  pm_list$Q_2 <- Q_2
+  pm_list$prop_hosp <- prop_hosp
   pm_list$FOI_grid <- FOI_grid
   pm_list$sf_vals <- sf_vals
   pm_list$shape_1 <- shape_1
