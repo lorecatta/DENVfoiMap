@@ -36,6 +36,8 @@ create_lookup_tables <- function(i,
 
       lookup_list <- lapply(Infection_values, cbind_FOI_to_lookup, FOI_values)
 
+      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+
       # saveRDS(lookup_list, out_nm)
 
     }
@@ -66,6 +68,8 @@ create_lookup_tables <- function(i,
                           parallel = parallel_2)
 
       lookup_list <- lapply(case_values, cbind_FOI_to_lookup, FOI_values)
+
+      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
 
       # saveRDS(lookup_list, out_nm_)
 
@@ -99,6 +103,8 @@ create_lookup_tables <- function(i,
 
       lookup_list <- lapply(HCase_values, cbind_FOI_to_lookup, FOI_values)
 
+      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+
       # saveRDS(lookup_list, out_nm)
 
     }
@@ -129,6 +135,8 @@ create_lookup_tables <- function(i,
                         parallel = parallel_2)
 
       lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
+
+      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
 
       lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
 
@@ -163,6 +171,8 @@ create_lookup_tables <- function(i,
 
       lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
 
+      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+
       lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
 
       # saveRDS(lookup_list, out_nm)
@@ -191,6 +201,12 @@ wrapper_to_lookup <- function(i,
          numeric(1),
          n_j = m_j,
          ...)
+
+}
+
+fix_all_lookup_limits <- function(i) {
+
+  rbind(c(x = 0, y = 0), i)
 
 }
 
