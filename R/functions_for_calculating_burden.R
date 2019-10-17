@@ -1,0 +1,370 @@
+create_lookup_tables <- function(i,
+                                 age_band_tags,
+                                 age_band_L_bounds,
+                                 age_band_U_bounds,
+                                 parms){
+
+  cat("variable to look up =", i, "\n")
+
+  FOI_values <- parms$FOI_grid
+  parallel_2 <- parms$parallel_2
+
+  target_fun <- list(calculate_infections = "calculate_infections",
+                     calculate_cases = "calculate_cases",
+                     calculate_hosp_cases = "calculate_hosp_cases",
+                     calculate_R0 = "calculate_R0")
+
+  if (i == "I") {
+
+    my_fun <- drep::calculate_infections
+    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+
+    if (!file.exists(out_nm)) {
+
+      message("1D lookup")
+
+      Infection_values <- loop(seq_len(nrow(age_struct)),
+                               wrapper_to_lookup,
+                               age_struct = age_struct,
+                               tags = age_band_tags,
+                               FOI_values = FOI_values,
+                               my_fun = my_fun,
+                               age_band_lower_bounds = age_band_L_bounds,
+                               age_band_upper_bounds = age_band_U_bounds,
+                               parallel = parallel_2)
+
+      lookup_list_1 <- lapply(Infection_values, cbind_FOI_to_lookup, FOI_values)
+
+      # saveRDS(lookup_list_1, out_nm)
+
+    }
+
+  }
+
+  if (i == "C") {
+
+    my_fun <- drep::calculate_cases
+    my_weights <- parms$prop_sympt
+    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+
+    if (!file.exists(out_nm)) {
+
+      message("1D lookup")
+
+      cat("weights vector =", my_weights, "\n")
+
+      case_values <- loop(seq_len(nrow(age_struct)),
+                          wrapper_to_lookup,
+                          age_struct = age_struct,
+                          tags = age_band_tags,
+                          FOI_values = FOI_values,
+                          my_fun = my_fun,
+                          age_band_lower_bounds = age_band_L_bounds,
+                          age_band_upper_bounds = age_band_U_bounds,
+                          weights_vec = my_weights,
+                          parallel = parallel_2)
+
+      lookup_list_2 <- lapply(case_values, cbind_FOI_to_lookup, FOI_values)
+
+      # saveRDS(lookup_list_2, out_nm_)
+
+    }
+
+  }
+
+  if (i == "HC") {
+
+    my_fun <- drep::calculate_hosp_cases
+    my_weights <- parms$prop_sympt
+    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+
+    if (!file.exists(out_nm)) {
+
+      message("1D lookup")
+
+      cat("weights vector =", my_weights, "\n")
+
+      HCase_values <- loop(seq_len(nrow(age_struct)),
+                           wrapper_to_lookup,
+                           age_struct = age_struct,
+                           tags = age_band_tags,
+                           FOI_values = FOI_values,
+                           my_fun = my_fun,
+                           age_band_lower_bounds = age_band_L_bounds,
+                           age_band_upper_bounds = age_band_U_bounds,
+                           parms = parms,
+                           weights_vec = my_weights,
+                           parallel = parallel_2)
+
+      lookup_list_3 <- lapply(HCase_values, cbind_FOI_to_lookup, FOI_values)
+
+      # saveRDS(lookup_list_3, out_nm)
+
+    }
+
+  }
+
+  if (i == "R0_1") {
+
+    my_fun <- drep::calculate_R0
+    my_weights <- parms$vec_phis_R0_1
+    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+
+    if (!file.exists(file.path(out_path, out_nm))) {
+
+      message("1D lookup")
+
+      cat("weights vector =", my_weights, "\n")
+
+      R0_values <- loop(seq_len(nrow(age_struct)),
+                        wrapper_to_lookup,
+                        age_struct = age_struct,
+                        tags = age_band_tags,
+                        FOI_values = FOI_values,
+                        my_fun = my_fun,
+                        age_band_lower_bounds = age_band_L_bounds,
+                        age_band_upper_bounds = age_band_U_bounds,
+                        weights_vec = my_weights,
+                        parallel = parallel_2)
+
+      lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
+
+      lookup_list_4 <- lapply(lookup_list, fix_R0_lookup_limits)
+
+      # saveRDS(lookup_list_4, out_nm)
+
+    }
+
+  }
+
+  if (i == "R0_2") {
+
+    my_fun <- drep::calculate_R0
+    my_weights <- parms$vec_phis_R0_2
+    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+
+    if (!file.exists(file.path(out_path, out_nm))) {
+
+      message("1D lookup")
+
+      cat("weights vector =", my_weights, "\n")
+
+      R0_values <- loop(seq_len(nrow(age_struct)),
+                        wrapper_to_lookup,
+                        age_struct = age_struct,
+                        tags = age_band_tags,
+                        FOI_values = FOI_values,
+                        my_fun = my_fun,
+                        age_band_lower_bounds = age_band_L_bounds,
+                        age_band_upper_bounds = age_band_U_bounds,
+                        weights_vec = my_weights,
+                        parallel = parallel_2)
+
+      lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
+
+      lookup_list_5 <- lapply(lookup_list, fix_R0_lookup_limits)
+
+      # saveRDS(lookup_list_5, out_nm)
+
+    }
+
+  }
+
+  if (i == "R0_3") {
+
+    my_fun <- drep::calculate_R0
+    my_weights <- parms$vec_phis_R0_3
+    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+
+    if (!file.exists(file.path(out_path, out_nm))) {
+
+      message("1D lookup")
+
+      cat("weights vector =", my_weights, "\n")
+
+      R0_values <- loop(seq_len(nrow(age_struct)),
+                        wrapper_to_lookup,
+                        age_struct = age_struct,
+                        tags = age_band_tags,
+                        FOI_values = FOI_values,
+                        my_fun = my_fun,
+                        age_band_lower_bounds = age_band_L_bounds,
+                        age_band_upper_bounds = age_band_U_bounds,
+                        weights_vec = my_weights,
+                        parallel = parallel_2)
+
+      lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
+
+      lookup_list_6 <- lapply(lookup_list, fix_R0_lookup_limits)
+
+      # saveRDS(lookup_list_6, out_nm)
+
+    }
+
+  }
+
+  list(lookup_list_1,
+       lookup_list_2,
+       lookup_list_3,
+       lookup_list_4,
+       lookup_list_5,
+       lookup_list_6)
+
+}
+
+wrapper_to_lookup <- function(i,
+                              age_struct,
+                              tags,
+                              FOI_values,
+                              my_fun, ...){
+
+  my_FUN <- my_fun
+  # my_FUN <- match.fun(my_fun)
+
+  m_j <- age_struct[i, tags]
+
+  vapply(FOI_values,
+         my_FUN,
+         numeric(1),
+         n_j = m_j,
+         ...)
+
+}
+
+fix_R0_lookup_limits <- function(i) {
+
+  i[1, "y"] <- 1
+
+  rbind(c(x = 0, y = 0), i)
+
+}
+
+cbind_FOI_to_lookup <- function(i, FOI_values) {
+
+  cbind(x = FOI_values, y = i)
+
+}
+
+# calculate_infections <- function(FOI,
+#                                  n_j,
+#                                  age_band_lower_bounds,
+#                                  age_band_upper_bounds){
+#
+#   prob_fun <- list("calculate_primary_infection_prob",
+#                    "calculate_secondary_infection_prob",
+#                    "calculate_tertiary_infection_prob",
+#                    "calculate_quaternary_infection_prob")
+#
+#   infection_probabilities <- lapply(
+#     prob_fun,
+#     do.call,
+#     list(FOI, age_band_lower_bounds, age_band_upper_bounds))
+#
+#   infection_incidences <- lapply(
+#     infection_probabilities,
+#     calc_average_prob_infect,
+#     age_band_upper_bounds,
+#     age_band_lower_bounds)
+#
+#   infection_numbers_j <- lapply(infection_incidences, calculate_case_number, n_j)
+#
+#   total_infection_number <- vapply(infection_numbers_j, sum, numeric(1))
+#
+#   sum(total_infection_number) * 4
+#
+# }
+#
+# calculate_cases <- function(FOI,
+#                             n_j,
+#                             age_band_lower_bounds,
+#                             age_band_upper_bounds,
+#                             weights_vec){
+#
+#   prob_fun <- list("calculate_primary_infection_prob",
+#                    "calculate_secondary_infection_prob",
+#                    "calculate_tertiary_infection_prob",
+#                    "calculate_quaternary_infection_prob")
+#
+#   gamma_1 <- weights_vec[1]
+#   rho <- weights_vec[2]
+#   gamma_3 <- weights_vec[3]
+#
+#   infection_probabilities <- lapply(
+#     prob_fun,
+#     do.call,
+#     list(FOI, age_band_lower_bounds, age_band_upper_bounds))
+#
+#   infection_incidences <- lapply(
+#     infection_probabilities,
+#     calc_average_prob_infect,
+#     age_band_upper_bounds,
+#     age_band_lower_bounds)
+#
+#   I1_rate <- infection_incidences[[1]]
+#   I2_rate <- infection_incidences[[2]]
+#   I3_rate <- infection_incidences[[3]]
+#   I4_rate <- infection_incidences[[4]]
+#
+#   tot_incid_rate_j <- rho * I2_rate + (gamma_1 * I1_rate) + (gamma_3 * (I3_rate + I4_rate))
+#
+#   case_number_j <- calculate_case_number(tot_incid_rate_j, n_j)
+#
+#   sum(case_number_j) * 4
+#
+# }
+#
+# calculate_hosp_cases <- function(FOI,
+#                                  n_j,
+#                                  age_band_lower_bounds,
+#                                  age_band_upper_bounds,
+#                                  parms,
+#                                  weights_vec){
+#
+#   prob_fun <- list("calculate_primary_infection_prob",
+#                    "calculate_secondary_infection_prob",
+#                    "calculate_tertiary_infection_prob",
+#                    "calculate_quaternary_infection_prob")
+#
+#   gamma_1 <- weights_vec[1]
+#   rho <- weights_vec[2]
+#   gamma_3 <- weights_vec[3]
+#
+#   Q_1 <- parms$Q_1
+#   Q_2 <- parms$Q_2
+#   Q_3 <- parms$Q_3
+#
+#   infection_probabilities <- lapply(
+#     prob_fun,
+#     do.call,
+#     list(FOI, age_band_lower_bounds, age_band_upper_bounds))
+#
+#   infection_incidences <- lapply(
+#     infection_probabilities,
+#     calc_average_prob_infect,
+#     age_band_upper_bounds,
+#     age_band_lower_bounds)
+#
+#   I1_rate <- infection_incidences[[1]]
+#   I2_rate <- infection_incidences[[2]]
+#   I3_rate <- infection_incidences[[3]]
+#   I4_rate <- infection_incidences[[4]]
+#
+#   tot_incid_rate_j <- Q_2 * rho * I2_rate + (Q_1 * gamma_1 * I1_rate) + (gamma_3 * Q_3 * (I3_rate + I4_rate))
+#
+#   case_number_j <- calculate_case_number(tot_incid_rate_j, n_j)
+#
+#   sum(case_number_j) * 4
+#
+# }
+#
+# interpolate_using_mat_indices <- function(lookup_mat, rowIndices, colIndices, rowIndices_next, FOI_grid, FOI_values){
+#
+#   Infections_pc <- lookup_mat[rowIndices + nrow(lookup_mat) * (colIndices - 1)]
+#   Infections_pc_next <- lookup_mat[rowIndices_next + nrow(lookup_mat) * (colIndices - 1)]
+#
+#   m <- (Infections_pc_next - Infections_pc) / (FOI_grid[rowIndices_next] - FOI_grid[rowIndices]) # slope formula
+#   b <- Infections_pc-(m*FOI_grid[rowIndices]) # solve for b
+#
+#   m * (FOI_values) + b
+#
+# }
