@@ -125,7 +125,7 @@ create_lookup_tables <- function(i,
                         my_fun = my_fun,
                         u_lim = age_band_U_bounds,
                         l_lim = age_band_L_bounds,
-                        weights_vec = my_weights,
+                        phis = my_weights,
                         parallel = parallel_2)
 
       lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
@@ -158,7 +158,7 @@ create_lookup_tables <- function(i,
                         my_fun = my_fun,
                         u_lim = age_band_U_bounds,
                         l_lim = age_band_L_bounds,
-                        weights_vec = my_weights,
+                        phis = my_weights,
                         parallel = parallel_2)
 
       lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
