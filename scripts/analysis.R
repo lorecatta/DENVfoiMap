@@ -15,7 +15,8 @@ extra_prms <- list(id_fld = "unique_id",
                    ranger_threads = NULL,
                    fit_type = "boot",
                    parallel_2 = TRUE,
-                   screening_ages = c(9, 16))
+                   screening_ages = c(9, 16),
+                   target_nm = c("I", "C", "HC", "R0_1", "R0_2"))
 
 my_col <- colorRamps::matlab.like(100)
 
@@ -37,6 +38,8 @@ parallel_2 <- parameters$parallel_2
 
 screening_ages <- parameters$screening_ages
 
+target_nm <- parameters$target_nm
+
 
 # pre processing --------------------------------------------------------------
 
@@ -48,36 +51,30 @@ pAbs_wgt <- get_sat_area_wgts(foi_data, parameters)
 foi_data[foi_data$type == "pseudoAbsence", "new_weight"] <- pAbs_wgt
 
 
-# create bootstrap samples ----------------------------------------------------
+# create one bootstrap sample -------------------------------------------------
 
 
-boot_samples <- loop(seq_len(no_samples),
-                     grid_and_boot,
-                     a = foi_data,
-                     parms = param,
-                     parallel = FALSE)
-
-foi_data_bsample_1 <- boot_samples[[1]]
+foi_data_bsample <- grid_and_boot(data_df = foi_data,
+                                  parms = parameters)
 
 RF_obj_optim <- full_routine_bootstrap(parms = parameters,
                                        original_foi_data = foi_data,
                                        adm_covariates = admin_covariates,
                                        all_squares = all_sqr_covariates,
                                        covariates_names = all_predictors,
-                                       boot_sample = foi_data_bsample_1)
+                                       boot_sample = foi_data_bsample[[1]])
 
-saveRDS(RF_obj_optim, "RF_obj_optim.rds")
 global_predictions <- make_ranger_predictions(RF_obj_optim,
                                               dataset = all_sqr_covariates,
-                                              sel_preds = all_predictors)
+                                              covariates_names = all_predictors)
 
 all_sqr_covariates$p_i <- global_predictions
 saveRDS(all_sqr_covariates, "global_predictions.rds")
-all_sqr_covariates <- readRDS("global_predictions.rds")
+# all_sqr_covariates <- readRDS("global_predictions.rds")
 
-# map
 all_sqr_covariates_sub <- inner_join(all_sqr_covariates, endemic_ID_0_ID_1)
 
+# map
 mp_nm <- "FOI.png"
 quick_raster_map(pred_df = all_sqr_covariates_sub,
                  statistic = "p_i",
@@ -98,15 +95,25 @@ quick_raster_map(pred_df = all_sqr_covariates_sub,
 
 # preprocessing
 age_band_tgs <- grep("band", names(age_structure), value = TRUE)
-age_band_bnds <- get_age_band_bounds(age_band_tgs)
+age_band_bnds <- drep::get_age_band_bounds(age_band_tgs)
 age_band_L_bounds <- age_band_bnds[, 1]
-age_band_U_bounds <- age_band_bnds[, 2] + 1
+age_band_U_bounds <- age_band_bnds[, 2]
 
 # set up a context which integrates nicely the parallel package
 ctx <- context::context_save(path = "context",
                              package_sources = provisionr::package_sources(github = "lorecatta/DENVfoiMap"))
 context::context_load(ctx)
 context::parallel_cluster_start(7, ctx)
+
+# create lookup tables
+lookup_tabs <- loop(target_nm,
+                    create_lookup_tables,
+                    age_struct = age_structure,
+                    age_band_tags = age_band_tgs,
+                    age_band_L_bounds = age_band_L_bounds,
+                    age_band_U_bounds = age_band_U_bounds,
+                    parms = parameters,
+                    parallel = FALSE)
 
 # assume a transmission reduction effect of 0% (scale factor = 1)
 sf_val <- parameters$sf_vals[1]
@@ -123,11 +130,11 @@ burden_estimates_raw <- loop(seq_len(nrow(sqr_preds_3)),
                          foi_data = sqr_preds_3,
                          age_struct = age_structure,
                          scaling_factor = sf_val,
-                         FOI_to_Inf_list = FOI_to_I_lookup_tables,
-                         FOI_to_C_list = FOI_to_C_lookup_tables,
-                         FOI_to_HC_list = FOI_to_HC_lookup_tables,
-                         FOI_to_R0_1_list = FOI_to_R0_1_lookup_tables,
-                         FOI_to_R0_2_list = FOI_to_R0_2_lookup_tables,
+                         FOI_to_Inf_list = lookup_tabs[[1]],
+                         FOI_to_C_list = lookup_tabs[[2]],
+                         FOI_to_HC_list = lookup_tabs[[3]],
+                         FOI_to_R0_1_list = lookup_tabs[[4]],
+                         FOI_to_R0_2_list = lookup_tabs[[5]],
                          age_band_lower_bounds = age_band_L_bounds,
                          age_band_upper_bounds = age_band_U_bounds,
                          age_band_tags = age_band_tgs,
@@ -183,11 +190,11 @@ tr_red_impact_estimates_raw <- loop(seq_len(nrow(sqr_preds_3)),
                                     foi_data = sqr_preds_3,
                                     age_struct = age_structure,
                                     scaling_factor = sf_val,
-                                    FOI_to_Inf_list = FOI_to_I_lookup_tables,
-                                    FOI_to_C_list = FOI_to_C_lookup_tables,
-                                    FOI_to_HC_list = FOI_to_HC_lookup_tables,
-                                    FOI_to_R0_1_list = FOI_to_R0_1_lookup_tables,
-                                    FOI_to_R0_2_list = FOI_to_R0_2_lookup_tables,
+                                    FOI_to_Inf_list = lookup_tabs[[1]],
+                                    FOI_to_C_list = lookup_tabs[[2]],
+                                    FOI_to_HC_list = lookup_tabs[[3]],
+                                    FOI_to_R0_1_list = lookup_tabs[[4]],
+                                    FOI_to_R0_2_list = lookup_tabs[[5]],
                                     age_band_lower_bounds = age_band_L_bounds,
                                     age_band_upper_bounds = age_band_U_bounds,
                                     age_band_tags = age_band_tgs,
