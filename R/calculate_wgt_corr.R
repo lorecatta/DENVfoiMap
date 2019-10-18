@@ -1,9 +1,9 @@
 
 #------------------------------------------------------------------------------
 
-# calculate_wgt_cor
-
-#' \code{calculate_wgt_cor} calculate a weighted Pearson correlation coefficient
+#' The function calculates a weighted Pearson correlation coefficient using \link[fields]{wtd.cor}.
+#'
+#' @title Calculate weighted Pearson correlation coefficient
 #'
 #' @param d.subs a dataframe with data.
 #'

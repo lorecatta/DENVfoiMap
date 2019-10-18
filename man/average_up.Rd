@@ -2,9 +2,7 @@
 % Please edit documentation in R/average_up.R
 \name{average_up}
 \alias{average_up}
-\title{\code{average_up} aggregates foi predictions at 1/6 degree resolutions to
-  adim unit 1 level by taking the population-weighted average of the
-  1/6 degree resolution predictions within each admin unit 1.}
+\title{Aggregate FOI predictions at 1/6 degree resolutions to adim unit level}
 \usage{
 average_up(pxl_df, grp_flds, covariates_names)
 }
@@ -17,7 +15,7 @@ resolution predictions are aggregated by.}
 \item{covariates_names}{character vector of covariates names.}
 }
 \description{
-\code{average_up} aggregates foi predictions at 1/6 degree resolutions to
-  adim unit 1 level by taking the population-weighted average of the
-  1/6 degree resolution predictions within each admin unit 1.
+The function ggregates foi predictions at 1/6 degree resolutions to
+adim unit 1 level by taking the population-weighted average of the
+1/6 degree resolution predictions within each admin unit 1.
 }

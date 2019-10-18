@@ -1,16 +1,32 @@
 
 #------------------------------------------------------------------------------
 
-# create_parameter_list
-
-#' \code{create_parameter_list} creates a list of user-defined parameters.
+#' @title Create a list of user-defined parameters
+#'
+#' The function creates a list of user-defined parameters.
 #'
 #' @param no_predictors number of selected covariates used for model fitting and making predictions.
 #' @param dependent_variable character string of the fitted response variable (FOI).
 #' @param resample_grid_size resolution of the foi predictions (in km). Default = 20 (1/6 degree).
 #' @param grid_size size of the grid used for block bootstrapping.
 #' @param no_samples number of bootstrap samples.
-#' @param vec_phis_R0_1
+#' @param vec_phis_R0_1 numeric vector of length = 4 of the relative infectiousness of primary,
+#'  secondary, tertiary and quaternary dengue infections, when assuming only primary and
+#'  secondary infections are infectious.
+#' @param vec_phis_R0_2 numeric vector of length = 4 of the relative infectiousness of primary,
+#'  secondary, tertiary and quaternary dengue infections, when assuming all four infections
+#'  are infectious.
+#' @param prop_sympt numeric vector of length = 4 of the proportions of primary, secondary,
+#'  tertiary and quaternary infections which are symptomatic.
+#' @param prop_hosp numeric vector of length = 4 of the proportions of primary, secondary,
+#'  tertiary and quaternary infections requiring hospitalization.
+#' @param FOI_grid numeric vector of force of infection values used for mapping FOI to
+#'  number of infections, cases hopsitalizations and R0.
+#' @param sf_vals scaling factor used to model the effect of transmission-reducing interventions.
+#' @param sat_functions_shapes parameters of the saturating function used for setting pseudo absences
+#'  case weights.
+#' @param no_trees number of trees of the random forest model passed to \code{\link{ranger}}.
+#' @param min_node_size minimal node size of the random forest model passed to \code{\link{ranger}}.
 #'
 #' @inheritParams fit_ranger_RF
 #'
@@ -28,9 +44,7 @@ create_parameter_list <- function(no_predictors = 16,
                                   prop_hosp = c(0.04, 0.1, 0.04, 0.04),
                                   FOI_grid = seq(0.002, 0.2, 0.002), #seq(0, 0.2, 0.0002),
                                   sf_vals = seq(1, 0.1, -0.1),
-                                  shape_1 = 0,
-                                  shape_2 = 5,
-                                  shape_3 = 1.6e6,
+                                  sat_functions_shapes = c(0, 5, 1.6e6),
                                   no_trees = 500,
                                   min_node_size = 20,
                                   all_wgt = 1,

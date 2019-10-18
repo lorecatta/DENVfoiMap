@@ -2,10 +2,7 @@
 % Please edit documentation in R/average_up.R
 \name{fitted_sero_cell_to_adm}
 \alias{fitted_sero_cell_to_adm}
-\title{\code{fitted_sero_cell_to_adm} replace the mean of all 1/6 degree predictions
-  within adim unit 1 level serology data with the value of the prediction in
-  1/6 degree resolution cell where the original serology data point belongs.
-  This allows to fit the serology data points as point data.}
+\title{Modify predictions of serology data points at 1/6 degree resolution}
 \usage{
 fitted_sero_cell_to_adm(join_all, sqr_dataset_2, fld_1, fld_2)
 }
@@ -18,8 +15,8 @@ fitted_sero_cell_to_adm(join_all, sqr_dataset_2, fld_1, fld_2)
 a joined dataframe
 }
 \description{
-\code{fitted_sero_cell_to_adm} replace the mean of all 1/6 degree predictions
-  within adim unit 1 level serology data with the value of the prediction in
-  1/6 degree resolution cell where the original serology data point belongs.
-  This allows to fit the serology data points as point data.
+The function replaces the mean of all 1/6 degree predictions within adim unit 1 level
+serology data with the value of the prediction in 1/6 degree resolution cell
+where the original serology data point belongs. This allows to fit the
+serology data points as point data.
 }

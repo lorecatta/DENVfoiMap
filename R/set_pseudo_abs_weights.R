@@ -1,8 +1,8 @@
 get_sat_area_wgts <- function(foi_data, parms){
 
-  b <- parms$shape_1
-  c <- parms$shape_2
-  d <- parms$shape_3
+  b <- parms$sat_functions_shapes[1]
+  c <- parms$sat_functions_shapes[2]
+  d <- parms$sat_functions_shapes[3]
 
   data_sub <- foi_data[foi_data$type == "pseudoAbsence", ]
 

@@ -1,11 +1,11 @@
 
 #------------------------------------------------------------------------------
 
-# average_up
-
-#' \code{average_up} aggregates foi predictions at 1/6 degree resolutions to
-#'   adim unit 1 level by taking the population-weighted average of the
-#'   1/6 degree resolution predictions within each admin unit 1.
+#' The function ggregates foi predictions at 1/6 degree resolutions to
+#' adim unit 1 level by taking the population-weighted average of the
+#' 1/6 degree resolution predictions within each admin unit 1.
+#'
+#' @title Aggregate FOI predictions at 1/6 degree resolutions to adim unit level
 #'
 #' @param pxl_df dataframe of foi predictions at 1/6 degree resolution.
 #'
@@ -38,12 +38,12 @@ average_up <- function(pxl_df, grp_flds, covariates_names){
 
 #------------------------------------------------------------------------------
 
-# fitted_sero_cell_to_adm
-
-#' \code{fitted_sero_cell_to_adm} replace the mean of all 1/6 degree predictions
-#'   within adim unit 1 level serology data with the value of the prediction in
-#'   1/6 degree resolution cell where the original serology data point belongs.
-#'   This allows to fit the serology data points as point data.
+#' The function replaces the mean of all 1/6 degree predictions within adim unit 1 level
+#' serology data with the value of the prediction in 1/6 degree resolution cell
+#' where the original serology data point belongs. This allows to fit the
+#' serology data points as point data.
+#'
+#' @title Modify predictions of serology data points at 1/6 degree resolution
 #'
 #' @param join_all dataframe of foi estimates and predictions at admin unit 1 resolution.
 #'

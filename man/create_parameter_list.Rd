@@ -2,19 +2,20 @@
 % Please edit documentation in R/create_parameter_list.R
 \name{create_parameter_list}
 \alias{create_parameter_list}
-\title{\code{create_parameter_list} creates a list of user-defined parameters.}
+\title{Create a list of user-defined parameters
+
+The function creates a list of user-defined parameters.}
 \usage{
 create_parameter_list(no_predictors = 16, dependent_variable = "FOI",
   resample_grid_size = 20, grid_size = 5, no_samples = 1,
-  vec_phis_R0_1 = c(1, 1, 0), vec_phis_R0_2 = c(1, 1, 1),
-  prop_sympt = c(0.45, 0.85, 0.15), Q_1 = 0.04, Q_3 = 0.04,
-  Q_2 = 0.1, FOI_grid = seq(0, 0.2, 0.001), sf_vals = seq(1, 0.1,
-  -0.1), shape_1 = 0, shape_2 = 5, shape_3 = 1600000,
-  no_trees = 500, min_node_size = 20, all_wgt = 1,
-  pseudoAbs_value = c(FOI = -0.02, R0_1 = 0.5, R0_2 = 0.5, R0_3 = 0.5, Z
-  = -0.02), foi_offset = 0.03, EM_iter = 10, base_info = c("cell",
-  "latitude", "longitude", "population", "ID_0", "ID_1", "ID_2"),
-  extra_params = NULL)
+  vec_phis_R0_1 = c(1, 1, 0, 0), vec_phis_R0_2 = c(1, 1, 1, 1),
+  prop_sympt = c(0.45, 0.85, 0.15, 0.15), prop_hosp = c(0.04, 0.1,
+  0.04, 0.04), FOI_grid = seq(0.002, 0.2, 0.002), sf_vals = seq(1, 0.1,
+  -0.1), sat_functions_shapes = c(0, 5, 1600000), no_trees = 500,
+  min_node_size = 20, all_wgt = 1, pseudoAbs_value = c(FOI = -0.02,
+  R0_1 = 0.5, R0_2 = 0.5, R0_3 = 0.5, Z = -0.02), foi_offset = 0.03,
+  EM_iter = 10, base_info = c("cell", "latitude", "longitude",
+  "population", "ID_0", "ID_1", "ID_2"), extra_params = NULL)
 }
 \arguments{
 \item{no_predictors}{number of selected covariates used for model fitting and making predictions.}
@@ -27,8 +28,34 @@ create_parameter_list(no_predictors = 16, dependent_variable = "FOI",
 
 \item{no_samples}{number of bootstrap samples.}
 
-\item{vec_phis_R0_1}{}
+\item{vec_phis_R0_1}{numeric vector of length = 4 of the relative infectiousness of primary,
+secondary, tertiary and quaternary dengue infections, when assuming only primary and
+secondary infections are infectious.}
+
+\item{vec_phis_R0_2}{numeric vector of length = 4 of the relative infectiousness of primary,
+secondary, tertiary and quaternary dengue infections, when assuming all four infections
+are infectious.}
+
+\item{prop_sympt}{numeric vector of length = 4 of the proportions of primary, secondary,
+tertiary and quaternary infections which are symptomatic.}
+
+\item{prop_hosp}{numeric vector of length = 4 of the proportions of primary, secondary,
+tertiary and quaternary infections requiring hospitalization.}
+
+\item{FOI_grid}{numeric vector of force of infection values used for mapping FOI to
+number of infections, cases hopsitalizations and R0.}
+
+\item{sf_vals}{scaling factor used to model the effect of transmission-reducing interventions.}
+
+\item{sat_functions_shapes}{parameters of the saturating function used for setting pseudo absences
+case weights.}
+
+\item{no_trees}{number of trees of the random forest model passed to \code{\link{ranger}}.}
+
+\item{min_node_size}{minimal node size of the random forest model passed to \code{\link{ranger}}.}
 }
 \description{
-\code{create_parameter_list} creates a list of user-defined parameters.
+Create a list of user-defined parameters
+
+The function creates a list of user-defined parameters.
 }

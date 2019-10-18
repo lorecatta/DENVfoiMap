@@ -4,10 +4,10 @@
 \alias{grid_and_boot}
 \title{\code{grid_and_boot} take a block bootstrapped sample of the original foi dataset.}
 \usage{
-grid_and_boot(a, parms)
+grid_and_boot(data_df, parms)
 }
 \arguments{
-\item{a}{dataframe of foi predictions dataset at admin unit 1 resolution.}
+\item{data_df}{dataframe of foi predictions dataset at admin unit 1 resolution.}
 
 \item{parms}{list of user-defined parameters.}
 }

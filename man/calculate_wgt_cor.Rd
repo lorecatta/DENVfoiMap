@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculate_wgt_corr.R
 \name{calculate_wgt_cor}
 \alias{calculate_wgt_cor}
-\title{\code{calculate_wgt_cor} calculate a weighted Pearson correlation coefficient}
+\title{Calculate weighted Pearson correlation coefficient}
 \usage{
 calculate_wgt_cor(d.sub, x, y)
 }
@@ -17,5 +17,5 @@ calculate_wgt_cor(d.sub, x, y)
 the numeric value of the correlation coefficient.
 }
 \description{
-\code{calculate_wgt_cor} calculate a weighted Pearson correlation coefficient
+The function calculates a weighted Pearson correlation coefficient using \link[fields]{wtd.cor}.
 }
