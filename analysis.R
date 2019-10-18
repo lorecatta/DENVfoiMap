@@ -16,7 +16,7 @@ extra_prms <- list(id_fld = "unique_id",
                    fit_type = "boot",
                    parallel_2 = TRUE,
                    screening_ages = c(9, 16),
-                   target_nm = c("I", "C", "HC", "R0_1", "R0_2"))
+                   )
 
 my_col <- colorRamps::matlab.like(100)
 
@@ -35,8 +35,6 @@ all_predictors <- predictor_rank$name
 base_info <- parameters$base_info
 
 screening_ages <- parameters$screening_ages
-
-target_nm <- parameters$target_nm
 
 
 # pre processing --------------------------------------------------------------
@@ -104,14 +102,12 @@ context::context_load(ctx)
 context::parallel_cluster_start(7, ctx)
 
 # create lookup tables
-lookup_tabs <- loop(target_nm,
-                    create_lookup_tables,
-                    age_struct = age_structure,
-                    age_band_tags = age_band_tgs,
-                    age_band_L_bounds = age_band_L_bounds,
-                    age_band_U_bounds = age_band_U_bounds,
-                    parms = parameters,
-                    parallel = FALSE)
+lookup_tabs <- create_lookup_tables(
+  age_struct = age_structure,
+  age_band_tags = age_band_tgs,
+  age_band_L_bounds = age_band_L_bounds,
+  age_band_U_bounds = age_band_U_bounds,
+  parms = parameters)
 
 # assume a transmission reduction effect of 0% (scale factor = 1)
 sf_val <- parameters$sf_vals[1]
