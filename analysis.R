@@ -15,8 +15,7 @@ extra_prms <- list(id_fld = "unique_id",
                    ranger_threads = NULL,
                    fit_type = "boot",
                    parallel_2 = TRUE,
-                   screening_ages = c(9, 16),
-                   )
+                   screening_ages = c(9, 16))
 
 my_col <- colorRamps::matlab.like(100)
 
