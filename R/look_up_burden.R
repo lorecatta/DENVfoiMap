@@ -238,11 +238,11 @@ create_lookup_tables <- function(age_struct,
 
   loop(target_nm,
        helper,
-       age_struct = age_structure,
-       age_band_tags = age_band_tgs,
-       age_band_L_bounds = age_band_L_bounds,
-       age_band_U_bounds = age_band_U_bounds,
-       parms = parameters,
+       age_struct,
+       age_band_tags,
+       age_band_L_bounds,
+       age_band_U_bounds,
+       parms,
        parallel = FALSE)
 
 }
