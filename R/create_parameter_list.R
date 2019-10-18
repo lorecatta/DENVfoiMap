@@ -1,32 +1,57 @@
 
 #------------------------------------------------------------------------------
 
-#' @title Create a list of user-defined parameters
-#'
 #' The function creates a list of user-defined parameters.
 #'
+#' @title Create a list of user-defined parameters
+#'
 #' @param no_predictors number of selected covariates used for model fitting and making predictions.
+#'
 #' @param dependent_variable character string of the fitted response variable (FOI).
+#'
 #' @param resample_grid_size resolution of the foi predictions (in km). Default = 20 (1/6 degree).
+#'
 #' @param grid_size size of the grid used for block bootstrapping.
+#'
 #' @param no_samples number of bootstrap samples.
+#'
 #' @param vec_phis_R0_1 numeric vector of length = 4 of the relative infectiousness of primary,
 #'  secondary, tertiary and quaternary dengue infections, when assuming only primary and
 #'  secondary infections are infectious.
+#'
 #' @param vec_phis_R0_2 numeric vector of length = 4 of the relative infectiousness of primary,
 #'  secondary, tertiary and quaternary dengue infections, when assuming all four infections
 #'  are infectious.
+#'
 #' @param prop_sympt numeric vector of length = 4 of the proportions of primary, secondary,
 #'  tertiary and quaternary infections which are symptomatic.
+#'
 #' @param prop_hosp numeric vector of length = 4 of the proportions of primary, secondary,
 #'  tertiary and quaternary infections requiring hospitalization.
+#'
 #' @param FOI_grid numeric vector of force of infection values used for mapping FOI to
 #'  number of infections, cases hopsitalizations and R0.
+#'
 #' @param sf_vals scaling factor used to model the effect of transmission-reducing interventions.
+#'
 #' @param sat_functions_shapes parameters of the saturating function used for setting pseudo absences
 #'  case weights.
+#'
 #' @param no_trees number of trees of the random forest model passed to \code{\link{ranger}}.
+#'
 #' @param min_node_size minimal node size of the random forest model passed to \code{\link{ranger}}.
+#'
+#' @param all_wgt numeric value of case weights for all data points.
+#'
+#' @param pseudoAbs_value numeric value of pseudo absences for different response variables.
+#'
+#' @param foi_offset numeric value to offset model FOI predictions during fitting with
+#'  Expectation Maximization.
+#'
+#' @param base_info character string of key ID variable in the 1/6 degree resolution global
+#'  covariate dataset.
+#'
+#' @param extra_params list of additional parameters. Default = NULL.
 #'
 #' @inheritParams fit_ranger_RF
 #'

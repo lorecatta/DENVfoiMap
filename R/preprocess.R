@@ -1,3 +1,18 @@
+
+#------------------------------------------------------------------------------
+
+#' The function sets the case weigths and applies an offset to the FOI response variable
+#' (offset is needed during the EM fitting) in the original admin unit level FOI dataset.
+#'
+#' @title Pre-process the original admin unit level FOI dataset
+#'
+#' @param foi_data dataframe of admin unit level FOI data.
+#'
+#' @inheritParams full_routine_bootstrap
+#'
+#' @export
+
+
 preprocess_adm_data <- function(parms, foi_data) {
 
   var_to_fit <- parms$dependent_variable
@@ -26,6 +41,21 @@ preprocess_adm_data <- function(parms, foi_data) {
   foi_data
 
 }
+
+
+#------------------------------------------------------------------------------
+
+#' The function joins the original admin unit level FOI estimates to the 1/6 degree resolution
+#' FOI dataset and also sets the case weigths for each 1/6 degree resolution data point.
+#'
+#' @title Pre-process the 1/6 degree resolution FOI dataset
+#'
+#' @param foi_data dataframe of admin unit level FOI data.
+#'
+#' @inheritParams preprocess_adm_data
+#'
+#' @export
+
 
 preprocess_pxl_data <- function(parms, foi_data, pxl_data) {
 

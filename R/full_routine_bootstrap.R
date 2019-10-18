@@ -1,17 +1,15 @@
 
 #------------------------------------------------------------------------------
 
-# full_routine_bootstrap
-
-#' \code{full_routine_bootstrap} preprocess one single bootstrap sample of the
-#'   data and fit a random forest model to it using the EM algorithm
+#' The function preprocess one single bootstrap sample of the original FOI data
+#' and fits a random forest model to it using the EM algorithm.
+#'
+#' @title Pre-process and fit a random forest model to a sample of FOI data
 #'
 #' @param parms list of user-defined parameters.
 #'
 #' @param original_foi_data dataframe of the original foi estimates dataset at
 #'   admin unit 1 resolution.
-#'
-#' @param adm_covariates dataframe of global covariates at admin unit 1 resolution.
 #'
 #' @param all_squares dataframe of global covariates at 1/6 degree resolution.
 #'
@@ -20,9 +18,11 @@
 #' @param boot_sample dataframe of the bootstrapped dataset of foi estimates and
 #'   covariates at admin unit 1 resolution (not pre-processed).
 #'
+#' @inheritParams exp_max_algorithm
+#'
 #' @importFrom dplyr left_join inner_join
 #'
-#' @return the random forest model object returned by \code{ranger}
+#' @return the random forest model object returned by \code{\link{ranger}}.
 #'
 #' @export
 

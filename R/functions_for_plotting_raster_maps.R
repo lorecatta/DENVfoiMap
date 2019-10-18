@@ -1,9 +1,9 @@
 
 #------------------------------------------------------------------------------
 
-# quick_raster_map
-
-#' \code{quick_raster_map} plot a raster map
+#' The functions make a quick ratser map using \code{\link{image.plot}}.
+#'
+#' @title Plot a raster map
 #'
 #' @param pred_df dataframe of data.
 #'
@@ -15,11 +15,11 @@
 #'
 #' @param out_name output file name.
 #'
-#' @param z_range range of values to show on plot.
+#' @param z_range range of values to show on plot. Default = NULL.
 #'
-#' @param shp shapefile object.
+#' @param shp shapefile object. Default = NULL.
 #'
-#' @param key_ttl character string of legend title
+#' @param key_ttl character string of legend title. Default = NULL.
 #'
 #' @importFrom fields image.plot
 #'

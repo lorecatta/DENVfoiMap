@@ -2,7 +2,7 @@
 % Please edit documentation in R/fit_ranger_RF_and_make_predictions.R
 \name{fit_ranger_RF}
 \alias{fit_ranger_RF}
-\title{\code{fit_ranger_RF} fit a random forest model using \code{ranger}.}
+\title{Fit a random forest model}
 \usage{
 fit_ranger_RF(parms, dependent_variable, covariates_names,
   training_dataset, my_weights)
@@ -25,5 +25,5 @@ with case weights.}
 the random forest model object returned by \code{ranger}
 }
 \description{
-\code{fit_ranger_RF} fit a random forest model using \code{ranger}.
+The function fits a random forest model using \code{\link{ranger}}.
 }

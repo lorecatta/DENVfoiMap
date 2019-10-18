@@ -1,9 +1,11 @@
 
 #------------------------------------------------------------------------------
 
-# grid_and_boot
-
-#' \code{grid_and_boot} take a block bootstrapped sample of the original foi dataset.
+#' The function creates a block bootstrapped sample of the original foi dataset,
+#'  by ensuring that points are sampled at certain geographical distance from the
+#'  other points.
+#'
+#' @title Generate a block bootstrapped sample of the original FOI data.
 #'
 #' @param data_df dataframe of foi predictions dataset at admin unit 1 resolution.
 #'

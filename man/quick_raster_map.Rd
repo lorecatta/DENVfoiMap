@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions_for_plotting_raster_maps.R
 \name{quick_raster_map}
 \alias{quick_raster_map}
-\title{\code{quick_raster_map} plot a raster map}
+\title{Plot a raster map}
 \usage{
 quick_raster_map(pred_df, statistic, my_col, out_pt, out_name,
   z_range = NULL, shp = NULL, key_ttle = NULL)
@@ -18,12 +18,12 @@ quick_raster_map(pred_df, statistic, my_col, out_pt, out_name,
 
 \item{out_name}{output file name.}
 
-\item{z_range}{range of values to show on plot.}
+\item{z_range}{range of values to show on plot. Default = NULL.}
 
-\item{shp}{shapefile object.}
+\item{shp}{shapefile object. Default = NULL.}
 
-\item{key_ttl}{character string of legend title}
+\item{key_ttl}{character string of legend title. Default = NULL.}
 }
 \description{
-\code{quick_raster_map} plot a raster map
+The functions make a quick ratser map using \code{\link{image.plot}}.
 }

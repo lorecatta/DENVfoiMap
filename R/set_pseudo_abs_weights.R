@@ -1,3 +1,17 @@
+
+#------------------------------------------------------------------------------
+
+#' The function calculates case weights for admin unit 1 level pseudo absence points
+#' assuming that the case weight value is a saturating function of the area (km) of
+#' the admin unit.
+#'
+#' @title Calculate case weights for admin unit 1 level pseudo absences
+#'
+#' @inheritParams preprocess_adm_data
+#'
+#' @export
+
+
 get_sat_area_wgts <- function(foi_data, parms){
 
   b <- parms$sat_functions_shapes[1]
@@ -10,37 +24,20 @@ get_sat_area_wgts <- function(foi_data, parms){
 
 }
 
-get_area_scaled_wgts <- function(foi_data, wgt_limits){
 
-  x <- foi_data[foi_data$type== "pseudoAbsence", "Shape_Area"]
+#------------------------------------------------------------------------------
 
-  area_limits <- c(min(x), max(x))
+#' The function sets to 1 the case weights of the 1/6 degree resolution cells where
+#' the original serology data points were located. It sets to 0 the case weights of
+#' all the other 1/6 degree resolution cells in the data points admin unit. This
+#' allows to fit the serology data points as point data.
+#'
+#' @title Calculate case weights for serology 1/6 degree resolution cells
+#'
+#' @inheritParams preprocess_pxl_data
+#'
+#' @export
 
-  y <- rep(0, length(x))
-
-  y[which(x==min(x))] <- wgt_limits[1]
-  y[which(x==max(x))] <- wgt_limits[2]
-
-  between_lims_ids <- which(y == 0)
-  between_lims <- y[between_lims_ids]
-
-  look_up_t <- cbind(x, y)
-
-  interp_wgts <- vapply(look_up_t[between_lims_ids, "x"],
-                        approx_one,
-                        numeric(1),
-                        a = area_limits,
-                        b = wgt_limits)
-
-  look_up_t[between_lims_ids, "y"] <- interp_wgts
-
-  look_up_t[,"y"]
-
-}
-
-approx_one <- function(i, a, b){
-  approx(a, b, xout = i)$y
-}
 
 set_wgts_to_sero_cells <- function(foi_data, pxl_data, parms){
 

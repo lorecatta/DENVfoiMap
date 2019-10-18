@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions_for_creating_bootstrap_samples.R
 \name{grid_and_boot}
 \alias{grid_and_boot}
-\title{\code{grid_and_boot} take a block bootstrapped sample of the original foi dataset.}
+\title{Generate a block bootstrapped sample of the original FOI data.}
 \usage{
 grid_and_boot(data_df, parms)
 }
@@ -12,5 +12,7 @@ grid_and_boot(data_df, parms)
 \item{parms}{list of user-defined parameters.}
 }
 \description{
-\code{grid_and_boot} take a block bootstrapped sample of the original foi dataset.
+The function creates a block bootstrapped sample of the original foi dataset,
+ by ensuring that points are sampled at certain geographical distance from the
+ other points.
 }

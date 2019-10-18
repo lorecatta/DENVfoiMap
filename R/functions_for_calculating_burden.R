@@ -1,9 +1,72 @@
+
+#------------------------------------------------------------------------------
+
+#' The function generates look up tables for calculating total number of annual dengue infections,
+#'  mild febrile cases, cases requiring hospitalization and R0. R0 is estimated for
+#'  two different assumptions of the infectiousness of the four dengue infections.
+#'
+#' @title Create look up tables for burden and R0 calculation
+#'
+#' @param age_struct dataframe of the proportion of individuals in different 5-yr age groups,
+#'  for each country.
+#'
+#' @param age_band_tags character string of the names of the columns of the `age_structure` dataframe
+#'  containing the actual age structure data.
+#'
+#' @param age_band_L_bounds integers of the lower limits of the age groups.
+#'
+#' @param age_band_U_bounds integers pf the upper limits of the age groups.
+#'
+#' @inheritParams full_routine_bootstrap
+#'
+#' @export
+
+
 create_lookup_tables <- function(i,
                                  age_struct,
                                  age_band_tags,
                                  age_band_L_bounds,
                                  age_band_U_bounds,
                                  parms){
+
+  wrapper_to_lookup <- function(i,
+                                age_struct,
+                                tags,
+                                FOI_values,
+                                my_fun, ...){
+
+    my_FUN <- my_fun
+    # my_FUN <- match.fun(my_fun)
+
+    m_j <- age_struct[i, tags]
+
+    vapply(FOI_values,
+           my_FUN,
+           numeric(1),
+           n_j = m_j,
+           ...)
+
+  }
+
+  fix_all_lookup_limits <- function(i) {
+
+    rbind(c(x = 0, y = 0), i)
+
+  }
+
+  fix_R0_lookup_limits <- function(i) {
+
+    i[1, "y"] <- 1
+
+    rbind(c(x = 0, y = 0), i)
+
+  }
+
+  cbind_FOI_to_lookup <- function(i, FOI_values) {
+
+    cbind(x = FOI_values, y = i)
+
+  }
 
   cat("variable to look up =", i, "\n")
 
@@ -32,8 +95,6 @@ create_lookup_tables <- function(i,
       lookup_list <- lapply(Infection_values, cbind_FOI_to_lookup, FOI_values)
 
       lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
-
-      # saveRDS(lookup_list, out_nm)
 
     }
 
@@ -66,8 +127,6 @@ create_lookup_tables <- function(i,
 
       lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
 
-      # saveRDS(lookup_list, out_nm_)
-
     }
 
   }
@@ -99,8 +158,6 @@ create_lookup_tables <- function(i,
       lookup_list <- lapply(HCase_values, cbind_FOI_to_lookup, FOI_values)
 
       lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
-
-      # saveRDS(lookup_list, out_nm)
 
     }
 
@@ -135,8 +192,6 @@ create_lookup_tables <- function(i,
 
       lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
 
-      # saveRDS(lookup_list, out_nm)
-
     }
 
   }
@@ -170,8 +225,6 @@ create_lookup_tables <- function(i,
 
       lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
 
-      # saveRDS(lookup_list, out_nm)
-
     }
 
   }
@@ -180,41 +233,28 @@ create_lookup_tables <- function(i,
 
 }
 
-wrapper_to_lookup <- function(i,
-                              age_struct,
-                              tags,
-                              FOI_values,
-                              my_fun, ...){
 
-  my_FUN <- my_fun
-  # my_FUN <- match.fun(my_fun)
+#------------------------------------------------------------------------------
 
-  m_j <- age_struct[i, tags]
+#' The functions post processes the output of the burden calculation.
+#'
+#' @title Post-process the output of the burden calculation
+#'
+#' @param data_matrix a matrix output from \code{\link{wrapper_to_replicate_R0_and_burden}}.
+#'
+#' @inheritParams full_routine_bootstrap
+#'
+#' @export
 
-  vapply(FOI_values,
-         my_FUN,
-         numeric(1),
-         n_j = m_j,
-         ...)
 
-}
+post_processing_burden <- function(data_matrix, parms) {
 
-fix_all_lookup_limits <- function(i) {
+  base_info <- parms$base_info
 
-  rbind(c(x = 0, y = 0), i)
+  ret1 <- lapply(data_matrix, t)
+  ret2 <- do.call("rbind", ret1)
+  ret3 <- cbind(sqr_preds_3[, base_info], ret2)
 
-}
-
-fix_R0_lookup_limits <- function(i) {
-
-  i[1, "y"] <- 1
-
-  rbind(c(x = 0, y = 0), i)
-
-}
-
-cbind_FOI_to_lookup <- function(i, FOI_values) {
-
-  cbind(x = FOI_values, y = i)
+  as.data.frame(ret3)
 
 }

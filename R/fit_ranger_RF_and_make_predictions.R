@@ -1,9 +1,9 @@
 
 #------------------------------------------------------------------------------
 
-# fit_ranger_RF
-
-#' \code{fit_ranger_RF} fit a random forest model using \code{ranger}.
+#' The function fits a random forest model using \code{\link{ranger}}.
+#'
+#' @title Fit a random forest model
 #'
 #' @param sqr_dataset_2 dataframe of foi estimates and predictions at 1/6 degree resolution.
 #'
@@ -52,9 +52,9 @@ fit_ranger_RF <- function(parms,
 
 #------------------------------------------------------------------------------
 
-# make_ranger_predictions
-
-#' \code{make_ranger_predictions} make predictions using a Ranger model object.
+#' The functions makes predictions using a \code{Ranger} model object and a dataset of covariates.
+#'
+#' @title Generate predictions from a \code{Ranger} model fit
 #'
 #' @param mod_obj the random forest model object returned by \code{ranger}.
 #'

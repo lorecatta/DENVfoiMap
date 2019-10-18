@@ -2,8 +2,7 @@
 % Please edit documentation in R/exp_max_algorithm.R
 \name{exp_max_algorithm}
 \alias{exp_max_algorithm}
-\title{\code{exp_max_algorithm} fit a random forest model to one single
-  bootstrap sample of the data using the EM algorithm}
+\title{Fit a random forest using an EM algorithm}
 \usage{
 exp_max_algorithm(parms, adm_dataset, pxl_dataset, covariates_names,
   map_col = NULL, RF_obj_path = NULL, RF_obj_name = NULL,
@@ -22,12 +21,38 @@ covariates at 1/6 degree resolution.}
 
 \item{covariates_names}{character vector of covariates names.}
 
-\item{adm_covariates}{dataframe of global covariates at admin unit 1 resolution.}
+\item{map_col}{map colours. Default = NULL.}
+
+\item{RF_obj_path}{character string of the directory for saving the random forest
+object model. Default = NULL.}
+
+\item{RF_obj_name}{character of name of the random forest model object to save.
+Default = NULL.}
+
+\item{diagn_tab_path}{character string of the directory for saving the table of diagnostics
+from the EM fit. Default = NULL.}
+
+\item{diagn_tab_name}{character of name of the EM fit table of diagnostics to save.
+Default = NULL.}
+
+\item{map_path}{character string of the directory for saving the figure of the prediction map
+from the EM fit. Default = NULL.}
+
+\item{sct_plt_path}{character string of the directory for saving the figure of
+observation vs predictions plot. Default = NULL.}
+
+\item{train_dts_path}{character string of the directory for saving the training dataset.
+Default = NULL.}
+
+\item{train_dts_name}{character of name of the training dataset dataframe to save.
+Default = NULL.}
+
+\item{adm_covariates}{dataframe of global covariates at admin unit 1 resolution. Default = NULL.}
 }
 \value{
-the random forest model object returned by \code{ranger}
+the random forest model object returned by \code{ranger}.
 }
 \description{
-\code{exp_max_algorithm} fit a random forest model to one single
-  bootstrap sample of the data using the EM algorithm
+The function fits a random forest model to FOI data point estimates at 1/6 degree resolution
+using an Expectation Maximization algorithm
 }

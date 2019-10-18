@@ -2,7 +2,7 @@
 % Please edit documentation in R/fit_ranger_RF_and_make_predictions.R
 \name{make_ranger_predictions}
 \alias{make_ranger_predictions}
-\title{\code{make_ranger_predictions} make predictions using a Ranger model object.}
+\title{Generate predictions from a \code{Ranger} model fit}
 \usage{
 make_ranger_predictions(mod_obj, dataset, covariates_names)
 }
@@ -14,5 +14,5 @@ make_ranger_predictions(mod_obj, dataset, covariates_names)
 \item{covariates_names}{character vector of covariates names.}
 }
 \description{
-\code{make_ranger_predictions} make predictions using a Ranger model object.
+The functions makes predictions using a \code{Ranger} model object and a dataset of covariates.
 }

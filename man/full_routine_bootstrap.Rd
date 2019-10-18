@@ -2,8 +2,7 @@
 % Please edit documentation in R/full_routine_bootstrap.R
 \name{full_routine_bootstrap}
 \alias{full_routine_bootstrap}
-\title{\code{full_routine_bootstrap} preprocess one single bootstrap sample of the
-  data and fit a random forest model to it using the EM algorithm}
+\title{Pre-process and fit a random forest model to a sample of FOI data}
 \usage{
 full_routine_bootstrap(parms, original_foi_data, adm_covariates,
   all_squares, covariates_names, boot_sample)
@@ -14,7 +13,7 @@ full_routine_bootstrap(parms, original_foi_data, adm_covariates,
 \item{original_foi_data}{dataframe of the original foi estimates dataset at
 admin unit 1 resolution.}
 
-\item{adm_covariates}{dataframe of global covariates at admin unit 1 resolution.}
+\item{adm_covariates}{dataframe of global covariates at admin unit 1 resolution. Default = NULL.}
 
 \item{all_squares}{dataframe of global covariates at 1/6 degree resolution.}
 
@@ -24,9 +23,9 @@ admin unit 1 resolution.}
 covariates at admin unit 1 resolution (not pre-processed).}
 }
 \value{
-the random forest model object returned by \code{ranger}
+the random forest model object returned by \code{\link{ranger}}.
 }
 \description{
-\code{full_routine_bootstrap} preprocess one single bootstrap sample of the
-  data and fit a random forest model to it using the EM algorithm
+The function preprocess one single bootstrap sample of the original FOI data
+and fits a random forest model to it using the EM algorithm.
 }

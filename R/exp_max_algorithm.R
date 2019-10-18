@@ -1,12 +1,10 @@
 
 #------------------------------------------------------------------------------
 
-# exp_max_algorithm
-
-#' \code{exp_max_algorithm} fit a random forest model to one single
-#'   bootstrap sample of the data using the EM algorithm
+#' The function fits a random forest model to FOI data point estimates at 1/6 degree resolution
+#' using an Expectation Maximization algorithm
 #'
-#' @inheritParams full_routine_bootstrap
+#' @title Fit a random forest using an EM algorithm
 #'
 #' @param adm_dataset dataframe of the bootstrapped dataset of foi estimates and
 #'   covariates at admin unit 1 resolution (pre-processed).
@@ -14,9 +12,39 @@
 #' @param pxl_dataset dataframe of the bootstrapped dataset of foi estimates and
 #'   covariates at 1/6 degree resolution.
 #'
+#' @param map_col map colours. Default = NULL.
+#'
+#' @param RF_obj_path character string of the directory for saving the random forest
+#'  object model. Default = NULL.
+#'
+#' @param RF_obj_name character of name of the random forest model object to save.
+#'  Default = NULL.
+#'
+#' @param diagn_tab_path character string of the directory for saving the table of diagnostics
+#' from the EM fit. Default = NULL.
+#'
+#' @param diagn_tab_name character of name of the EM fit table of diagnostics to save.
+#'  Default = NULL.
+#'
+#' @param map_path character string of the directory for saving the figure of the prediction map
+#'  from the EM fit. Default = NULL.
+#'
+#' @param sct_plt_path character string of the directory for saving the figure of
+#'  observation vs predictions plot. Default = NULL.
+#'
+#' @param train_dts_path character string of the directory for saving the training dataset.
+#'  Default = NULL.
+#'
+#' @param train_dts_name character of name of the training dataset dataframe to save.
+#'  Default = NULL.
+#'
+#' @param adm_covariates dataframe of global covariates at admin unit 1 resolution. Default = NULL.
+#'
+#' @inheritParams full_routine_bootstrap
+#'
 #' @importFrom dplyr left_join inner_join %>% group_by summarise
 #'
-#' @return the random forest model object returned by \code{ranger}
+#' @return the random forest model object returned by \code{ranger}.
 #'
 #' @export
 

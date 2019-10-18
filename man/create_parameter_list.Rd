@@ -2,9 +2,7 @@
 % Please edit documentation in R/create_parameter_list.R
 \name{create_parameter_list}
 \alias{create_parameter_list}
-\title{Create a list of user-defined parameters
-
-The function creates a list of user-defined parameters.}
+\title{Create a list of user-defined parameters}
 \usage{
 create_parameter_list(no_predictors = 16, dependent_variable = "FOI",
   resample_grid_size = 20, grid_size = 5, no_samples = 1,
@@ -53,9 +51,19 @@ case weights.}
 \item{no_trees}{number of trees of the random forest model passed to \code{\link{ranger}}.}
 
 \item{min_node_size}{minimal node size of the random forest model passed to \code{\link{ranger}}.}
+
+\item{all_wgt}{numeric value of case weights for all data points.}
+
+\item{pseudoAbs_value}{numeric value of pseudo absences for different response variables.}
+
+\item{foi_offset}{numeric value to offset model FOI predictions during fitting with
+Expectation Maximization.}
+
+\item{base_info}{character string of key ID variable in the 1/6 degree resolution global
+covariate dataset.}
+
+\item{extra_params}{list of additional parameters. Default = NULL.}
 }
 \description{
-Create a list of user-defined parameters
-
 The function creates a list of user-defined parameters.
 }

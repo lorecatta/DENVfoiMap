@@ -1,7 +1,8 @@
 
 #------------------------------------------------------------------------------
 
-#' The function calculates a weighted Pearson correlation coefficient using \code{\link{wtd.cor}}.
+#' The function calculates a weighted Pearson correlation coefficient between
+#' variable A and B using \code{\link{wtd.cor}}.
 #'
 #' @title Calculate weighted Pearson correlation coefficient
 #'
