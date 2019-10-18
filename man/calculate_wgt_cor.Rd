@@ -17,5 +17,5 @@ calculate_wgt_cor(d.sub, x, y)
 the numeric value of the correlation coefficient.
 }
 \description{
-The function calculates a weighted Pearson correlation coefficient using \link[fields]{wtd.cor}.
+The function calculates a weighted Pearson correlation coefficient using \code{\link[weights]{wtd.cor}}.
 }
