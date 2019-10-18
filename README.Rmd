@@ -36,17 +36,37 @@ of the original force of infection data.
 
 ## Installation
 
-
-The package is not fully documented yet unfortunately. So the best way to use it is by cloning the github repository and do 
+Please install `DENVfoiMap` from github with 
 
 ```{r include = TRUE, eval = FALSE}
-devtools::load_all()
+devtools::install_github("lorecatta/DENVfoiMap")
 ```
 
-which will load all the functions and the datasets used in the analysys. 
-The code for running the analys is in:
+Load and attach it with
 
-/scripts/analysis.R
+```{r}
+library(DENVfoiMap)
+```
+
+which will load all the functions and the datasets used in the analysis. 
+The datasets loaded with the package include:
+
+* foi_data - DESCRIPTION TO COME
+* admin_covariates - 
+* predictor_rank - 
+* age_structure - 
+* endemic_ID_0_ID_1 - 
+* all_sqr_covariates - 
+* R0_to_prop_cases_averted_lookup_1 - 
+* R0_to_prop_cases_averted_lookup_2 - 
+* R0_to_prop_hosp_averted_lookup_1 - 
+* R0_to_prop_hosp_averted_lookup_2 - 
+* R0_to_prop_infections_averted_lookup_1 - 
+* R0_to_prop_infections_averted_lookup_2 - 
+
+The code for running the analysis is in:
+
+analysis.R
 
 Plase do get in touch (l.cattarino@imperial.ac.uk) if you have any queries or encounter issues when using 
 `DENVfoiMap`.

@@ -14,14 +14,35 @@ As the analysis described in the aformentioned publication includes bootstrappin
 Installation
 ------------
 
-The package is not fully documented yet unfortunately. So the best way to use it is by cloning the github repository and do
+Please install `DENVfoiMap` from github with
 
 ``` r
-devtools::load_all()
+devtools::install_github("lorecatta/DENVfoiMap")
 ```
 
-which will load all the functions and the datasets used in the analysys. The code for running the analys is in:
+Load and attach it with
 
-/scripts/analysis.R
+``` r
+library(DENVfoiMap)
+```
+
+which will load all the functions and the datasets used in the analysis. The datasets loaded with the package include:
+
+-   foi\_data - DESCRIPTION TO COME
+-   admin\_covariates -
+-   predictor\_rank -
+-   age\_structure -
+-   endemic\_ID\_0\_ID\_1 -
+-   all\_sqr\_covariates -
+-   R0\_to\_prop\_cases\_averted\_lookup\_1 -
+-   R0\_to\_prop\_cases\_averted\_lookup\_2 -
+-   R0\_to\_prop\_hosp\_averted\_lookup\_1 -
+-   R0\_to\_prop\_hosp\_averted\_lookup\_2 -
+-   R0\_to\_prop\_infections\_averted\_lookup\_1 -
+-   R0\_to\_prop\_infections\_averted\_lookup\_2 -
+
+The code for running the analysis is in:
+
+analysis.R
 
 Plase do get in touch (<l.cattarino@imperial.ac.uk>) if you have any queries or encounter issues when using `DENVfoiMap`.
