@@ -24,7 +24,8 @@ Imports:
     fields,
     context,
     drep,
-    matrixStats
+    matrixStats,
+    ggplot2
 RoxygenNote: 6.1.1
 Remotes:
     mrc-ide/context,
