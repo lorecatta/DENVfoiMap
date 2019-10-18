@@ -3,7 +3,7 @@ Type: Package
 Title: Runs the analysis of the paper on global dengue FOI mapping and 
   prediction of intervention impact
 Version: 0.1.0
-Author: person(given = "Lorenzo", 
+Authors@R: person(given = "Lorenzo", 
                family = "Cattarino", 
                role = c("aut", "cre"),
                email = "l.cattarino@imperial.ac.uk")
