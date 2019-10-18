@@ -43,6 +43,10 @@ pre_process_vaccine_lookup_table <- function(look_up_table, R0_preds) {
 #'
 #' @inheritParams pre_process_vaccine_lookup_table
 #'
+#' @importFrom stats approx
+#'
+#' @importFrom matrixStats rowMaxs
+#'
 #' @export
 
 

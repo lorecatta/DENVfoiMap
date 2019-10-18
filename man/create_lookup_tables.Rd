@@ -4,7 +4,7 @@
 \alias{create_lookup_tables}
 \title{Create look up tables for burden and R0 calculation}
 \usage{
-create_lookup_tables(i, age_struct, age_band_tags, age_band_L_bounds,
+create_lookup_tables(age_struct, age_band_tags, age_band_L_bounds,
   age_band_U_bounds, parms)
 }
 \arguments{

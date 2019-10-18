@@ -24,6 +24,8 @@
 #'
 #' @inheritParams create_lookup_tables
 #'
+#' @importFrom stats approx
+#'
 #' @export
 
 

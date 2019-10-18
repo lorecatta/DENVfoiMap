@@ -62,6 +62,8 @@ fit_ranger_RF <- function(parms,
 #'
 #' @inheritParams full_routine_bootstrap
 #'
+#' @importFrom stats predict
+#'
 #' @export
 
 

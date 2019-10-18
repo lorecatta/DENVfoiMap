@@ -279,29 +279,21 @@ exp_max_algorithm <- function(parms,
 
     if(!is.null(sct_plt_path)){
 
-      # browser()
-
-      # plot of observed admin values vs pop-wgt average predicted square values
-
       av_sqr_sp_nm <- paste0("pred_vs_obs_av_sqr_iter_", i, ".png")
 
       generic_scatter_plot(df = aa_2,
                            x = "o_j",
                            y = "mean_p_i",
-                           file_name = av_sqr_sp_nm,
-                           file_path = sct_plt_path)
-
-
-      # plot of observed vs predicted admin values ------------------------------
-
+                           out_name = av_sqr_sp_nm,
+                           out_pt = sct_plt_path)
 
       adm_sp_nm <- paste0("pred_vs_obs_adm_iter_", i, ".png")
 
       generic_scatter_plot(df = aa_2,
                            x = "o_j",
                            y = "adm_pred",
-                           file_name = adm_sp_nm,
-                           file_path = sct_plt_path)
+                           out_name = adm_sp_nm,
+                           out_pt = sct_plt_path)
 
     }
 
@@ -329,15 +321,15 @@ exp_max_algorithm <- function(parms,
   }
 
   if(!is.null(RF_obj_path)){
-    write_out_rds(RF_obj, RF_obj_path, RF_obj_name)
+    # write_out_rds(RF_obj, RF_obj_path, RF_obj_name)
   }
 
   if(!is.null(diagn_tab_path)){
-    write_out_rds(out_mat, diagn_tab_path, diagn_tab_name)
+    # write_out_rds(out_mat, diagn_tab_path, diagn_tab_name)
   }
 
   if(!is.null(train_dts_path)){
-    write_out_rds(training_dataset, train_dts_path, train_dts_name)
+    # write_out_rds(training_dataset, train_dts_path, train_dts_name)
   }
 
   RF_obj

@@ -7,11 +7,11 @@
 calculate_wgt_cor(d.sub, x, y)
 }
 \arguments{
+\item{d.sub}{a dataframe with data.}
+
 \item{x}{character string of the name of variable A.}
 
 \item{y}{character string of the name of variable B.}
-
-\item{d.subs}{a dataframe with data.}
 }
 \value{
 the numeric value of the correlation coefficient.

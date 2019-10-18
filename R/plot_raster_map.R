@@ -1,9 +1,9 @@
 
 #------------------------------------------------------------------------------
 
-#' The functions make a quick ratser map using \code{\link{image.plot}}.
+#' The function makes and saves locally a raster map using \code{\link{image.plot}}.
 #'
-#' @title Plot a raster map
+#' @title Plot and save a raster map
 #'
 #' @param pred_df dataframe of data.
 #'
@@ -22,6 +22,10 @@
 #' @param key_ttl character string of legend title. Default = NULL.
 #'
 #' @importFrom fields image.plot
+#'
+#' @importFrom grDevices dev.off png
+#'
+#' @importFrom graphics image par plot text
 #'
 #' @export
 

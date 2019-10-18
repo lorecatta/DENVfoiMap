@@ -15,7 +15,7 @@ resolution predictions are aggregated by.}
 \item{covariates_names}{character vector of covariates names.}
 }
 \description{
-The function ggregates foi predictions at 1/6 degree resolutions to
+The function aggregates foi predictions at 1/6 degree resolutions to
 adim unit 1 level by taking the population-weighted average of the
 1/6 degree resolution predictions within each admin unit 1.
 }

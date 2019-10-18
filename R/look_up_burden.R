@@ -22,8 +22,7 @@
 #' @export
 
 
-create_lookup_tables <- function(i,
-                                 age_struct,
+create_lookup_tables <- function(age_struct,
                                  age_band_tags,
                                  age_band_L_bounds,
                                  age_band_U_bounds,
@@ -68,51 +67,116 @@ create_lookup_tables <- function(i,
 
   }
 
-  cat("variable to look up =", i, "\n")
+  helper <- function(i) {
 
-  FOI_values <- parms$FOI_grid
-  parallel_2 <- parms$parallel_2
+    cat("variable to look up =", i, "\n")
 
-  if (i == "I") {
+    FOI_values <- parms$FOI_grid
+    parallel_2 <- parms$parallel_2
 
-    my_fun <- drep::calculate_infections
-    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+    if (i == "I") {
 
-    if (!file.exists(out_nm)) {
+      my_fun <- drep::calculate_infections
+      out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
 
-      message("1D lookup")
+      if (!file.exists(out_nm)) {
 
-      Infection_values <- loop(seq_len(nrow(age_struct)),
-                               wrapper_to_lookup,
-                               age_struct = age_struct,
-                               tags = age_band_tags,
-                               FOI_values = FOI_values,
-                               my_fun = my_fun,
-                               u_lim = age_band_U_bounds,
-                               l_lim = age_band_L_bounds,
-                               parallel = parallel_2)
+        message("1D lookup")
 
-      lookup_list <- lapply(Infection_values, cbind_FOI_to_lookup, FOI_values)
+        Infection_values <- loop(seq_len(nrow(age_struct)),
+                                 wrapper_to_lookup,
+                                 age_struct = age_struct,
+                                 tags = age_band_tags,
+                                 FOI_values = FOI_values,
+                                 my_fun = my_fun,
+                                 u_lim = age_band_U_bounds,
+                                 l_lim = age_band_L_bounds,
+                                 parallel = parallel_2)
 
-      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+        lookup_list <- lapply(Infection_values, cbind_FOI_to_lookup, FOI_values)
+
+        lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+
+      }
 
     }
 
-  }
+    if (i == "C") {
 
-  if (i == "C") {
+      my_fun <- drep::calculate_cases
+      my_weights <- parms$prop_sympt
+      out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
 
-    my_fun <- drep::calculate_cases
-    my_weights <- parms$prop_sympt
-    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+      if (!file.exists(out_nm)) {
 
-    if (!file.exists(out_nm)) {
+        message("1D lookup")
 
-      message("1D lookup")
+        cat("weights vector =", my_weights, "\n")
 
-      cat("weights vector =", my_weights, "\n")
+        case_values <- loop(seq_len(nrow(age_struct)),
+                            wrapper_to_lookup,
+                            age_struct = age_struct,
+                            tags = age_band_tags,
+                            FOI_values = FOI_values,
+                            my_fun = my_fun,
+                            u_lim = age_band_U_bounds,
+                            l_lim = age_band_L_bounds,
+                            weights_vec = my_weights,
+                            parallel = parallel_2)
 
-      case_values <- loop(seq_len(nrow(age_struct)),
+        lookup_list <- lapply(case_values, cbind_FOI_to_lookup, FOI_values)
+
+        lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+
+      }
+
+    }
+
+    if (i == "HC") {
+
+      my_fun <- drep::calculate_hosp_cases
+      my_weights <- parms$prop_sympt
+      out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+
+      if (!file.exists(out_nm)) {
+
+        message("1D lookup")
+
+        cat("weights vector =", my_weights, "\n")
+
+        HCase_values <- loop(seq_len(nrow(age_struct)),
+                             wrapper_to_lookup,
+                             age_struct = age_struct,
+                             tags = age_band_tags,
+                             FOI_values = FOI_values,
+                             my_fun = my_fun,
+                             u_lim = age_band_U_bounds,
+                             l_lim = age_band_L_bounds,
+                             parms = parms$prop_hosp,
+                             weights_vec = my_weights,
+                             parallel = parallel_2)
+
+        lookup_list <- lapply(HCase_values, cbind_FOI_to_lookup, FOI_values)
+
+        lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+
+      }
+
+    }
+
+    if (i == "R0_1") {
+
+      my_fun <- drep::calculate_R0
+      my_weights <- parms$vec_phis_R0_1
+      out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+
+      if (!file.exists(out_nm)) {
+
+        message("1D lookup")
+
+        cat("weights vector =", my_weights, "\n")
+
+        R0_values <- loop(seq_len(nrow(age_struct)),
                           wrapper_to_lookup,
                           age_struct = age_struct,
                           tags = age_band_tags,
@@ -120,116 +184,66 @@ create_lookup_tables <- function(i,
                           my_fun = my_fun,
                           u_lim = age_band_U_bounds,
                           l_lim = age_band_L_bounds,
-                          weights_vec = my_weights,
+                          phis = my_weights,
                           parallel = parallel_2)
 
-      lookup_list <- lapply(case_values, cbind_FOI_to_lookup, FOI_values)
+        lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
 
-      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+        lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
 
-    }
+        lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
 
-  }
-
-  if (i == "HC") {
-
-    my_fun <- drep::calculate_hosp_cases
-    my_weights <- parms$prop_sympt
-    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
-
-    if (!file.exists(out_nm)) {
-
-      message("1D lookup")
-
-      cat("weights vector =", my_weights, "\n")
-
-      HCase_values <- loop(seq_len(nrow(age_struct)),
-                           wrapper_to_lookup,
-                           age_struct = age_struct,
-                           tags = age_band_tags,
-                           FOI_values = FOI_values,
-                           my_fun = my_fun,
-                           u_lim = age_band_U_bounds,
-                           l_lim = age_band_L_bounds,
-                           parms = parms$prop_hosp,
-                           weights_vec = my_weights,
-                           parallel = parallel_2)
-
-      lookup_list <- lapply(HCase_values, cbind_FOI_to_lookup, FOI_values)
-
-      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+      }
 
     }
 
-  }
+    if (i == "R0_2") {
 
-  if (i == "R0_1") {
+      my_fun <- drep::calculate_R0
+      my_weights <- parms$vec_phis_R0_2
+      out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
 
-    my_fun <- drep::calculate_R0
-    my_weights <- parms$vec_phis_R0_1
-    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
+      if (!file.exists(out_nm)) {
 
-    if (!file.exists(out_nm)) {
+        message("1D lookup")
 
-      message("1D lookup")
+        cat("weights vector =", my_weights, "\n")
 
-      cat("weights vector =", my_weights, "\n")
+        R0_values <- loop(seq_len(nrow(age_struct)),
+                          wrapper_to_lookup,
+                          age_struct = age_struct,
+                          tags = age_band_tags,
+                          FOI_values = FOI_values,
+                          my_fun = my_fun,
+                          u_lim = age_band_U_bounds,
+                          l_lim = age_band_L_bounds,
+                          phis = my_weights,
+                          parallel = parallel_2)
 
-      R0_values <- loop(seq_len(nrow(age_struct)),
-                        wrapper_to_lookup,
-                        age_struct = age_struct,
-                        tags = age_band_tags,
-                        FOI_values = FOI_values,
-                        my_fun = my_fun,
-                        u_lim = age_band_U_bounds,
-                        l_lim = age_band_L_bounds,
-                        phis = my_weights,
-                        parallel = parallel_2)
+        lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
 
-      lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
+        lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
 
-      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
+        lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
 
-      lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
-
-    }
-
-  }
-
-  if (i == "R0_2") {
-
-    my_fun <- drep::calculate_R0
-    my_weights <- parms$vec_phis_R0_2
-    out_nm <- sprintf("FOI_to_%s_lookup_tables.rds", i)
-
-    if (!file.exists(out_nm)) {
-
-      message("1D lookup")
-
-      cat("weights vector =", my_weights, "\n")
-
-      R0_values <- loop(seq_len(nrow(age_struct)),
-                        wrapper_to_lookup,
-                        age_struct = age_struct,
-                        tags = age_band_tags,
-                        FOI_values = FOI_values,
-                        my_fun = my_fun,
-                        u_lim = age_band_U_bounds,
-                        l_lim = age_band_L_bounds,
-                        phis = my_weights,
-                        parallel = parallel_2)
-
-      lookup_list <- lapply(R0_values, cbind_FOI_to_lookup, FOI_values)
-
-      lookup_list <- lapply(lookup_list, fix_all_lookup_limits)
-
-      lookup_list <- lapply(lookup_list, fix_R0_lookup_limits)
+      }
 
     }
 
+    lookup_list
+
   }
 
-  lookup_list
+  target_nm <- parms$target_nm
+
+  loop(target_nm,
+       helper,
+       age_struct = age_structure,
+       age_band_tags = age_band_tgs,
+       age_band_L_bounds = age_band_L_bounds,
+       age_band_U_bounds = age_band_U_bounds,
+       parms = parameters,
+       parallel = FALSE)
 
 }
 

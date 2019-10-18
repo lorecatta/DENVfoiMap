@@ -102,9 +102,7 @@ create_parameter_list <- function(no_predictors = 16,
   pm_list$prop_hosp <- prop_hosp
   pm_list$FOI_grid <- FOI_grid
   pm_list$sf_vals <- sf_vals
-  pm_list$shape_1 <- shape_1
-  pm_list$shape_2 <- shape_2
-  pm_list$shape_3 <- shape_3
+  pm_list$sat_functions_shapes <- sat_functions_shapes
   pm_list$no_trees <- no_trees
   pm_list$min_node_size <- min_node_size
   pm_list$all_wgt <- all_wgt

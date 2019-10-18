@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_raster_map.R
 \name{quick_raster_map}
 \alias{quick_raster_map}
-\title{Plot a raster map}
+\title{Plot and save a raster map}
 \usage{
 quick_raster_map(pred_df, statistic, my_col, out_pt, out_name,
   z_range = NULL, shp = NULL, key_ttle = NULL)
@@ -25,5 +25,5 @@ quick_raster_map(pred_df, statistic, my_col, out_pt, out_name,
 \item{key_ttl}{character string of legend title. Default = NULL.}
 }
 \description{
-The functions make a quick ratser map using \code{\link{image.plot}}.
+The function makes and saves locally a raster map using \code{\link{image.plot}}.
 }

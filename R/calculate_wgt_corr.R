@@ -6,7 +6,7 @@
 #'
 #' @title Calculate weighted Pearson correlation coefficient
 #'
-#' @param d.subs a dataframe with data.
+#' @param d.sub a dataframe with data.
 #'
 #' @param x character string of the name of variable A.
 #'

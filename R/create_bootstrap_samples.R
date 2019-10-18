@@ -11,6 +11,8 @@
 #'
 #' @inheritParams full_routine_bootstrap
 #'
+#' @importFrom stats runif
+#'
 #' @export
 
 
