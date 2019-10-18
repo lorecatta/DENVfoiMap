@@ -34,8 +34,6 @@ all_predictors <- predictor_rank$name
 
 base_info <- parameters$base_info
 
-parallel_2 <- parameters$parallel_2
-
 screening_ages <- parameters$screening_ages
 
 target_nm <- parameters$target_nm
@@ -125,21 +123,19 @@ sqr_preds_2 <- inner_join(age_structure[, c("age_id", "ID_0")],
 
 sqr_preds_3 <- as.matrix(sqr_preds_2)
 
-burden_estimates_raw <- loop(seq_len(nrow(sqr_preds_3)),
-                         wrapper_to_replicate_R0_and_burden,
-                         foi_data = sqr_preds_3,
-                         age_struct = age_structure,
-                         scaling_factor = sf_val,
-                         FOI_to_Inf_list = lookup_tabs[[1]],
-                         FOI_to_C_list = lookup_tabs[[2]],
-                         FOI_to_HC_list = lookup_tabs[[3]],
-                         FOI_to_R0_1_list = lookup_tabs[[4]],
-                         FOI_to_R0_2_list = lookup_tabs[[5]],
-                         age_band_lower_bounds = age_band_L_bounds,
-                         age_band_upper_bounds = age_band_U_bounds,
-                         age_band_tags = age_band_tgs,
-                         parms = parameters,
-                         parallel = parallel_2)
+burden_estimates_raw <- wrapper_to_replicate_R0_and_burden(
+  foi_data = sqr_preds_3,
+  age_struct = age_structure,
+  scaling_factor = sf_val,
+  FOI_to_Inf_list = lookup_tabs[[1]],
+  FOI_to_C_list = lookup_tabs[[2]],
+  FOI_to_HC_list = lookup_tabs[[3]],
+  FOI_to_R0_1_list = lookup_tabs[[4]],
+  FOI_to_R0_2_list = lookup_tabs[[5]],
+  age_band_lower_bounds = age_band_L_bounds,
+  age_band_upper_bounds = age_band_U_bounds,
+  age_band_tags = age_band_tgs,
+  parms = parameters)
 
 context::parallel_cluster_stop()
 
@@ -185,21 +181,19 @@ sf_val <- parameters$sf_vals[4]
 
 context::parallel_cluster_start(7, ctx)
 
-tr_red_impact_estimates_raw <- loop(seq_len(nrow(sqr_preds_3)),
-                                    wrapper_to_replicate_R0_and_burden,
-                                    foi_data = sqr_preds_3,
-                                    age_struct = age_structure,
-                                    scaling_factor = sf_val,
-                                    FOI_to_Inf_list = lookup_tabs[[1]],
-                                    FOI_to_C_list = lookup_tabs[[2]],
-                                    FOI_to_HC_list = lookup_tabs[[3]],
-                                    FOI_to_R0_1_list = lookup_tabs[[4]],
-                                    FOI_to_R0_2_list = lookup_tabs[[5]],
-                                    age_band_lower_bounds = age_band_L_bounds,
-                                    age_band_upper_bounds = age_band_U_bounds,
-                                    age_band_tags = age_band_tgs,
-                                    parms = parameters,
-                                    parallel = parallel_2)
+tr_red_impact_estimates_raw <- wrapper_to_replicate_R0_and_burden(
+  foi_data = sqr_preds_3,
+  age_struct = age_structure,
+  scaling_factor = sf_val,
+  FOI_to_Inf_list = lookup_tabs[[1]],
+  FOI_to_C_list = lookup_tabs[[2]],
+  FOI_to_HC_list = lookup_tabs[[3]],
+  FOI_to_R0_1_list = lookup_tabs[[4]],
+  FOI_to_R0_2_list = lookup_tabs[[5]],
+  age_band_lower_bounds = age_band_L_bounds,
+  age_band_upper_bounds = age_band_U_bounds,
+  age_band_tags = age_band_tgs,
+  parms = parameters)
 
 context::parallel_cluster_stop()
 
