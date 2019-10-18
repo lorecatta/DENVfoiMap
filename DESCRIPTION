@@ -12,6 +12,8 @@ Description: The package fits a random forest model to a set of geolocated
   explanatory variables and calculates the impact of transmission-reduction 
   interventions against dengue and the Sanofi Pasteur dengue vaccine
 License: MIT + file LICENSE
+Depends:
+    R (>= 2.10)
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -21,7 +23,8 @@ Imports:
     colorRamps,
     fields,
     context,
-    drep
+    drep,
+    matrixStats
 RoxygenNote: 6.1.1
 Remotes:
     mrc-ide/context,
