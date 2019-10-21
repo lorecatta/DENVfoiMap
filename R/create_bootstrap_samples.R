@@ -70,8 +70,8 @@ grid_and_boot <- function(data_df, parms){
 
   loop(seq_len(no_samples),
        helper,
-       data_df = foi_data,
-       parms = parameters,
+       data_df,
+       parms,
        parallel = FALSE)
 
 }
