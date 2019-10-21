@@ -127,9 +127,6 @@ burden_estimates_raw <- wrapper_to_replicate_R0_and_burden(
   FOI_to_HC_list = lookup_tabs[[3]],
   FOI_to_R0_1_list = lookup_tabs[[4]],
   FOI_to_R0_2_list = lookup_tabs[[5]],
-  age_band_lower_bounds = age_band_L_bounds,
-  age_band_upper_bounds = age_band_U_bounds,
-  age_band_tags = age_band_tgs,
   parms = parameters)
 
 context::parallel_cluster_stop()
@@ -185,9 +182,6 @@ tr_red_impact_estimates_raw <- wrapper_to_replicate_R0_and_burden(
   FOI_to_HC_list = lookup_tabs[[3]],
   FOI_to_R0_1_list = lookup_tabs[[4]],
   FOI_to_R0_2_list = lookup_tabs[[5]],
-  age_band_lower_bounds = age_band_L_bounds,
-  age_band_upper_bounds = age_band_U_bounds,
-  age_band_tags = age_band_tgs,
   parms = parameters)
 
 context::parallel_cluster_stop()
