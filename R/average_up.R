@@ -29,7 +29,7 @@ average_up <- function(pxl_df, grp_flds, covariates_names){
     funs(weighted.mean(., population, na.rm = TRUE)))
 
   mean_pixel_data <- by_grp %>% summarise(
-    population = sum(population))
+    population = sum(by_grp$population))
 
   aggreg_pixel_data <- left_join(wtd_mean_pixel_data, mean_pixel_data)
 
