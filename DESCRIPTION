@@ -10,7 +10,7 @@ Authors@R: person(given = "Lorenzo",
 Description: The package fits a random forest model to a set of geolocated 
   dengue force of infection point data, makes global predictions using a set of 
   explanatory variables and calculates the impact of transmission-reduction 
-  interventions against dengue and the Sanofi Pasteur dengue vaccine
+  interventions against dengue and the Sanofi Pasteur dengue vaccine.
 License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
