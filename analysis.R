@@ -134,7 +134,7 @@ burden_estimates_raw <- wrapper_to_replicate_R0_and_burden(
 
 context::parallel_cluster_stop()
 
-burden_estimates <- post_processing_burden(burden_estimates_raw, parameters)
+burden_estimates <- post_processing_burden(sqr_preds_3, burden_estimates_raw, parameters)
 
 # map the R0 (assumption 1, only primary and secondary infections are infectious)
 
@@ -192,7 +192,7 @@ tr_red_impact_estimates_raw <- wrapper_to_replicate_R0_and_burden(
 
 context::parallel_cluster_stop()
 
-tr_red_impact_estimates <- post_processing_burden(tr_red_impact_estimates_raw, parameters)
+tr_red_impact_estimates <- post_processing_burden(sqr_preds_3, tr_red_impact_estimates_raw, parameters)
 
 # map the incidence of infections (per 1000) - assumption 1
 
@@ -217,9 +217,10 @@ my_look_up_table <- pre_process_vaccine_lookup_table(R0_to_prop_infections_avert
 
 screen_age <- screening_ages[1] # 9
 
-prop_averted <- wrapper_to_replicate_vaccine_impact(preds = R0_1_preds,
-                                                    vaccine_lookup = my_look_up_table,
-                                                    screen_age = screen_age)
+prop_averted <- wrapper_to_replicate_vaccine_impact(R0_preds = R0_1_preds,
+                                                    look_up_table = my_look_up_table,
+                                                    screen_age = screen_age,
+                                                    parms = parameters)
 
 prop_averted <- do.call("rbind", output1)
 
