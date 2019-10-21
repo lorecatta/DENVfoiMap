@@ -254,6 +254,8 @@ create_lookup_tables <- function(age_struct,
 #'
 #' @title Post-process the output of the burden calculation
 #'
+#' @param sqr_preds_full a dataframe of ID variables at 1/6 degree resolution
+#'
 #' @param data_matrix a matrix output from \code{\link{wrapper_to_replicate_R0_and_burden}}.
 #'
 #' @inheritParams full_routine_bootstrap
@@ -261,13 +263,13 @@ create_lookup_tables <- function(age_struct,
 #' @export
 
 
-post_processing_burden <- function(data_matrix, parms) {
+post_processing_burden <- function(sqr_preds_full, data_matrix, parms) {
 
   base_info <- parms$base_info
 
   ret1 <- lapply(data_matrix, t)
   ret2 <- do.call("rbind", ret1)
-  ret3 <- cbind(sqr_preds_3[, base_info], ret2)
+  ret3 <- cbind(sqr_preds_full[, base_info], ret2)
 
   as.data.frame(ret3)
 
