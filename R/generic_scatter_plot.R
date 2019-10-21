@@ -16,8 +16,9 @@
 #'
 #' @importFrom stats as.formula lm residuals coef
 #'
-#' @importFrom ggplot2 aes_string geom_point scale_x_continuous scale_y_continuous
-#'  geom_smooth coord_cartesian geom_text aes theme element_text margin unit
+#' @importFrom ggplot2 ggplot aes_string geom_point scale_x_continuous
+#'  scale_y_continuous geom_smooth coord_cartesian geom_text aes theme
+#'  element_text margin unit
 #'
 #' @export
 
