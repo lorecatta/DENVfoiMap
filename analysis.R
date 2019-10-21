@@ -64,10 +64,8 @@ global_predictions <- make_ranger_predictions(RF_obj_optim,
                                               covariates_names = all_predictors)
 
 all_sqr_covariates$p_i <- global_predictions
-saveRDS(all_sqr_covariates, "global_predictions.rds")
-# all_sqr_covariates <- readRDS("global_predictions.rds")
 
-all_sqr_covariates_sub <- inner_join(all_sqr_covariates, endemic_ID_0_ID_1)
+all_sqr_covariates_sub <- dplyr::inner_join(all_sqr_covariates, endemic_ID_0_ID_1)
 
 # map
 mp_nm <- "FOI.png"
@@ -112,9 +110,9 @@ lookup_tabs <- create_lookup_tables(
 sf_val <- parameters$sf_vals[1]
 
 # attach look up table id
-sqr_preds_2 <- inner_join(age_structure[, c("age_id", "ID_0")],
-                          all_sqr_covariates_sub,
-                          by = "ID_0")
+sqr_preds_2 <- dplyr::inner_join(age_structure[, c("age_id", "ID_0")],
+                                 all_sqr_covariates_sub,
+                                 by = "ID_0")
 
 sqr_preds_3 <- as.matrix(sqr_preds_2)
 
