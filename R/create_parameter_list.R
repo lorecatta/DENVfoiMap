@@ -48,6 +48,8 @@
 #' @param foi_offset numeric value to offset model FOI predictions during fitting with
 #'  Expectation Maximization.
 #'
+#' @param EM_iter number of iterations of the Expectation Maximization algorithm
+#'
 #' @param base_info character string of key ID variable in the 1/6 degree resolution global
 #'  covariate dataset.
 #'

@@ -4,7 +4,8 @@
 \alias{wrapper_to_replicate_vaccine_impact}
 \title{Look up the impact of the Sanofi Pasteur dengue vaccine}
 \usage{
-wrapper_to_replicate_vaccine_impact(R0_preds, look_up_table, screen_age)
+wrapper_to_replicate_vaccine_impact(R0_preds, look_up_table, screen_age,
+  parms)
 }
 \arguments{
 \item{R0_preds}{numeric vector of R0 predictions}
@@ -12,6 +13,8 @@ wrapper_to_replicate_vaccine_impact(R0_preds, look_up_table, screen_age)
 \item{look_up_table}{original look up table of vaccine impact}
 
 \item{screen_age}{integer value of assumed screening age of vaccination}
+
+\item{parms}{list of user-defined parameters.}
 }
 \description{
 The function looks up the vaccine impact (i.e. estimated proportion of infections,

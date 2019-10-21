@@ -266,7 +266,7 @@ exp_max_algorithm <- function(parms,
 
     p_i_by_adm <- dd_2 %>% group_by(.dots = grp_flds)
 
-    mean_p_i <- p_i_by_adm %>% summarise(mean_p_i = sum(p_i * pop_weight))
+    mean_p_i <- p_i_by_adm %>% summarise(mean_p_i = sum(p_i * p_i_by_adm$pop_weight))
 
     aa <- inner_join(cc, mean_p_i)
 

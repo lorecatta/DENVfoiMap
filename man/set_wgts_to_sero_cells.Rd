@@ -9,6 +9,8 @@ set_wgts_to_sero_cells(foi_data, pxl_data, parms)
 \arguments{
 \item{foi_data}{dataframe of admin unit level FOI data.}
 
+\item{pxl_data}{dataframe of 1/6 degree resolution FOI data.}
+
 \item{parms}{list of user-defined parameters.}
 }
 \description{

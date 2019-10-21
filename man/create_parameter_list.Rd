@@ -59,6 +59,8 @@ case weights.}
 \item{foi_offset}{numeric value to offset model FOI predictions during fitting with
 Expectation Maximization.}
 
+\item{EM_iter}{number of iterations of the Expectation Maximization algorithm}
+
 \item{base_info}{character string of key ID variable in the 1/6 degree resolution global
 covariate dataset.}
 

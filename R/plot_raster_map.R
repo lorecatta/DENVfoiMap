@@ -19,7 +19,7 @@
 #'
 #' @param shp shapefile object. Default = NULL.
 #'
-#' @param key_ttl character string of legend title. Default = NULL.
+#' @param key_ttle character string of legend title. Default = NULL.
 #'
 #' @importFrom fields image.plot
 #'

@@ -6,8 +6,7 @@
 \usage{
 wrapper_to_replicate_R0_and_burden(foi_data, age_struct, scaling_factor,
   FOI_to_Inf_list, FOI_to_C_list, FOI_to_HC_list, FOI_to_R0_1_list,
-  FOI_to_R0_2_list, age_band_lower_bounds, age_band_upper_bounds,
-  age_band_tags, parms)
+  FOI_to_R0_2_list, parms)
 }
 \arguments{
 \item{foi_data}{dataframe of processed admin unit level foi data.}
@@ -26,9 +25,6 @@ for each country.}
 \item{FOI_to_R0_1_list}{list of FOI -> R0 (assumption 1) look up tables for different countries}
 
 \item{FOI_to_R0_2_list}{list of FOI -> R0 (assumption 2) look up tables for different countries}
-
-\item{age_band_tags}{character string of the names of the columns of the `age_structure` dataframe
-containing the actual age structure data.}
 
 \item{parms}{list of user-defined parameters.}
 }

@@ -4,9 +4,11 @@
 \alias{post_processing_burden}
 \title{Post-process the output of the burden calculation}
 \usage{
-post_processing_burden(data_matrix, parms)
+post_processing_burden(sqr_preds_full, data_matrix, parms)
 }
 \arguments{
+\item{sqr_preds_full}{a dataframe of ID variables at 1/6 degree resolution}
+
 \item{data_matrix}{a matrix output from \code{\link{wrapper_to_replicate_R0_and_burden}}.}
 
 \item{parms}{list of user-defined parameters.}

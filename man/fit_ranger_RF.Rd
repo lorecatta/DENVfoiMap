@@ -18,8 +18,6 @@ fit_ranger_RF(parms, dependent_variable, covariates_names,
 
 \item{my_weights}{character string of the name of the column of \code{training dataset}
 with case weights.}
-
-\item{sqr_dataset_2}{dataframe of foi estimates and predictions at 1/6 degree resolution.}
 }
 \value{
 the random forest model object returned by \code{ranger}

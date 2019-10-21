@@ -50,7 +50,7 @@ preprocess_adm_data <- function(parms, foi_data) {
 #'
 #' @title Pre-process the 1/6 degree resolution FOI dataset
 #'
-#' @param foi_data dataframe of admin unit level FOI data.
+#' @param pxl_data dataframe of 1/6 degree resolution FOI data.
 #'
 #' @inheritParams preprocess_adm_data
 #'

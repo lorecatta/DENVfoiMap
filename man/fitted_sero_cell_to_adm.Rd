@@ -10,6 +10,10 @@ fitted_sero_cell_to_adm(join_all, sqr_dataset_2, fld_1, fld_2)
 \item{join_all}{dataframe of foi estimates and predictions at admin unit 1 resolution.}
 
 \item{sqr_dataset_2}{dataframe of foi estimates and predictions at 1/6 degree resolution.}
+
+\item{fld_1}{character strings of variables (columns names)}
+
+\item{fld_2}{character strings of variables (columns names)}
 }
 \value{
 a joined dataframe

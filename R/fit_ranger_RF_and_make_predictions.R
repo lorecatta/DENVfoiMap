@@ -5,8 +5,6 @@
 #'
 #' @title Fit a random forest model
 #'
-#' @param sqr_dataset_2 dataframe of foi estimates and predictions at 1/6 degree resolution.
-#'
 #' @param training_dataset a dataframe of the dataset used for model training.
 #'
 #' @param my_weights character string of the name of the column of \code{training dataset}

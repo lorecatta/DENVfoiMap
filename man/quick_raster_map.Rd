@@ -22,7 +22,7 @@ quick_raster_map(pred_df, statistic, my_col, out_pt, out_name,
 
 \item{shp}{shapefile object. Default = NULL.}
 
-\item{key_ttl}{character string of legend title. Default = NULL.}
+\item{key_ttle}{character string of legend title. Default = NULL.}
 }
 \description{
 The function makes and saves locally a raster map using \code{\link{image.plot}}.

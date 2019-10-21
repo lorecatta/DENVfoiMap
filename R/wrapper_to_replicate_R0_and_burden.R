@@ -37,9 +37,6 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
                                                FOI_to_HC_list,
                                                FOI_to_R0_1_list,
                                                FOI_to_R0_2_list,
-                                               age_band_lower_bounds,
-                                               age_band_upper_bounds,
-                                               age_band_tags,
                                                parms){
 
 

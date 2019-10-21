@@ -51,6 +51,10 @@ average_up <- function(pxl_df, grp_flds, covariates_names){
 #'
 #' @param sqr_dataset_2 dataframe of foi estimates and predictions at 1/6 degree resolution.
 #'
+#' @param fld_1 character strings of variables (columns names)
+#'
+#' @param fld_2 character strings of variables (columns names)
+#'
 #' @importFrom dplyr %>% left_join mutate select
 #'
 #' @return a joined dataframe

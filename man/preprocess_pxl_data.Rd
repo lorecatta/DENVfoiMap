@@ -10,6 +10,8 @@ preprocess_pxl_data(parms, foi_data, pxl_data)
 \item{parms}{list of user-defined parameters.}
 
 \item{foi_data}{dataframe of admin unit level FOI data.}
+
+\item{pxl_data}{dataframe of 1/6 degree resolution FOI data.}
 }
 \description{
 The function joins the original admin unit level FOI estimates to the 1/6 degree resolution
