@@ -52,11 +52,14 @@ pre_process_vaccine_lookup_table <- function(look_up_table, R0_preds) {
 
 wrapper_to_replicate_vaccine_impact <- function(R0_preds,
                                                 look_up_table,
-                                                screen_age){
+                                                screen_age,
+                                                parms){
 
   approx_all_ages <- function(j, look_up_table, R0_preds){
     approx(look_up_table[, "R0"], look_up_table[, j], xout = R0_preds)$y
   }
+
+  no_fits <- parms$no_samples
 
   if (screen_age != 0) {
 
