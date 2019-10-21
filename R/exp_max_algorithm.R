@@ -99,7 +99,7 @@ exp_max_algorithm <- function(parms,
 
     p_i_by_adm <- pxl_dataset %>% group_by(.dots = grp_flds)
 
-    a_sum <- p_i_by_adm %>% summarise(a_sum = sum(pop_weight * p_i))
+    a_sum <- p_i_by_adm %>% summarise(a_sum = sum(p_i_by_adm$pop_weight * p_i))
 
     dd <- left_join(pxl_dataset, a_sum)
 
