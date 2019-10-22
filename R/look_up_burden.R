@@ -67,7 +67,7 @@ create_lookup_tables <- function(age_struct,
 
   }
 
-  helper <- function(i) {
+  helper <- function(i, ...) {
 
     cat("variable to look up =", i, "\n")
 
