@@ -15,7 +15,8 @@ extra_prms <- list(id_fld = "unique_id",
                    ranger_threads = NULL,
                    fit_type = "boot",
                    parallel_2 = TRUE,
-                   screening_ages = c(9, 16))
+                   screening_ages = c(9, 16),
+                   target_nm = c("I", "C", "HC", "R0_1", "R0_2"))
 
 my_col <- colorRamps::matlab.like(100)
 
@@ -34,6 +35,8 @@ all_predictors <- predictor_rank$name
 base_info <- parameters$base_info
 
 screening_ages <- parameters$screening_ages
+
+target_nm <- parameters$target_nm
 
 
 # pre processing --------------------------------------------------------------
