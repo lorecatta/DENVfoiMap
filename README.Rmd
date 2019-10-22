@@ -49,24 +49,8 @@ library(DENVfoiMap)
 ```
 
 which will load all the functions and the datasets used in the analysis. 
-The datasets loaded with the package include:
 
-* foi_data - DESCRIPTION TO COME
-* admin_covariates - 
-* predictor_rank - 
-* age_structure - 
-* endemic_ID_0_ID_1 - 
-* all_sqr_covariates - 
-* R0_to_prop_cases_averted_lookup_1 - 
-* R0_to_prop_cases_averted_lookup_2 - 
-* R0_to_prop_hosp_averted_lookup_1 - 
-* R0_to_prop_hosp_averted_lookup_2 - 
-* R0_to_prop_infections_averted_lookup_1 - 
-* R0_to_prop_infections_averted_lookup_2 - 
-
-The code for running the analysis is in:
-
-analysis.R
+The code for running the analysis is in `analysis.R`.
 
 Plase do get in touch (l.cattarino@imperial.ac.uk) if you have any queries or encounter issues when using 
 `DENVfoiMap`.
