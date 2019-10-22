@@ -40,7 +40,7 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
                                                parms){
 
 
-  helper <- function(i){
+  helper <- function(i, ...){
 
 
     # browser()
