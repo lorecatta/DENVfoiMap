@@ -4,15 +4,12 @@
 \alias{wrapper_to_replicate_R0_and_burden}
 \title{Look up the impact of a transmission-reducing intervention}
 \usage{
-wrapper_to_replicate_R0_and_burden(foi_data, age_struct, scaling_factor,
+wrapper_to_replicate_R0_and_burden(foi_data, scaling_factor,
   FOI_to_Inf_list, FOI_to_C_list, FOI_to_HC_list, FOI_to_R0_1_list,
   FOI_to_R0_2_list, parms)
 }
 \arguments{
 \item{foi_data}{dataframe of processed admin unit level foi data.}
-
-\item{age_struct}{dataframe of the proportion of individuals in different 5-yr age groups,
-for each country.}
 
 \item{scaling_factor}{numeric scaling factor value (0-1)}
 
