@@ -24,7 +24,7 @@ endemic_ID_0_ID_1 <- read.csv(file.path("data-raw",
 
 ID_0_to_remove <- c(1, 69, 171, 122, 200, 224, 226, 235, 236, 244, 246)
 
-endemic_ID_0_ID_1 <- endemic_ID_0_ID_1[!endemic_ID_0_ID_1$ID_0 %in% ID_0_to_remove,]
+# endemic_ID_0_ID_1 <- endemic_ID_0_ID_1[!endemic_ID_0_ID_1$ID_0 %in% ID_0_to_remove,]
 
 all_sqr_covariates <- readRDS(file.path("data-raw",
                                         "all_squares_env_var_0_1667_deg.rds"))
