@@ -206,6 +206,16 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
 
   parallel_2 <- parms$parallel_2
 
-  loop(seq_len(nrow(foi_data)), helper, parallel = parallel_2)
+  loop(seq_len(nrow(foi_data)),
+       helper,
+       foi_data,
+       scaling_factor,
+       FOI_to_Inf_list,
+       FOI_to_C_list,
+       FOI_to_HC_list,
+       FOI_to_R0_1_list,
+       FOI_to_R0_2_list,
+       parms,
+       parallel = parallel_2)
 
 }
