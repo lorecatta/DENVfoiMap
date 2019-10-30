@@ -67,7 +67,7 @@ global_predictions <- make_ranger_predictions(RF_obj_optim,
                                               covariates_names = all_predictors)
 
 all_sqr_covariates$p_i <- global_predictions
-
+#saveRDS(all_sqr_covariates, "prediction.rds")
 all_sqr_covariates_sub <- dplyr::inner_join(all_sqr_covariates, endemic_ID_0_ID_1)
 
 # map
@@ -121,7 +121,6 @@ sqr_preds_3 <- as.matrix(sqr_preds_2)
 
 burden_estimates_raw <- wrapper_to_replicate_R0_and_burden(
   foi_data = sqr_preds_3,
-  age_struct = age_structure,
   scaling_factor = sf_val,
   FOI_to_Inf_list = lookup_tabs[[1]],
   FOI_to_C_list = lookup_tabs[[2]],
