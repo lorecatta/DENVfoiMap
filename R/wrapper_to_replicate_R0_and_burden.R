@@ -30,7 +30,6 @@
 
 
 wrapper_to_replicate_R0_and_burden <- function(foi_data,
-                                               age_struct,
                                                scaling_factor,
                                                FOI_to_Inf_list,
                                                FOI_to_C_list,
@@ -204,7 +203,6 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
     out
 
   }
-
 
   parallel_2 <- parms$parallel_2
 
