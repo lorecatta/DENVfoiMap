@@ -58,7 +58,7 @@ foi_data[foi_data$type == "pseudoAbsence", "new_weight"] <- pAbs_wgt
 foi_data_bsample <- grid_and_boot(data_df = foi_data,
                                   parms = parameters)
 
-# this RF fitting is going to take 20-30 minutes
+# this model fitting takes approximately 20-30 minutes
 RF_obj_optim <- full_routine_bootstrap(parms = parameters,
                                        original_foi_data = foi_data,
                                        adm_covariates = admin_covariates,
@@ -70,8 +70,8 @@ RF_obj_optim <- full_routine_bootstrap(parms = parameters,
 BRA_sqr_covariates <- all_sqr_covariates[all_sqr_covariates$ID_0 %in% 33,]
 
 BRA_predictions <- make_ranger_predictions(RF_obj_optim,
-                                              dataset = BRA_sqr_covariates,
-                                              covariates_names = all_predictors)
+                                           dataset = BRA_sqr_covariates,
+                                           covariates_names = all_predictors)
 
 BRA_predictions <- BRA_predictions - foi_offset
 BRA_predictions[BRA_predictions < 0] <- 0
@@ -105,7 +105,7 @@ age_band_bnds <- drep::get_age_band_bounds(age_band_tgs)
 age_band_L_bounds <- age_band_bnds[, 1]
 age_band_U_bounds <- age_band_bnds[, 2]
 
-# create lookup tables
+# create lookup tables - this takes 5-10 minutes
 lookup_tabs <- create_lookup_tables(
   age_struct = age_structure,
   age_band_tags = age_band_tgs,
