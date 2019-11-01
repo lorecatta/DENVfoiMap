@@ -33,18 +33,17 @@
 "all_sqr_covariates"
 
 
-#' Dengue endemic countries.
+#' Brazil national administrative boundary.
 #'
-#' A dataset containing GADM identifier fields for country and administrative unit 1
-#' where dengue is an endemic disease.
+#' A shapefile of the GADM national administrative boundary of Brazil.
 #'
-#' @format a data frame with 1952 rows and 3 columns
-"endemic_ID_0_ID_1"
+#' @format a sf object with 1 row
+"Brazil_contour"
 
 
 #' Selected predictors.
 #'
-#' A dataset containing the top explanatory variables as output from variable sslection.
+#' A dataset containing the top explanatory variables as output from variable selection.
 #'
 #' @format a data frame with 28 rows and 3 columns
 "predictor_rank"
