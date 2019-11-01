@@ -25,7 +25,8 @@ Imports:
     drep,
     matrixStats,
     ggplot2,
-    raster
+    raster,
+    methods
 RoxygenNote: 6.1.1
 Remotes:
     mrc-ide/drep
