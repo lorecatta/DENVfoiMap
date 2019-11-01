@@ -91,7 +91,7 @@ map_preprocess <- function(pred2, var_to_plot, parms) {
 #' @importFrom grDevices dev.off png
 #'
 #' @importFrom ggplot2 ggplot geom_tile geom_sf scale_fill_gradientn guide_colourbar
-#' element_blank
+#' element_blank coord_sf
 #'
 #' @export
 
