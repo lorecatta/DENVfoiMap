@@ -30,3 +30,5 @@ RoxygenNote: 6.1.1
 Remotes:
     mrc-ide/context,
     mrc-ide/drep
+Suggests: 
+    testthat
