@@ -66,7 +66,7 @@ RF_obj_optim <- full_routine_bootstrap(parms = parameters,
                                        covariates_names = all_predictors,
                                        boot_sample = foi_data_bsample[[1]])
 
-# keep only pixels in Brazil as example
+# keep only pixels in Brazil as example and to reduce computing time
 BRA_sqr_covariates <- all_sqr_covariates[all_sqr_covariates$ID_0 %in% 33,]
 
 BRA_predictions <- make_ranger_predictions(RF_obj_optim,
