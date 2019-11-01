@@ -82,7 +82,7 @@ BRA_sqr_covariates$p_i <- BRA_predictions
 mp_nm <- "FOI.png"
 map_data_df <- map_preprocess(BRA_sqr_covariates, "p_i", parameters)
 quick_raster_map(countries = Brazil_contour,
-                 pred_r_df = map_data_df,
+                 pred_df = map_data_df,
                  my_col = my_col,
                  ttl = "FOI",
                  parms = parameters,
@@ -140,7 +140,7 @@ burden_estimates <- post_processing_burden(sqr_preds_3, burden_estimates_raw, pa
 mp_nm <- "R0_1.png"
 map_data_df <- map_preprocess(burden_estimates, "transformed_1", parameters)
 quick_raster_map(countries = Brazil_contour,
-                 pred_r_df = map_data_df,
+                 pred_df = map_data_df,
                  my_col = my_col,
                  ttl = expression("R"[0]),
                  parms = parameters,
@@ -153,7 +153,7 @@ burden_estimates$I_num_inc <- burden_estimates$I_num / burden_estimates$populati
 mp_nm <- "Infections.png"
 map_data_df <- map_preprocess(burden_estimates, "I_num_inc", parameters)
 quick_raster_map(countries = Brazil_contour,
-                 pred_r_df = map_data_df,
+                 pred_df = map_data_df,
                  my_col = my_col,
                  ttl = "Infections",
                  parms = parameters,
@@ -194,7 +194,7 @@ tr_red_impact_estimates$I_num_1_inc <- tr_red_impact_estimates$I_num_1 / tr_red_
 mp_nm <- "Infections_30pc_tr_red_impact.png"
 map_data_df <- map_preprocess(tr_red_impact_estimates, "I_num_1_inc", parameters)
 quick_raster_map(countries = Brazil_contour,
-                 pred_r_df = map_data_df,
+                 pred_df = map_data_df,
                  my_col = my_col,
                  ttl = "Infections",
                  parms = parameters,
@@ -226,7 +226,7 @@ burden_estimates_2$I_num_1_inc_v <- burden_estimates_2$I_vacc_impact / burden_es
 mp_nm <- "Infections_vacc_9yr_impact.png"
 map_data_df <- map_preprocess(burden_estimates_2, "I_num_1_inc_v", parameters)
 quick_raster_map(countries = Brazil_contour,
-                 pred_r_df = map_data_df,
+                 pred_df = map_data_df,
                  my_col = my_col,
                  ttl = "Infections",
                  parms = parameters,
