@@ -12,6 +12,10 @@
 #'
 #' @inheritParams full_routine_bootstrap
 #'
+#' @importFrom methods as
+#'
+#' @importFrom raster raster
+#'
 #' @export
 
 
@@ -55,7 +59,7 @@ map_preprocess <- function(pred2, var_to_plot, parms) {
                       y = lats,
                       z = pred_mat)
 
-  pred_r_mat <- raster::raster(pred_mat_ls)
+  pred_r_mat <- raster(pred_mat_ls)
 
   pred_r_spdf <- as(pred_r_mat, "SpatialPixelsDataFrame")
 
@@ -86,7 +90,8 @@ map_preprocess <- function(pred2, var_to_plot, parms) {
 #'
 #' @importFrom grDevices dev.off png
 #'
-#' @importFrom ggplot2 ggplot geom_tile geom_sf
+#' @importFrom ggplot2 ggplot geom_tile geom_sf scale_fill_gradientn guide_colourbar
+#' element_blank
 #'
 #' @export
 
