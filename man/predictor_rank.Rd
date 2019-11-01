@@ -9,6 +9,6 @@
 predictor_rank
 }
 \description{
-A dataset containing the top explanatory variables as output from variable sslection.
+A dataset containing the top explanatory variables as output from variable selection.
 }
 \keyword{datasets}

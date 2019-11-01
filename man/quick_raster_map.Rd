@@ -4,26 +4,24 @@
 \alias{quick_raster_map}
 \title{Plot and save a raster map}
 \usage{
-quick_raster_map(pred_df, statistic, my_col, out_pt, out_name,
-  z_range = NULL, shp = NULL, key_ttle = NULL)
+quick_raster_map(countries, pred_df, my_col, ttl = NULL, parms, out_pt,
+  out_name)
 }
 \arguments{
+\item{countries}{shapefile.}
+
 \item{pred_df}{dataframe of data.}
 
-\item{statistic}{character of the name of the variable to plot.}
-
 \item{my_col}{colours to use for plotting.}
+
+\item{ttl}{character string of legend title. Default = NULL.}
+
+\item{parms}{list of user-defined parameters.}
 
 \item{out_pt}{output directory.}
 
 \item{out_name}{output file name.}
-
-\item{z_range}{range of values to show on plot. Default = NULL.}
-
-\item{shp}{shapefile object. Default = NULL.}
-
-\item{key_ttle}{character string of legend title. Default = NULL.}
 }
 \description{
-The function makes and saves locally a raster map using \code{\link{image.plot}}.
+The function makes and saves locally a raster map using \code{\link{ggplot}}.
 }
