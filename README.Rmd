@@ -22,7 +22,7 @@ similar to the one described in
 
 CITATION AND link
 
-The functions of `DENVfoiMap` allow to run a complete analysis, which inlcudes: 
+`DENVfoiMap` allows to run a complete analysis, which includes: 
 
 * making global predictions of dengue force of infection at 1/6 degree resolution (approximately 20 km), 
 * estimating baseline global dengue burden (number of annual infections, mild febbrile cases and hospitalized cases), and 
