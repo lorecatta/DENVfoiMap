@@ -213,12 +213,14 @@ my_look_up_table <- pre_process_vaccine_lookup_table(R0_to_prop_infections_avert
 
 screen_age <- screening_ages[1] # 9
 
-prop_averted <- wrapper_to_replicate_vaccine_impact(R0_preds = R0_1_preds,
-                                                    look_up_table = my_look_up_table,
-                                                    screen_age = screen_age,
-                                                    parms = parameters)
+prop_averted <- approx(my_look_up_table[, "R0"], my_look_up_table[, screen_age], xout = R0_1_preds)$y
 
-burden_net_vaccine <- (1 - prop_averted[[1]]) * burden_estimates[, "I_num"]
+# prop_averted <- wrapper_to_replicate_vaccine_impact(R0_preds = R0_1_preds,
+#                                                     look_up_table = my_look_up_table,
+#                                                     screen_age = screen_age,
+#                                                     parms = parameters)
+
+burden_net_vaccine <- (1 - prop_averted) * burden_estimates[, "I_num"]
 
 burden_estimates_2 <- cbind(burden_estimates[, base_info], I_vacc_impact = burden_net_vaccine)
 
