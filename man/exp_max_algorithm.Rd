@@ -5,10 +5,8 @@
 \title{Fit a random forest using an EM algorithm}
 \usage{
 exp_max_algorithm(parms, adm_dataset, pxl_dataset, covariates_names,
-  map_col = NULL, RF_obj_path = NULL, RF_obj_name = NULL,
-  diagn_tab_path = NULL, diagn_tab_name = NULL, map_path = NULL,
-  sct_plt_path = NULL, train_dts_path = NULL, train_dts_name = NULL,
-  adm_covariates = NULL)
+  RF_obj_path = NULL, RF_obj_name = NULL, train_dts_path = NULL,
+  train_dts_name = NULL, adm_covariates = NULL)
 }
 \arguments{
 \item{parms}{list of user-defined parameters.}
@@ -21,25 +19,11 @@ covariates at 1/6 degree resolution.}
 
 \item{covariates_names}{character vector of covariates names.}
 
-\item{map_col}{map colours. Default = NULL.}
-
 \item{RF_obj_path}{character string of the directory for saving the random forest
 object model. Default = NULL.}
 
 \item{RF_obj_name}{character of name of the random forest model object to save.
 Default = NULL.}
-
-\item{diagn_tab_path}{character string of the directory for saving the table of diagnostics
-from the EM fit. Default = NULL.}
-
-\item{diagn_tab_name}{character of name of the EM fit table of diagnostics to save.
-Default = NULL.}
-
-\item{map_path}{character string of the directory for saving the figure of the prediction map
-from the EM fit. Default = NULL.}
-
-\item{sct_plt_path}{character string of the directory for saving the figure of
-observation vs predictions plot. Default = NULL.}
 
 \item{train_dts_path}{character string of the directory for saving the training dataset.
 Default = NULL.}
