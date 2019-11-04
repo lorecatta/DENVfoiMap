@@ -23,7 +23,8 @@ Imports:
     drep,
     ggplot2,
     raster,
-    methods
+    methods,
+    weights
 RoxygenNote: 6.1.1
 Remotes:
     mrc-ide/drep
