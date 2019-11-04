@@ -12,25 +12,11 @@
 #' @param pxl_dataset dataframe of the bootstrapped dataset of foi estimates and
 #'   covariates at 1/6 degree resolution.
 #'
-#' @param map_col map colours. Default = NULL.
-#'
 #' @param RF_obj_path character string of the directory for saving the random forest
 #'  object model. Default = NULL.
 #'
 #' @param RF_obj_name character of name of the random forest model object to save.
 #'  Default = NULL.
-#'
-#' @param diagn_tab_path character string of the directory for saving the table of diagnostics
-#' from the EM fit. Default = NULL.
-#'
-#' @param diagn_tab_name character of name of the EM fit table of diagnostics to save.
-#'  Default = NULL.
-#'
-#' @param map_path character string of the directory for saving the figure of the prediction map
-#'  from the EM fit. Default = NULL.
-#'
-#' @param sct_plt_path character string of the directory for saving the figure of
-#'  observation vs predictions plot. Default = NULL.
 #'
 #' @param train_dts_path character string of the directory for saving the training dataset.
 #'  Default = NULL.
@@ -53,13 +39,8 @@ exp_max_algorithm <- function(parms,
                               adm_dataset,
                               pxl_dataset,
                               covariates_names,
-                              map_col = NULL,
                               RF_obj_path = NULL,
                               RF_obj_name = NULL,
-                              diagn_tab_path = NULL,
-                              diagn_tab_name = NULL,
-                              map_path = NULL,
-                              sct_plt_path = NULL,
                               train_dts_path = NULL,
                               train_dts_name = NULL,
                               adm_covariates = NULL){
@@ -167,37 +148,6 @@ exp_max_algorithm <- function(parms,
     dd$p_i <- p_i
 
 
-    # map of square predictions -----------------------------------------------
-
-
-    dd_1 <- dd
-
-    if(var_to_fit == "FOI" | var_to_fit == "Z"){
-
-      dd_1$p_i <- dd$p_i - foi_offset
-
-    }
-
-    if(!is.null(map_path)){
-
-      my_col <- colorRamps::matlab.like(100)
-
-      if(!is.null(map_col)){
-
-        my_col <- map_col
-
-      }
-
-      mp_nm <- sprintf("iter_%s%s", i, ".png")
-
-      quick_raster_map(pred_df = dd_1,
-                       statistic = "p_i",
-                       my_col = my_col,
-                       out_pt = map_path,
-                       out_name = mp_nm)
-    }
-
-
     # create a copy for obs vs preds plot and SS calculation ------------------
 
 
@@ -232,8 +182,8 @@ exp_max_algorithm <- function(parms,
     if(!is.null(adm_covariates)) {
 
       adm_covariates$adm_pred <- make_ranger_predictions(RF_obj,
-                                                      adm_covariates,
-                                                      covariates_names)
+                                                         adm_covariates,
+                                                         covariates_names)
 
       cc <- inner_join(adm_dataset, adm_covariates[, c("ID_0", "ID_1", "adm_pred")])
 
@@ -277,26 +227,6 @@ exp_max_algorithm <- function(parms,
                                     c(id_field, "p_i"),
                                     c(grp_flds, "type", "new_weight", "o_j", "adm_pred", "mean_p_i"))
 
-    if(!is.null(sct_plt_path)){
-
-      av_sqr_sp_nm <- paste0("pred_vs_obs_av_sqr_iter_", i, ".png")
-
-      generic_scatter_plot(df = aa_2,
-                           x = "o_j",
-                           y = "mean_p_i",
-                           out_name = av_sqr_sp_nm,
-                           out_pt = sct_plt_path)
-
-      adm_sp_nm <- paste0("pred_vs_obs_adm_iter_", i, ".png")
-
-      generic_scatter_plot(df = aa_2,
-                           x = "o_j",
-                           y = "adm_pred",
-                           out_name = adm_sp_nm,
-                           out_pt = sct_plt_path)
-
-    }
-
 
     # 8. calculate admin unit level sum of square -----------------------------
 
@@ -322,10 +252,6 @@ exp_max_algorithm <- function(parms,
 
   if(!is.null(RF_obj_path)){
     # write_out_rds(RF_obj, RF_obj_path, RF_obj_name)
-  }
-
-  if(!is.null(diagn_tab_path)){
-    # write_out_rds(out_mat, diagn_tab_path, diagn_tab_name)
   }
 
   if(!is.null(train_dts_path)){
