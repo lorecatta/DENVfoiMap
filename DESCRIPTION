@@ -19,11 +19,8 @@ LazyData: true
 Imports: 
     dplyr,
     ranger,
-    weights,
     colorRamps,
-    fields,
     drep,
-    matrixStats,
     ggplot2,
     raster,
     methods
