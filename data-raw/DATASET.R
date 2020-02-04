@@ -33,7 +33,6 @@ R0_to_prop_hosp_averted_lookup_1 <- read.csv(file.path("data-raw",
                                                        "R0_to_prop_hosp_averted_lookup_1.csv"),
                                              stringsAsFactors = FALSE)
 
-
 R0_to_prop_hosp_averted_lookup_2 <- read.csv(file.path("data-raw",
                                                        "R0_to_prop_hosp_averted_lookup_2.csv"),
                                              stringsAsFactors = FALSE)
