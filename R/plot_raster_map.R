@@ -82,10 +82,6 @@ map_preprocess <- function(pred2, var_to_plot, parms) {
 #'
 #' @param ttl character string of legend title. Default = NULL.
 #'
-#' @param out_pt output directory.
-#'
-#' @param out_name output file name.
-#'
 #' @inheritParams full_routine_bootstrap
 #'
 #' @importFrom grDevices dev.off png
@@ -96,7 +92,7 @@ map_preprocess <- function(pred2, var_to_plot, parms) {
 #' @export
 
 
-quick_raster_map <- function(countries, pred_df, my_col, ttl = NULL, parms, out_pt, out_name) {
+quick_raster_map <- function(countries, pred_df, my_col, ttl = NULL, parms) {
 
   bbox <- parms$coord_limits
 
@@ -105,7 +101,7 @@ quick_raster_map <- function(countries, pred_df, my_col, ttl = NULL, parms, out_
   y1 <- bbox[3]
   y2 <- bbox[4]
 
-  p <- ggplot() +
+  ggplot() +
     geom_tile(data = pred_df, aes(x = x, y = y, fill = layer)) +
     geom_sf(data = countries, fill = NA, color = "black", size = 0.4) +
     scale_fill_gradientn(colours = my_col,
@@ -123,18 +119,5 @@ quick_raster_map <- function(countries, pred_df, my_col, ttl = NULL, parms, out_
           plot.margin = unit(c(0, 0, 0, 0), "cm"),
           panel.background = element_blank(),
           panel.border = element_blank())
-
-  dir.create(out_pt, FALSE, TRUE)
-
-  png(file.path(out_pt, out_name),
-      width = 10,
-      height = 10,
-      units = "cm",
-      pointsize = 12,
-      res = 300)
-
-  print(p)
-
-  on.exit(dev.off())
 
 }
