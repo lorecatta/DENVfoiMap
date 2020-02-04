@@ -6,9 +6,9 @@ DENVfoiMap
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/lorecatta/DENVfoiMap.svg?branch=master)](https://travis-ci.org/lorecatta/DENVfoiMap) <!-- badges: end -->
 
-The goal of `DENVfoiMap` is to provide a set of functions to run a complete analysis similar to the one described in
+The goal of `DENVfoiMap` is to provide a set of functions to run a complete analysis similar to the one described in the following sudy:
 
-CITATION AND link
+[L. Cattarino, I. Rodriguez-Barraquer, N. Imai, D. A. T. Cummings, N. M. Ferguson, Mapping global variation in dengue transmission intensity. Sci. Transl. Med. 12, eaax4144 (2020)](https://stm.sciencemag.org/content/12/528/eaax4144)
 
 A *complete* analysis includes:
 
