@@ -60,7 +60,7 @@ generic_scatter_plot <- function(df,
 
   x_text <- ifelse(max_x_value > 2, 3, min_x_value + (0.3 * max_x_value))
 
-  p <- ggplot(df, aes_string(x = x, y = y)) +
+  ggplot(df, aes_string(x = x, y = y)) +
     geom_point(aes_string(x = x, y = y), size = 1) +
     scale_x_continuous("Observations",
                        breaks = x_values,
@@ -77,17 +77,5 @@ generic_scatter_plot <- function(df,
           axis.text.x = element_text(size = 11),
           axis.text.y = element_text(size = 11),
           plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
-
-  dir.create(out_pt, FALSE, TRUE)
-
-  png(filename = file.path(out_pt, out_name),
-      width = 6,
-      height = 4,
-      units = "cm",
-      res = 300)
-
-  print(p)
-
-  on.exit(dev.off())
 
 }
