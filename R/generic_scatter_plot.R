@@ -25,9 +25,7 @@
 
 generic_scatter_plot <- function(df,
                                  x,
-                                 y,
-                                 out_name,
-                                 out_pt) {
+                                 y) {
 
   lm_eqn <- function(df, y, x) {
 

@@ -4,7 +4,7 @@
 \alias{generic_scatter_plot}
 \title{Plot observations vs predictions}
 \usage{
-generic_scatter_plot(df, x, y, out_name, out_pt)
+generic_scatter_plot(df, x, y)
 }
 \arguments{
 \item{df}{dataframe admin unit 1 level FOI observations and predictions.}
