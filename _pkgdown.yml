@@ -1,1 +1,19 @@
-destination: docs
+url: https://lorecatta.github.io/DENVfoiMap/
+
+navbar:
+  title: "DENVfoiMap"
+  type: inverse
+  left:
+    - href: index.html
+      icon: fa-home fa-lg
+    - text: "Functions"
+      href: reference/index.html
+    - text: "Articles"
+      menu:
+      - text: "Run the analysis"
+        href: articles/how_to_run_analysis.html
+    - text: "News"
+      href: news/index.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/lorecatta/DENVfoiMap
