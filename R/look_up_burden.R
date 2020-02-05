@@ -69,7 +69,7 @@ create_lookup_tables <- function(age_struct,
 
   helper <- function(i, ...) {
 
-    cat("variable to look up =", i, "\n")
+    # cat("variable to look up =", i, "\n")
 
     FOI_values <- parms$FOI_grid
     parallel_2 <- parms$parallel_2
@@ -81,7 +81,7 @@ create_lookup_tables <- function(age_struct,
 
       if (!file.exists(out_nm)) {
 
-        message("1D lookup")
+        # message("1D lookup")
 
         Infection_values <- loop(seq_len(nrow(age_struct)),
                                  wrapper_to_lookup,
@@ -109,9 +109,9 @@ create_lookup_tables <- function(age_struct,
 
       if (!file.exists(out_nm)) {
 
-        message("1D lookup")
+        # message("1D lookup")
 
-        cat("weights vector =", my_weights, "\n")
+        # cat("weights vector =", my_weights, "\n")
 
         case_values <- loop(seq_len(nrow(age_struct)),
                             wrapper_to_lookup,
@@ -140,9 +140,9 @@ create_lookup_tables <- function(age_struct,
 
       if (!file.exists(out_nm)) {
 
-        message("1D lookup")
+        # message("1D lookup")
 
-        cat("weights vector =", my_weights, "\n")
+        # cat("weights vector =", my_weights, "\n")
 
         HCase_values <- loop(seq_len(nrow(age_struct)),
                              wrapper_to_lookup,
@@ -172,9 +172,9 @@ create_lookup_tables <- function(age_struct,
 
       if (!file.exists(out_nm)) {
 
-        message("1D lookup")
+        # message("1D lookup")
 
-        cat("weights vector =", my_weights, "\n")
+        # cat("weights vector =", my_weights, "\n")
 
         R0_values <- loop(seq_len(nrow(age_struct)),
                           wrapper_to_lookup,
@@ -205,9 +205,9 @@ create_lookup_tables <- function(age_struct,
 
       if (!file.exists(out_nm)) {
 
-        message("1D lookup")
+        # message("1D lookup")
 
-        cat("weights vector =", my_weights, "\n")
+        # cat("weights vector =", my_weights, "\n")
 
         R0_values <- loop(seq_len(nrow(age_struct)),
                           wrapper_to_lookup,
