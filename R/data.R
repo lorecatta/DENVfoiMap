@@ -24,15 +24,6 @@
 "foi_data"
 
 
-#' Force of infection estimates and covariates at 1/6 degree.
-#'
-#' A dataset containing FOI estimates and environmental and demographic covariates at
-#' 1/6 degree resolution.
-#'
-#' @format a data frame with 425138 rows and 43 columns
-"all_sqr_covariates"
-
-
 #' Brazil national administrative boundary.
 #'
 #' A shapefile of the GADM national administrative boundary of Brazil.
