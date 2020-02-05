@@ -12,10 +12,6 @@ generic_scatter_plot(df, x, y, out_name, out_pt)
 \item{x}{character of the column name containing the observations.}
 
 \item{y}{character of the column name containing the predictions.#}
-
-\item{out_name}{output file name.}
-
-\item{out_pt}{output directory.}
 }
 \description{
 The function generates a plot of admin unit 1 level FOI observations against

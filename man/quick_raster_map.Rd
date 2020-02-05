@@ -4,8 +4,7 @@
 \alias{quick_raster_map}
 \title{Plot and save a raster map}
 \usage{
-quick_raster_map(countries, pred_df, my_col, ttl = NULL, parms, out_pt,
-  out_name)
+quick_raster_map(countries, pred_df, my_col, ttl = NULL, parms)
 }
 \arguments{
 \item{countries}{shapefile.}
@@ -17,10 +16,6 @@ quick_raster_map(countries, pred_df, my_col, ttl = NULL, parms, out_pt,
 \item{ttl}{character string of legend title. Default = NULL.}
 
 \item{parms}{list of user-defined parameters.}
-
-\item{out_pt}{output directory.}
-
-\item{out_name}{output file name.}
 }
 \description{
 The function makes and saves locally a raster map using \code{\link{ggplot}}.
