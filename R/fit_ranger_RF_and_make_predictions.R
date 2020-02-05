@@ -42,7 +42,7 @@ fit_ranger_RF <- function(parms,
          case.weights = wgts,
          write.forest = TRUE,
          min.node.size = min_node_size,
-         verbose = TRUE,
+         verbose = FALSE,
          num.threads = num_threads)
 
 }
