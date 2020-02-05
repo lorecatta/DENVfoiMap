@@ -24,14 +24,6 @@
 "foi_data"
 
 
-#' Brazil national administrative boundary.
-#'
-#' A shapefile of the GADM national administrative boundary of Brazil.
-#'
-#' @format a sf object with 1 row
-"Brazil_contour"
-
-
 #' Selected predictors.
 #'
 #' A dataset containing the top explanatory variables as output from variable selection.
