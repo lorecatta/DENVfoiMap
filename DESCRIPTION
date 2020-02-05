@@ -24,8 +24,7 @@ Imports:
     ggplot2,
     raster,
     methods,
-    weights,
-    sf
+    weights
 RoxygenNote: 6.1.1
 Remotes:
     mrc-ide/drep
