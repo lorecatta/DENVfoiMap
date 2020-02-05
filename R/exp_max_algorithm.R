@@ -70,9 +70,7 @@ exp_max_algorithm <- function(parms,
 
   for (i in seq_len(niter)){
 
-    # browser()
-
-    cat("iteration =", i, "\n")
+    # cat("iteration =", i, "\n")
 
 
     # 1. calculate scaling factors --------------------------------------------
@@ -82,7 +80,7 @@ exp_max_algorithm <- function(parms,
 
     a_sum <- p_i_by_adm %>% summarise(a_sum = sum(pop_weight * p_i))
 
-    dd <- left_join(pxl_dataset, a_sum)
+    dd <- left_join(pxl_dataset, a_sum, by = c("ID_0", "ID_1", "unique_id"))
 
     dd$wgt_prime <- (dd$pop_weight / dd$p_i) * dd$a_sum
     # dd$wgt_prime <- dd$pop_weight
@@ -185,7 +183,9 @@ exp_max_algorithm <- function(parms,
                                                          adm_covariates,
                                                          covariates_names)
 
-      cc <- inner_join(adm_dataset, adm_covariates[, c("ID_0", "ID_1", "adm_pred")])
+      cc <- inner_join(adm_dataset,
+                       adm_covariates[, c("ID_0", "ID_1", "adm_pred")],
+                       by = c("ID_0", "ID_1"))
 
     } else {
 
@@ -218,7 +218,7 @@ exp_max_algorithm <- function(parms,
 
     mean_p_i <- p_i_by_adm %>% summarise(mean_p_i = sum(p_i * pop_weight))
 
-    aa <- inner_join(cc, mean_p_i)
+    aa <- inner_join(cc, mean_p_i, by = c("unique_id", "ID_0", "ID_1"))
 
     # take the pixel level prediction (not the mean of all predictions)
     # for serology data
