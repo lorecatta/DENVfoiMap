@@ -71,13 +71,17 @@ full_routine_bootstrap <- function(parms,
 
   names(foi_data_2)[names(foi_data_2) == var_to_fit] <- "o_j"
 
-  pxl_data_3 <- inner_join(pxl_data_2, foi_data_2[, c(grp_flds, "o_j")])
+  pxl_data_3 <- inner_join(pxl_data_2,
+                           foi_data_2[, c(grp_flds, "o_j")],
+                           by = c("ID_0", "ID_1", "unique_id"))
 
   pxl_dts_grp <- pxl_data_3 %>%
     group_by(.dots = grp_flds) %>%
     summarise(pop_sqr_sum = sum(population))
 
-  pxl_data_4 <- left_join(pxl_data_3, pxl_dts_grp)
+  pxl_data_4 <- left_join(pxl_data_3,
+                          pxl_dts_grp,
+                          by = c("ID_0", "ID_1", "unique_id"))
 
   pxl_data_4$pop_weight <- pxl_data_4$population / pxl_data_4$pop_sqr_sum
 
