@@ -74,8 +74,6 @@ map_preprocess <- function(pred2, var_to_plot, parms) {
 #'
 #' @title Plot and save a raster map
 #'
-#' @param countries shapefile.
-#'
 #' @param pred_df dataframe of data.
 #'
 #' @param my_col colours to use for plotting.
@@ -84,13 +82,13 @@ map_preprocess <- function(pred2, var_to_plot, parms) {
 #'
 #' @inheritParams full_routine_bootstrap
 #'
-#' @importFrom ggplot2 ggplot geom_tile geom_sf scale_fill_gradientn guide_colourbar
-#' element_blank coord_sf
+#' @importFrom ggplot2 ggplot geom_tile scale_fill_gradientn guide_colourbar
+#' element_blank coord_cartesian
 #'
 #' @export
 
 
-quick_raster_map <- function(countries, pred_df, my_col, ttl = NULL, parms) {
+quick_raster_map <- function(pred_df, my_col, ttl = NULL, parms) {
 
   bbox <- parms$coord_limits
 
@@ -101,13 +99,12 @@ quick_raster_map <- function(countries, pred_df, my_col, ttl = NULL, parms) {
 
   ggplot() +
     geom_tile(data = pred_df, aes(x = x, y = y, fill = layer)) +
-    geom_sf(data = countries, fill = NA, color = "black", size = 0.4) +
     scale_fill_gradientn(colours = my_col,
                          na.value = "grey80",
                          guide = guide_colourbar(title = ttl,
                                                  barwidth = 1.5,
                                                  barheight = 4.5)) +
-    coord_sf(xlim = c(x1, x2), ylim = c(y1, y2), expand = FALSE) +
+    coord_cartesian(xlim = c(x1, x2), ylim = c(y1, y2), expand = FALSE) +
     theme(axis.line = element_blank(),
           axis.text = element_blank(),
           axis.ticks = element_blank(),
