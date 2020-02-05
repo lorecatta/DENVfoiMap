@@ -64,7 +64,9 @@ preprocess_pxl_data <- function(parms, foi_data, pxl_data) {
 
   # join (filtering)
 
-  pxl_data_2 <- inner_join(pxl_data, foi_data[, c(join_fields, "type", "new_weight")])
+  pxl_data_2 <- inner_join(pxl_data,
+                           foi_data[, c(join_fields, "type", "new_weight")],
+                           by = c("ID_0", "ID_1"))
 
   pxl_data_3 <- set_wgts_to_sero_cells(foi_data, pxl_data_2, parms)
 
