@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-We first load the package 
+We first load the package. 
 
 ```{r setup}
 library(DENVfoiMap)
@@ -45,7 +45,7 @@ extra_prms <- list(id_fld = "unique_id",
 my_col <- colorRamps::matlab.like(100)
 ```
 
-and variables which depend on those parameters
+and variables which depend on those parameters.
 
 ```{r define variables}
 parameters <- create_parameter_list(extra_params = extra_prms)
@@ -63,7 +63,7 @@ coord_limits <- parameters$coord_limits
 screening_ages <- parameters$screening_ages
 ```
 
-Now we do some preprocessing
+Now we do some preprocessing.
 
 ```{r fit preprocessing}
 foi_data$new_weight <- all_wgt
@@ -73,21 +73,12 @@ pAbs_wgt <- get_sat_area_wgts(foi_data, parameters)
 foi_data[foi_data$type == "pseudoAbsence", "new_weight"] <- pAbs_wgt
 ```
 
-We create one bootstrap sample of the data
+We create one bootstrap sample of the data.
 
 ```{r create bootstrap sample}
 foi_data_all_bsamples <- grid_and_boot(data_df = foi_data, parms = parameters)
 
-foi_data_bsample_full <- foi_data_all_bsamples[[1]]
-
-psab_all_idx <- which(foi_data_bsample_full$type == "pseudoAbsence")
-cases_all_idx <- which(foi_data_bsample_full$type == "caseReport")
-sero_all_idx <- which(foi_data_bsample_full$type == "serology")
-psab_idx <- sample(psab_all_idx, 2)
-cases_idx <- sample(cases_all_idx, 2)
-sero_idx <- sample(sero_all_idx, 2)
-foi_data_bsample <- foi_data_bsample_full[c(psab_idx, cases_idx, sero_idx),]
-foi_data_bsample$unique_id <- seq_len(nrow(foi_data_bsample))
+foi_data_bsample <- foi_data_all_bsamples[[1]]
 ```
 
 We then fit the random forest model. This takes approximately 20-30 minutes.
@@ -101,7 +92,7 @@ RF_obj_optim <- full_routine_bootstrap(parms = parameters,
                                        boot_sample = foi_data_bsample)
 ```
 
-We can make force of infection predictions using a dataset of covariates. In this example we will do it for Brazil only to reduce computing time
+We can make force of infection predictions using a dataset of covariates. In this example we will do it for Brazil only to reduce computing time.
 
 ```{r predictions}
 BRA_ID_0 <- 33
@@ -118,7 +109,7 @@ BRA_predictions[BRA_predictions < 0] <- 0
 BRA_sqr_covariates$p_i <- BRA_predictions
 ```
 
-And now we make a map of predicted force of infection for Brazil
+And now we make a map of predicted force of infection for Brazil.
 
 ```{r foi map, fig.width = 5, fig.width = 5, fig.cap = "Predicted dengue force of infection for Brazil"}
 # map
@@ -172,7 +163,7 @@ burden_estimates_raw <- wrapper_to_replicate_R0_and_burden(
 burden_estimates <- post_processing_burden(sqr_preds_3, burden_estimates_raw, parameters)
 ```
 
-We can map one $R_{0}$, for instance the one for assumption 1, only primary and secondary infections are infectious
+We can map one $R_{0}$, for instance the one for assumption 1, only primary and secondary infections are infectious.
 
 ```{r R0_1 map, fig.width = 5, fig.width = 5, fig.cap = "Predicted dengue reproduction number for Brazil (assumption 1)"} 
 map_data_df <- map_preprocess(burden_estimates, "transformed_1", parameters)
@@ -185,7 +176,7 @@ r0_map_1
 
 <br>
 
-Or the $R_{0}$ for assumption 2, all infections (primary to quaternary) are infectious
+Or the $R_{0}$ for assumption 2, all infections (primary to quaternary) are infectious.
 
 ```{r R0_2 map, fig.width = 5, fig.width = 5, fig.cap = "Predicted dengue reproduction number for Brazil (assumption 2)"} 
 map_data_df <- map_preprocess(burden_estimates, "transformed_2", parameters)
@@ -198,7 +189,7 @@ r0_map_2
 
 <br>
 
-We can also map a burden measure, e.g. the incidence of annual infections (per 1000)
+We can also map a burden measure, e.g. the incidence of annual infections (per 1000).
 
 ```{r infections incidence map, fig.width = 5, fig.width = 5, fig.cap = "Predicted incidence of annual dengue infections for Brazil"}
 burden_estimates$I_num_inc <- burden_estimates$I_num / burden_estimates$population * 1000
@@ -213,7 +204,7 @@ inc_inf_map
 
 <br>
 
-We now estimate the impact of control strategies using the predicted $R_{0}$. We first look at a transmission-reduction type of intervention, such as _Wolbachia_)
+We now estimate the impact of control strategies using the predicted $R_{0}$. We first look at a transmission-reduction type of intervention, such as _Wolbachia_).
 
 ```{r impact of transmission-reduction intervention}
 # assume a transmission reduction effect of 30%
@@ -232,7 +223,7 @@ tr_red_impact_estimates_raw <- wrapper_to_replicate_R0_and_burden(
 tr_red_impact_estimates <- post_processing_burden(sqr_preds_3, tr_red_impact_estimates_raw, parameters)
 ```
 
-And then map the incidence of infections following the intervention (for $R_{0}$ assumption 1)
+And then map the incidence of infections following the intervention (for $R_{0}$ assumption 1).
 
 ```{r intervention_1 map, fig.width = 5, fig.width = 5, fig.cap = "Predicted incidence of annual dengue infections for Brazil following application of an intervention with 30% transmission reduction effect"}
 tr_red_impact_estimates$I_num_1_inc <- tr_red_impact_estimates$I_num_1 / tr_red_impact_estimates$population * 1000
@@ -247,7 +238,7 @@ inc_inf_map_30pc_tr
 
 <br>
 
-Finally, we predict the impact of the Sanofi-Pasteur dengue vaccine using estimates of the vaccine effect size from this [study](https://science.sciencemag.org/content/353/6303/1033) and our $R_{0}$ predictions (assumption 1 in this example)
+Finally, we predict the impact of the Sanofi-Pasteur dengue vaccine using estimates of the vaccine effect size from this [study](https://science.sciencemag.org/content/353/6303/1033) and our $R_{0}$ predictions (assumption 1 in this example).
 
 ```{r impact of vaccine}
 R0_1_preds <- burden_estimates$transformed_1
@@ -263,7 +254,7 @@ burden_net_vaccine <- (1 - prop_averted) * burden_estimates[, "I_num"]
 burden_estimates_2 <- cbind(burden_estimates[, base_info], I_vacc_impact = burden_net_vaccine)
 ```
 
-We map incidence of infections following vaccination
+We map incidence of infections following vaccination.
 
 ```{r intervention_2 map, fig.width = 5, fig.width = 5, fig.cap = "Predicted incidence of annual dengue infections for Brazil following vaccination of 9 years olds  (80% vaccine coverage)"}
 burden_estimates_2$I_num_1_inc_v <- burden_estimates_2$I_vacc_impact / burden_estimates_2$population * 1000
