@@ -83,7 +83,7 @@ map_preprocess <- function(pred2, var_to_plot, parms) {
 #' @inheritParams full_routine_bootstrap
 #'
 #' @importFrom ggplot2 ggplot geom_tile scale_fill_gradientn guide_colourbar
-#' element_blank coord_cartesian
+#' element_blank coord_fixed
 #'
 #' @export
 
@@ -104,7 +104,7 @@ quick_raster_map <- function(pred_df, my_col, ttl = NULL, parms) {
                          guide = guide_colourbar(title = ttl,
                                                  barwidth = 1.5,
                                                  barheight = 4.5)) +
-    coord_cartesian(xlim = c(x1, x2), ylim = c(y1, y2), expand = FALSE) +
+    coord_fixed(xlim = c(x1, x2), ylim = c(y1, y2)) +
     theme(axis.line = element_blank(),
           axis.text = element_blank(),
           axis.ticks = element_blank(),

@@ -4,11 +4,9 @@
 \alias{quick_raster_map}
 \title{Plot and save a raster map}
 \usage{
-quick_raster_map(countries, pred_df, my_col, ttl = NULL, parms)
+quick_raster_map(pred_df, my_col, ttl = NULL, parms)
 }
 \arguments{
-\item{countries}{shapefile.}
-
 \item{pred_df}{dataframe of data.}
 
 \item{my_col}{colours to use for plotting.}
