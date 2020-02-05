@@ -85,7 +85,7 @@ set_wgts_to_sero_cells <- function(foi_data, pxl_data, parms){
 
   missing_square <- sero_points[sero_points$no_square == 1, ]
 
-  message("missing squares = ", nrow(missing_square))
+  # message("missing squares = ", nrow(missing_square))
 
   pxl_data
 
