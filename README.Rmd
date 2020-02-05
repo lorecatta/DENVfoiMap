@@ -51,9 +51,7 @@ Load and attach it with
 library(DENVfoiMap)
 ```
 
-which will load all the functions and the datasets used in the analysis. 
-
-The code for running the analysis is in `analysis.R`.
+This [vignette](https://lorecatta.github.io/DENVfoiMap/articles/how_to_run_analysis.html) explaines how to run a complete analysis.
 
 Plase do get in touch (l.cattarino@imperial.ac.uk) if you have any queries or encounter issues when using 
 `DENVfoiMap`.
