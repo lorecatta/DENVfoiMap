@@ -40,8 +40,6 @@ R0_to_prop_infections_averted_lookup_2 <- read.csv(file.path(my_dir,
                                                              "R0_to_prop_infections_averted_lookup_2.csv"),
                                                    stringsAsFactors = FALSE)
 
-Brazil_contour <- sf::st_read(dsn = my_dir, layer = "Brazil_contour")
-
 usethis::use_data(foi_data)
 usethis::use_data(admin_covariates)
 usethis::use_data(predictor_rank)
@@ -52,4 +50,3 @@ usethis::use_data(R0_to_prop_hosp_averted_lookup_1)
 usethis::use_data(R0_to_prop_hosp_averted_lookup_2)
 usethis::use_data(R0_to_prop_infections_averted_lookup_1)
 usethis::use_data(R0_to_prop_infections_averted_lookup_2)
-usethis::use_data(Brazil_contour)
