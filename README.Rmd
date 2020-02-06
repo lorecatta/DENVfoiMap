@@ -34,7 +34,7 @@ uncertainty estimation and sensitivity analyses of model parameters,
 which require considerable computing time, the original code was tailored to run
 on the High Performance Computing Cluster at the Department of Infectious Disease Epidemiology 
 (Imperial College London). 
-`DENVfoiMap` does not aim to perform uncertainty estimation and sensitivity analysis. It however provides a set of functions to run a complete analysis using a single bootstrap sample of the original force of infection dataset. To reduce computation time I provide an example code which produces predictions only for the country of Brazil. Model fitting and making global predictions, for different bootstrap samples, does require some form of parallelization if you wish to run them fast. 
+`DENVfoiMap` does not aim to perform uncertainty estimation and sensitivity analysis. It however provides a set of functions to run a complete analysis using a single bootstrap sample of the original force of infection dataset. To reduce computation time I provide an example code which produces predictions only for the country of Brazil. Model fitting and making global predictions, for different bootstrap samples, do require some form of parallelization if you wish to run them fast. 
 
 
 ## Installation
