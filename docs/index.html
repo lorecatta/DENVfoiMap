@@ -102,7 +102,7 @@
 <li>estimating baseline global dengue burden (number of annual infections, mild febbrile cases and hospitalized cases), and</li>
 <li>predicting the effect of transmission-reducing type of interventions and the Sanofi Pasteur dengue vaccine on burden.</li>
 </ul>
-<p>As the analysis described in the aformentioned publication includes uncertainty estimation and sensitivity analyses of model parameters, which require considerable computing time, the original code was tailored to run on the High Performance Computing Cluster at the Department of Infectious Disease Epidemiology (Imperial College London). <code>DENVfoiMap</code> does not aim to perform uncertainty estimation and sensitivity analysis. It however provides a set of functions to run a complete analysis using a single bootstrap sample of the original force of infection dataset. To reduce computation time further I provide an example code which produces predictions only for the country of Brazil. However, for the bold and patient ones, a global dataset of covariates at 1/6 degree resolution is made availabe with <code>DENVfoiMap</code>. The global analysis does require some form of parallelization if you wish to run it fast.</p>
+<p>As the analysis described in the aformentioned publication includes uncertainty estimation and sensitivity analyses of model parameters, which require considerable computing time, the original code was tailored to run on the High Performance Computing Cluster at the Department of Infectious Disease Epidemiology (Imperial College London). <code>DENVfoiMap</code> does not aim to perform uncertainty estimation and sensitivity analysis. It however provides a set of functions to run a complete analysis using a single bootstrap sample of the original force of infection dataset. To reduce computation time I provide an example code which produces predictions only for the country of Brazil. Model fitting and making global predictions, for different bootstrap samples, does require some form of parallelization if you wish to run them fast.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -110,7 +110,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"lorecatta/DENVfoiMap"</span>)</code></pre></div>
 <p>Load and attach it with</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(DENVfoiMap)</code></pre></div>
-<p>This <a href="https://lorecatta.github.io/DENVfoiMap/articles/how_to_run_analysis.html">vignette</a> explaines how to run a complete analysis.</p>
+<p>This <a href="https://lorecatta.github.io/DENVfoiMap/articles/how_to_run_analysis.html">vignette</a> and the <code>analysis.R</code> script explain how to run a complete analysis.</p>
 <p>Plase do get in touch (<a href="mailto:l.cattarino@imperial.ac.uk">l.cattarino@imperial.ac.uk</a>) if you have any queries or encounter issues when using <code>DENVfoiMap</code>.</p>
 </div>
 </div>

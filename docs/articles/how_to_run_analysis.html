@@ -81,7 +81,9 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Run the analysis</h1>
+                        <h4 class="author">Lorenzo Cattarino</h4>
             
+            <h4 class="date">2020-02-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lorecatta/DENVfoiMap/blob/master/vignettes/how_to_run_analysis.Rmd"><code>vignettes/how_to_run_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>how_to_run_analysis.Rmd</code></div>
@@ -90,7 +92,7 @@
 
     
     
-<p>We first load the package</p>
+<p>We first load the package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(DENVfoiMap)</code></pre></div>
 <p>We then need to download the database of global disaggregated FOI and environmental and demographic covariates values at 1/6 decimal degree resolution. This is a data frame with 425138 rows and 43 columns:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_url &lt;-<span class="st"> "https://mrcdata.dide.ic.ac.uk/resources/DENVfoiMap/all_squares_env_var_0_1667_deg.rds"</span>
@@ -107,7 +109,7 @@ all_sqr_covariates &lt;-<span class="st"> </span><span class="kw"><a href="https
                    <span class="dt">coord_limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">74</span>, <span class="op">-</span><span class="dv">32</span>, <span class="op">-</span><span class="dv">34</span>, <span class="dv">6</span>))
 
 my_col &lt;-<span class="st"> </span>colorRamps<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/colorRamps/topics/matlab.like">matlab.like</a></span>(<span class="dv">100</span>)</code></pre></div>
-<p>and variables which depend on those parameters</p>
+<p>and variables which depend on those parameters.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">parameters &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_parameter_list.html">create_parameter_list</a></span>(<span class="dt">extra_params =</span> extra_prms)
 
 all_wgt &lt;-<span class="st"> </span>parameters<span class="op">$</span>all_wgt
@@ -121,25 +123,16 @@ foi_offset &lt;-<span class="st"> </span>parameters<span class="op">$</span>foi_
 coord_limits &lt;-<span class="st"> </span>parameters<span class="op">$</span>coord_limits
 
 screening_ages &lt;-<span class="st"> </span>parameters<span class="op">$</span>screening_ages</code></pre></div>
-<p>Now we do some preprocessing</p>
+<p>Now we do some preprocessing.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foi_data<span class="op">$</span>new_weight &lt;-<span class="st"> </span>all_wgt
 
 pAbs_wgt &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_sat_area_wgts.html">get_sat_area_wgts</a></span>(foi_data, parameters)
 
 foi_data[foi_data<span class="op">$</span>type <span class="op">==</span><span class="st"> "pseudoAbsence"</span>, <span class="st">"new_weight"</span>] &lt;-<span class="st"> </span>pAbs_wgt</code></pre></div>
-<p>We create one bootstrap sample of the data</p>
+<p>We create one bootstrap sample of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foi_data_all_bsamples &lt;-<span class="st"> </span><span class="kw"><a href="../reference/grid_and_boot.html">grid_and_boot</a></span>(<span class="dt">data_df =</span> foi_data, <span class="dt">parms =</span> parameters)
 
-foi_data_bsample_full &lt;-<span class="st"> </span>foi_data_all_bsamples[[<span class="dv">1</span>]]
-
-psab_all_idx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/which">which</a></span>(foi_data_bsample_full<span class="op">$</span>type <span class="op">==</span><span class="st"> "pseudoAbsence"</span>)
-cases_all_idx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/which">which</a></span>(foi_data_bsample_full<span class="op">$</span>type <span class="op">==</span><span class="st"> "caseReport"</span>)
-sero_all_idx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/which">which</a></span>(foi_data_bsample_full<span class="op">$</span>type <span class="op">==</span><span class="st"> "serology"</span>)
-psab_idx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(psab_all_idx, <span class="dv">2</span>)
-cases_idx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(cases_all_idx, <span class="dv">2</span>)
-sero_idx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(sero_all_idx, <span class="dv">2</span>)
-foi_data_bsample &lt;-<span class="st"> </span>foi_data_bsample_full[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(psab_idx, cases_idx, sero_idx),]
-foi_data_bsample<span class="op">$</span>unique_id &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_len</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(foi_data_bsample))</code></pre></div>
+foi_data_bsample &lt;-<span class="st"> </span>foi_data_all_bsamples[[<span class="dv">1</span>]]</code></pre></div>
 <p>We then fit the random forest model. This takes approximately 20-30 minutes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">RF_obj_optim &lt;-<span class="st"> </span><span class="kw"><a href="../reference/full_routine_bootstrap.html">full_routine_bootstrap</a></span>(<span class="dt">parms =</span> parameters,
                                        <span class="dt">original_foi_data =</span> foi_data,
@@ -147,7 +140,7 @@ foi_data_bsample<span class="op">$</span>unique_id &lt;-<span class="st"> </span
                                        <span class="dt">all_squares =</span> all_sqr_covariates,
                                        <span class="dt">covariates_names =</span> all_predictors,
                                        <span class="dt">boot_sample =</span> foi_data_bsample)</code></pre></div>
-<p>We can make force of infection predictions using a dataset of covariates. In this example we will do it for Brazil only to reduce computing time</p>
+<p>We can make force of infection predictions using a dataset of covariates. In this example we will do it for Brazil only to reduce computing time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BRA_ID_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="dv">33</span>
 
 BRA_sqr_covariates &lt;-<span class="st"> </span>all_sqr_covariates[all_sqr_covariates<span class="op">$</span>ID_<span class="dv">0</span> <span class="op">==</span><span class="st"> </span>BRA_ID_<span class="dv">0</span>,]
@@ -160,11 +153,10 @@ BRA_predictions &lt;-<span class="st"> </span>BRA_predictions <span class="op">-
 BRA_predictions[BRA_predictions <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
 
 BRA_sqr_covariates<span class="op">$</span>p_i &lt;-<span class="st"> </span>BRA_predictions</code></pre></div>
-<p>And now we make a map of predicted force of infection for Brazil</p>
+<p>And now we make a map of predicted force of infection for Brazil.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># map</span>
 map_data_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_preprocess.html">map_preprocess</a></span>(BRA_sqr_covariates, <span class="st">"p_i"</span>, parameters)
-q_map &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">countries =</span> Brazil_contour,
-                          <span class="dt">pred_df =</span> map_data_df,
+q_map &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">pred_df =</span> map_data_df,
                           <span class="dt">my_col =</span> my_col,
                           <span class="dt">ttl =</span> <span class="st">"FOI"</span>,
                           <span class="dt">parms =</span> parameters)
@@ -211,10 +203,9 @@ burden_estimates_raw &lt;-<span class="st"> </span><span class="kw"><a href="../
   <span class="dt">parms =</span> parameters)
 
 burden_estimates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing_burden.html">post_processing_burden</a></span>(sqr_preds_<span class="dv">3</span>, burden_estimates_raw, parameters)</code></pre></div>
-<p>We can map one <span class="math inline">\(R_{0}\)</span>, for instance the one for assumption 1, only primary and secondary infections are infectious</p>
+<p>We can map one <span class="math inline">\(R_{0}\)</span>, for instance the one for assumption 1, only primary and secondary infections are infectious.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">map_data_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_preprocess.html">map_preprocess</a></span>(burden_estimates, <span class="st">"transformed_1"</span>, parameters)
-r0_map_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">countries =</span> Brazil_contour,
-                             <span class="dt">pred_df =</span> map_data_df,
+r0_map_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">pred_df =</span> map_data_df,
                              <span class="dt">my_col =</span> my_col,
                              <span class="dt">ttl =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/expression">expression</a></span>(<span class="st">"R"</span>[<span class="dv">0</span>]),
                              <span class="dt">parms =</span> parameters)
@@ -225,10 +216,9 @@ Predicted dengue reproduction number for Brazil (assumption 1)
 </p>
 </div>
 <p><br></p>
-<p>Or the <span class="math inline">\(R_{0}\)</span> for assumption 2, all infections (primary to quaternary) are infectious</p>
+<p>Or the <span class="math inline">\(R_{0}\)</span> for assumption 2, all infections (primary to quaternary) are infectious.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">map_data_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_preprocess.html">map_preprocess</a></span>(burden_estimates, <span class="st">"transformed_2"</span>, parameters)
-r0_map_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">countries =</span> Brazil_contour,
-                             <span class="dt">pred_df =</span> map_data_df,
+r0_map_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">pred_df =</span> map_data_df,
                              <span class="dt">my_col =</span> my_col,
                              <span class="dt">ttl =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/expression">expression</a></span>(<span class="st">"R"</span>[<span class="dv">0</span>]),
                              <span class="dt">parms =</span> parameters)
@@ -239,12 +229,11 @@ Predicted dengue reproduction number for Brazil (assumption 2)
 </p>
 </div>
 <p><br></p>
-<p>We can also map a burden measure, e.g. the incidence of annual infections (per 1000)</p>
+<p>We can also map a burden measure, e.g. the incidence of annual infections (per 1000).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">burden_estimates<span class="op">$</span>I_num_inc &lt;-<span class="st"> </span>burden_estimates<span class="op">$</span>I_num <span class="op">/</span><span class="st"> </span>burden_estimates<span class="op">$</span>population <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>
 
 map_data_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_preprocess.html">map_preprocess</a></span>(burden_estimates, <span class="st">"I_num_inc"</span>, parameters)
-inc_inf_map &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">countries =</span> Brazil_contour,
-                                <span class="dt">pred_df =</span> map_data_df,
+inc_inf_map &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">pred_df =</span> map_data_df,
                                 <span class="dt">my_col =</span> my_col,
                                 <span class="dt">ttl =</span> <span class="st">"Infections"</span>,
                                 <span class="dt">parms =</span> parameters)
@@ -255,7 +244,7 @@ Predicted incidence of annual dengue infections for Brazil
 </p>
 </div>
 <p><br></p>
-<p>We now estimate the impact of control strategies using the predicted <span class="math inline">\(R_{0}\)</span>. We first look at a transmission-reduction type of intervention, such as <em>Wolbachia</em>)</p>
+<p>We now estimate the impact of control strategies using the predicted <span class="math inline">\(R_{0}\)</span>. We first look at a transmission-reduction type of intervention, such as <em>Wolbachia</em>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># assume a transmission reduction effect of 30%</span>
 sf_val &lt;-<span class="st"> </span>parameters<span class="op">$</span>sf_vals[<span class="dv">4</span>]
 
@@ -270,12 +259,11 @@ tr_red_impact_estimates_raw &lt;-<span class="st"> </span><span class="kw"><a hr
   <span class="dt">parms =</span> parameters)
 
 tr_red_impact_estimates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/post_processing_burden.html">post_processing_burden</a></span>(sqr_preds_<span class="dv">3</span>, tr_red_impact_estimates_raw, parameters)</code></pre></div>
-<p>And then map the incidence of infections following the intervention (for <span class="math inline">\(R_{0}\)</span> assumption 1)</p>
+<p>And then map the incidence of infections following the intervention (for <span class="math inline">\(R_{0}\)</span> assumption 1).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tr_red_impact_estimates<span class="op">$</span>I_num_1_inc &lt;-<span class="st"> </span>tr_red_impact_estimates<span class="op">$</span>I_num_<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>tr_red_impact_estimates<span class="op">$</span>population <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>
 mp_nm &lt;-<span class="st"> "Infections_30pc_tr_red_impact.png"</span>
 map_data_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_preprocess.html">map_preprocess</a></span>(tr_red_impact_estimates, <span class="st">"I_num_1_inc"</span>, parameters)
-inc_inf_map_30pc_tr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">countries =</span> Brazil_contour,
-                                        <span class="dt">pred_df =</span> map_data_df,
+inc_inf_map_30pc_tr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">pred_df =</span> map_data_df,
                                         <span class="dt">my_col =</span> my_col,
                                         <span class="dt">ttl =</span> <span class="st">"Infections"</span>,
                                         <span class="dt">parms =</span> parameters)
@@ -286,7 +274,7 @@ Predicted incidence of annual dengue infections for Brazil following application
 </p>
 </div>
 <p><br></p>
-<p>Finally, we predict the impact of the Sanofi-Pasteur dengue vaccine using estimates of the vaccine effect size from this <a href="https://science.sciencemag.org/content/353/6303/1033">study</a> and our <span class="math inline">\(R_{0}\)</span> predictions (assumption 1 in this example)</p>
+<p>Finally, we predict the impact of the Sanofi-Pasteur dengue vaccine using estimates of the vaccine effect size from this <a href="https://science.sciencemag.org/content/353/6303/1033">study</a> and our <span class="math inline">\(R_{0}\)</span> predictions (assumption 1 in this example).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R0_1_preds &lt;-<span class="st"> </span>burden_estimates<span class="op">$</span>transformed_<span class="dv">1</span>
 
 my_look_up_table &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pre_process_vaccine_lookup_table.html">pre_process_vaccine_lookup_table</a></span>(R0_to_prop_infections_averted_lookup_<span class="dv">1</span>, R0_1_preds)
@@ -298,12 +286,11 @@ prop_averted &lt;-<span class="st"> </span><span class="kw"><a href="https://www
 burden_net_vaccine &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>prop_averted) <span class="op">*</span><span class="st"> </span>burden_estimates[, <span class="st">"I_num"</span>]
 
 burden_estimates_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">cbind</a></span>(burden_estimates[, base_info], <span class="dt">I_vacc_impact =</span> burden_net_vaccine)</code></pre></div>
-<p>We map incidence of infections following vaccination</p>
+<p>We map incidence of infections following vaccination.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">burden_estimates_<span class="dv">2</span><span class="op">$</span>I_num_1_inc_v &lt;-<span class="st"> </span>burden_estimates_<span class="dv">2</span><span class="op">$</span>I_vacc_impact <span class="op">/</span><span class="st"> </span>burden_estimates_<span class="dv">2</span><span class="op">$</span>population <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>
 
 map_data_df &lt;-<span class="st"> </span><span class="kw"><a href="../reference/map_preprocess.html">map_preprocess</a></span>(burden_estimates_<span class="dv">2</span>, <span class="st">"I_num_1_inc_v"</span>, parameters)
-inc_inf_map_vacc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">countries =</span> Brazil_contour,
-                                     <span class="dt">pred_df =</span> map_data_df,
+inc_inf_map_vacc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/quick_raster_map.html">quick_raster_map</a></span>(<span class="dt">pred_df =</span> map_data_df,
                                      <span class="dt">my_col =</span> my_col,
                                      <span class="dt">ttl =</span> <span class="st">"Infections"</span>,
                                      <span class="dt">parms =</span> parameters)
