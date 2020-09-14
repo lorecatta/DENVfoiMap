@@ -33,6 +33,6 @@ Load and attach it with
 library(DENVfoiMap)
 ```
 
-This [vignette](https://lorecatta.github.io/DENVfoiMap/articles/how_to_run_analysis.html) and the `analysis.R` script explain how to run a complete analysis.
+This [vignette](https://mrc-ide.github.io/DENVfoiMap/articles/how_to_run_analysis.html) and the `analysis.R` script explain how to run a complete analysis.
 
 Plase do get in touch (<l.cattarino@imperial.ac.uk>) if you have any queries or encounter issues when using `DENVfoiMap`.
