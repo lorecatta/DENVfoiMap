@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   how_to_run_analysis: how_to_run_analysis.html
-last_built: 2020-09-14T14:13Z
+last_built: 2020-09-15T08:31Z
 urls:
   reference: https://lorecatta.github.io/DENVfoiMap//reference
   article: https://lorecatta.github.io/DENVfoiMap//articles
