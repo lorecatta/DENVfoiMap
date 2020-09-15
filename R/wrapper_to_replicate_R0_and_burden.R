@@ -85,8 +85,8 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
       FOI_to_R0_1 <- FOI_to_R0_1_list[[idx]]
       FOI_to_R0_2 <- FOI_to_R0_2_list[[idx]]
 
-      trans_1 <- approx(FOI_to_R0_1[, "x"], FOI_to_R0_1[, "y"], xout = preds)$y
-      trans_2 <- approx(FOI_to_R0_2[, "x"], FOI_to_R0_2[, "y"], xout = preds)$y
+      trans_1 <- approx(FOI_to_R0_1[, "x"], FOI_to_R0_1[, "y"], xout = preds, ties = min)$y
+      trans_2 <- approx(FOI_to_R0_2[, "x"], FOI_to_R0_2[, "y"], xout = preds, ties = min)$y
 
       # use the 1D look up tables (C and HC) obtained using
       # the average values of the proportion of symptomatic (fixed)
@@ -99,9 +99,9 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
 
         # DO NOT use R0 to calculate I, C and HC
 
-        Infections_pc <- approx(FOI_to_Inf[, "x"], FOI_to_Inf[, "y"], xout = preds)$y
-        Cases_pc <- approx(FOI_to_C[, "x"], FOI_to_C[, "y"], xout = preds)$y
-        Hosp_cases_pc <- approx(FOI_to_HC[, "x"], FOI_to_HC[, "y"], xout = preds)$y
+        Infections_pc <- approx(FOI_to_Inf[, "x"], FOI_to_Inf[, "y"], xout = preds, ties = min)$y
+        Cases_pc <- approx(FOI_to_C[, "x"], FOI_to_C[, "y"], xout = preds, ties = min)$y
+        Hosp_cases_pc <- approx(FOI_to_HC[, "x"], FOI_to_HC[, "y"], xout = preds, ties = min)$y
 
         Infections <- Infections_pc * N
         Cases <- Cases_pc * N
@@ -118,17 +118,17 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
         red_trans_1 <- trans_1 * scaling_factor
         red_trans_2 <- trans_2 * scaling_factor
 
-        red_preds_1 <- approx(FOI_to_R0_1[, "y"], FOI_to_R0_1[, "x"], xout = red_trans_1)$y
-        red_preds_2 <- approx(FOI_to_R0_2[, "y"], FOI_to_R0_2[, "x"], xout = red_trans_2)$y
+        red_preds_1 <- approx(FOI_to_R0_1[, "y"], FOI_to_R0_1[, "x"], xout = red_trans_1, ties = min)$y
+        red_preds_2 <- approx(FOI_to_R0_2[, "y"], FOI_to_R0_2[, "x"], xout = red_trans_2, ties = min)$y
 
-        Infections_pc_1 <- approx(FOI_to_Inf[, "x"], FOI_to_Inf[, "y"], xout = red_preds_1)$y
-        Infections_pc_2 <- approx(FOI_to_Inf[, "x"], FOI_to_Inf[, "y"], xout = red_preds_2)$y
+        Infections_pc_1 <- approx(FOI_to_Inf[, "x"], FOI_to_Inf[, "y"], xout = red_preds_1, ties = min)$y
+        Infections_pc_2 <- approx(FOI_to_Inf[, "x"], FOI_to_Inf[, "y"], xout = red_preds_2, ties = min)$y
 
-        Cases_pc_1 <- approx(FOI_to_C[, "x"], FOI_to_C[, "y"], xout = red_preds_1)$y
-        Cases_pc_2 <- approx(FOI_to_C[, "x"], FOI_to_C[, "y"], xout = red_preds_2)$y
+        Cases_pc_1 <- approx(FOI_to_C[, "x"], FOI_to_C[, "y"], xout = red_preds_1, ties = min)$y
+        Cases_pc_2 <- approx(FOI_to_C[, "x"], FOI_to_C[, "y"], xout = red_preds_2, ties = min)$y
 
-        Hosp_cases_pc_1 <- approx(FOI_to_HC[, "x"], FOI_to_HC[, "y"], xout = red_preds_1)$y
-        Hosp_cases_pc_2 <- approx(FOI_to_HC[, "x"], FOI_to_HC[, "y"], xout = red_preds_2)$y
+        Hosp_cases_pc_1 <- approx(FOI_to_HC[, "x"], FOI_to_HC[, "y"], xout = red_preds_1, ties = min)$y
+        Hosp_cases_pc_2 <- approx(FOI_to_HC[, "x"], FOI_to_HC[, "y"], xout = red_preds_2, ties = min)$y
 
         Infections_1 <- Infections_pc_1 * N
         Cases_1 <- Cases_pc_1 * N
@@ -172,7 +172,7 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
 
       FOI_to_R0_list <- get(sprintf("FOI_to_%s_list", var_to_fit))
       FOI_to_R0 <- FOI_to_R0_list[[idx]]
-      red_trans <- approx(FOI_to_R0[, "y"], FOI_to_R0[, "x"], xout = red_preds)$y
+      red_trans <- approx(FOI_to_R0[, "y"], FOI_to_R0[, "x"], xout = red_preds, ties = min)$y
 
       # use the 1D look up tables (C and HC) obtained using
       # the average values of the proportion of symptomatic (fixed)
@@ -181,9 +181,9 @@ wrapper_to_replicate_R0_and_burden <- function(foi_data,
       FOI_to_C <- FOI_to_C_list[[idx]]
       FOI_to_HC <- FOI_to_HC_list[[idx]]
 
-      Infections_pc <- approx(FOI_to_Inf[, "x"], FOI_to_Inf[, "y"], xout = red_trans)$y
-      Cases_pc <- approx(FOI_to_C[, "x"], FOI_to_C[, "y"], xout = red_trans)$y
-      Hosp_cases_pc <- approx(FOI_to_HC[, "x"], FOI_to_HC[, "y"], xout = red_trans)$y
+      Infections_pc <- approx(FOI_to_Inf[, "x"], FOI_to_Inf[, "y"], xout = red_trans, ties = min)$y
+      Cases_pc <- approx(FOI_to_C[, "x"], FOI_to_C[, "y"], xout = red_trans, ties = min)$y
+      Hosp_cases_pc <- approx(FOI_to_HC[, "x"], FOI_to_HC[, "y"], xout = red_trans, ties = min)$y
 
       Infections <- Infections_pc * N
       Cases <- Cases_pc * N
