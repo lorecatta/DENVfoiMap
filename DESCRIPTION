@@ -32,5 +32,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/lorecatta/DENVfoiMap
-BugReports: https://github.com/lorecatta/DENVfoiMap/issues
+URL: https://github.com/mrc-ide/DENVfoiMap
+BugReports: https://github.com/mrc-ide/DENVfoiMap/issues
