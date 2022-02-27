@@ -3,12 +3,6 @@
 
 # DENVfoiMap
 
-<!-- badges: start -->
-
-[![Travis build
-status](https://travis-ci.org/github/lorecatta/DENVfoiMap.svg?branch=master)](https://travis-ci.org/github/lorecatta/DENVfoiMap)
-<!-- badges: end -->
-
 The goal of `DENVfoiMap` is to provide a set of functions to run a
 complete analysis similar to the one described in the following study:
 
