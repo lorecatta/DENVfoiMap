@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The goal of `DENVfoiMap` is to provide a set of functions to run a complete analysis 
-similar to the one described in the following sudy:
+similar to the one described in the following study:
 
 [L. Cattarino, I. Rodriguez-Barraquer, N. Imai, D. A. T. Cummings, N. M. Ferguson, Mapping global variation in dengue transmission intensity. Sci. Transl. Med. 12, eaax4144 (2020)](https://stm.sciencemag.org/content/12/528/eaax4144)
 
@@ -53,5 +53,5 @@ library(DENVfoiMap)
 
 This [vignette](https://lorecatta.github.io/DENVfoiMap/articles/how_to_run_analysis.html) and the `analysis.R` script explain how to run a complete analysis.
 
-Plase do get in touch (l.cattarino@imperial.ac.uk) if you have any queries or encounter issues when using 
+Please do get in touch (l.cattarino@gmail.com) if you have any queries or encounter issues when using 
 `DENVfoiMap`.

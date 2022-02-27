@@ -10,7 +10,7 @@ status](https://travis-ci.org/github/lorecatta/DENVfoiMap.svg?branch=master)](ht
 <!-- badges: end -->
 
 The goal of `DENVfoiMap` is to provide a set of functions to run a
-complete analysis similar to the one described in the following sudy:
+complete analysis similar to the one described in the following study:
 
 [L. Cattarino, I. Rodriguez-Barraquer, N. Imai, D. A. T. Cummings, N. M.
 Ferguson, Mapping global variation in dengue transmission intensity.
@@ -57,5 +57,5 @@ This
 [vignette](https://lorecatta.github.io/DENVfoiMap/articles/how_to_run_analysis.html)
 and the `analysis.R` script explain how to run a complete analysis.
 
-Plase do get in touch (<l.cattarino@imperial.ac.uk>) if you have any
-queries or encounter issues when using `DENVfoiMap`.
+Please do get in touch (<l.cattarino@gmail.com>) if you have any queries
+or encounter issues when using `DENVfoiMap`.
